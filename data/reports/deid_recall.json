@@ -1,0 +1,142 @@
+{
+  "caught": 874,
+  "total": 1017,
+  "recall": 0.8594,
+  "by_type": {
+    "PATIENT_NAME": {
+      "caught": 100,
+      "total": 100
+    },
+    "DATE": {
+      "caught": 403,
+      "total": 403
+    },
+    "MRN": {
+      "caught": 86,
+      "total": 86
+    },
+    "ADDRESS": {
+      "caught": 39,
+      "total": 82
+    },
+    "CITY": {
+      "caught": 80,
+      "total": 82
+    },
+    "STATE": {
+      "caught": 45,
+      "total": 82
+    },
+    "ZIP": {
+      "caught": 21,
+      "total": 82
+    },
+    "PROVIDER_NAME": {
+      "caught": 100,
+      "total": 100
+    }
+  },
+  "missed_sample": [
+    {
+      "type": "ZIP",
+      "text": "86619"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "5146 Sunset Dr"
+    },
+    {
+      "type": "ZIP",
+      "text": "16180"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "9929 Pine Rd"
+    },
+    {
+      "type": "ZIP",
+      "text": "70538"
+    },
+    {
+      "type": "STATE",
+      "text": "IL"
+    },
+    {
+      "type": "ZIP",
+      "text": "11129"
+    },
+    {
+      "type": "STATE",
+      "text": "VA"
+    },
+    {
+      "type": "ZIP",
+      "text": "69545"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "6114 Washington Ave"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "4224 Washington Ave"
+    },
+    {
+      "type": "STATE",
+      "text": "CT"
+    },
+    {
+      "type": "ZIP",
+      "text": "26108"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "9246 Cedar Ln"
+    },
+    {
+      "type": "STATE",
+      "text": "VA"
+    },
+    {
+      "type": "ZIP",
+      "text": "83047"
+    },
+    {
+      "type": "STATE",
+      "text": "OH"
+    },
+    {
+      "type": "ZIP",
+      "text": "55365"
+    },
+    {
+      "type": "STATE",
+      "text": "VA"
+    },
+    {
+      "type": "ZIP",
+      "text": "37165"
+    },
+    {
+      "type": "ZIP",
+      "text": "21437"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "1076 Cedar Ln"
+    },
+    {
+      "type": "STATE",
+      "text": "CT"
+    },
+    {
+      "type": "ZIP",
+      "text": "33556"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "5576 Sunset Dr"
+    }
+  ],
+  "engine": "Microsoft Presidio (spaCy en_core_web_lg) + custom MRN recognizer"
+}

@@ -42,8 +42,13 @@ Built incrementally, one verified Working Plan step per commit.
 - [x] **Step 1 — Repo scaffold + CI skeleton + app shell.** Project structure,
   CI (lint/type-check/tests, cost guardrail, secret-gated Space deploy), and a
   Streamlit sidebar-stepper `app.py` with every stage page stubbed empty.
-- [ ] Step 2 — Stage 0/1: FHIR generation + terminology binding
-- [ ] Step 3 — Stage 2: de-identification framework
+- [x] **Step 2 — Stage 0/1: FHIR generation + terminology binding.** US Core
+  FHIR (BP panel + components, dual-coded conditions), immutable NDJSON landing
+  layer, verified-OMOP terminology binding + `fhir.resources` validation, and
+  the OMOP CDM ETL.
+- [x] **Step 3 — Stage 2: de-identification framework.** Interval-preserving
+  date shift (LDS) + structured redaction, layered free-text NLP de-id
+  (Presidio) with measured recall, and the per-patient leakage check (0/N).
 - [ ] Step 4 — Stage 3: LLM extraction (Lane 1, paid)
 - [ ] Step 5 — Stage 4: curation + DQ gates
 - [ ] Step 6 — Stage 5: dataset assembly
@@ -60,5 +65,13 @@ pip install -r requirements-dev.txt
 
 streamlit run app.py          # the showcase app
 python -m pytest              # tests (incl. headless app check)
-ruff check . && mypy app.py test_app.py
+ruff check . && ruff format --check .
+
+# Rebuild committed artifacts (free, deterministic):
+python run_stage01.py         # Stage 0/1: FHIR + terminology + OMOP CDM
+
+# Stage 2 free-text de-id needs the heavy NLP model (local only; CI validates
+# the committed outputs instead of re-running it):
+pip install -r requirements-deid.txt
+python run_stage2.py          # Stage 2: de-identification + recall + leakage
 ```

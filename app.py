@@ -33,6 +33,15 @@ def load_csv(relpath: str):
     return pd.read_csv(path) if path.exists() else None
 
 
+@st.cache_data
+def load_jsonl(relpath: str) -> list[dict]:
+    path = ROOT / relpath
+    if not path.exists():
+        return []
+    with path.open() as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
 # (label, one-line description, Working Plan step that fills this page).
 # Order mirrors the pipeline; the two trailing "cross-cutting" pages and the
 # optional pages land in the step 9 showcase-polish pass.
@@ -232,7 +241,112 @@ def render_stage01(label: str, description: str) -> None:
                 st.dataframe(df.head(15), hide_index=True, use_container_width=True)
 
 
-PAGES = {"0/1 — Ingestion + Canonical Storage": render_stage01}
+def render_deid(label: str, description: str) -> None:
+    """Stage 2 — de-identification, read off the committed de-id artifacts."""
+    st.title(label)
+    st.caption(description)
+
+    raw_notes = load_jsonl("data/notes/raw_notes.jsonl")
+    deid_notes = load_jsonl("data/deid/notes_deid.jsonl")
+    recall = load_json("data/reports/deid_recall.json")
+    leakage = load_json("data/reports/deid_leakage.json")
+    raw_patients = {r["id"]: r for r in load_jsonl("data/landing/Patient.ndjson")}
+    deid_patients = {
+        r["id"]: r
+        for r in load_jsonl("data/deid/resources_deid.ndjson")
+        if r["resourceType"] == "Patient"
+    }
+    if not (raw_notes and deid_notes and recall and leakage):
+        st.warning(
+            "Stage 2 artifacts missing — run `python run_stage2.py` (needs presidio-analyzer)."
+        )
+        return
+
+    st.info(
+        "**Legal frame — HIPAA §164.514.** Structured data uses the **Limited "
+        "Data Set** pattern: a per-entity, interval-preserving date **shift** "
+        "(diagnosis→treatment gaps intact), which survives only under an LDS + "
+        "Data Use Agreement — **not** Safe Harbor (which would instead collapse "
+        "dates to year). Direct identifiers are removed; geography is "
+        "generalized to state + 3-digit ZIP."
+    )
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric(
+        "Per-patient leakage",
+        f"{leakage['total_leaks']}/{leakage['patients']}",
+        "raw identifiers surviving de-id",
+    )
+    c2.metric(
+        "Free-text de-id recall (Presidio)",
+        f"{recall['recall'] * 100:.1f}%",
+        f"{recall['caught']}/{recall['total']} PHI spans",
+    )
+    c3.metric("Notes de-identified", len(deid_notes))
+
+    # --- Before / after ---
+    st.subheader("Before / after — a sample record")
+    deid_by_pid = {n["patient_id"]: n for n in deid_notes}
+    idx = st.slider("Patient", 0, len(raw_notes) - 1, 0)
+    raw_note = raw_notes[idx]
+    pid = raw_note["patient_id"]
+    left, right = st.columns(2)
+    with left:
+        st.caption("Raw note (synthetic PHI)")
+        st.code(raw_note["text"], language=None)
+    with right:
+        st.caption("De-identified note (layered: Presidio + known-identifier removal)")
+        st.code(deid_by_pid[pid]["text"], language=None)
+    if pid in raw_patients and pid in deid_patients:
+        pl, pr = st.columns(2)
+        keys = ["identifier", "name", "birthDate", "address"]
+        pl.caption("Raw Patient")
+        pl.json({k: raw_patients[pid].get(k) for k in keys})
+        pr.caption(
+            "De-identified Patient (name dropped, MRN→pseudonym, DOB shifted, geo generalized)"
+        )
+        pr.json({k: deid_patients[pid].get(k) for k in keys})
+
+    # --- Measured recall (honest) ---
+    st.subheader("Free-text de-id — measured recall, stated honestly")
+    st.caption(
+        f"Recall of the **generalizable NLP layer alone** ({recall['engine']}) "
+        "against the ground-truth PHI labels — the honest measure of what would "
+        "protect unseen notes, since a miss is a breach. The committed notes are "
+        "safe (0 leaks) because a second deterministic layer removes the "
+        "identifiers already known from the structured record; recall here is "
+        "*not* inflated by that layer."
+    )
+    by_type = pd.DataFrame(
+        [
+            {
+                "PHI type": t,
+                "caught": v["caught"],
+                "total": v["total"],
+                "recall %": round(100 * v["caught"] / v["total"], 1),
+            }
+            for t, v in recall["by_type"].items()
+        ]
+    ).sort_values("recall %")
+    st.dataframe(by_type, hide_index=True, use_container_width=True)
+    st.caption(
+        "The gaps are real and instructive: Presidio catches names, dates, MRN "
+        "(custom recognizer), and provider names well, but under-detects address "
+        "components (ZIP, state abbreviations) — which is exactly why a human QA "
+        "sample and a layered approach exist. Missed examples:"
+    )
+    if recall.get("missed_sample"):
+        st.dataframe(
+            pd.DataFrame(recall["missed_sample"]).head(15),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+
+PAGES = {
+    "0/1 — Ingestion + Canonical Storage": render_stage01,
+    "2 — De-identification": render_deid,
+}
 
 
 def main() -> None:
