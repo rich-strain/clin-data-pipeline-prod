@@ -21,5 +21,8 @@ env/
 # cost guardrails.
 .env
 
+# Transient batch handoff between `--mode batch-submit` and `batch-retrieve`.
+extraction/cache/pending_batch.json
+
 # OS
 .DS_Store
