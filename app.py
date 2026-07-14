@@ -393,6 +393,41 @@ def render_extraction(label: str, description: str) -> None:
     confs = pd.DataFrame({"confidence": [e.get("confidence", 0.0) for e in extractions]})
     st.bar_chart(confs["confidence"].value_counts().sort_index())
 
+    # --- Accuracy vs. the source facts (teacher-side eval) ---
+    ext_eval = load_json("data/reports/extraction_eval.json")
+    if ext_eval:
+        st.subheader("Extraction accuracy vs. the source facts")
+        st.caption(
+            "Confidence above is the model grading **itself**. This measures it against "
+            "**ground truth**: the notes were generated from committed FHIR resources, so "
+            "those facts are what each note should contain. The normalized extraction is "
+            "scored against them by canonical name — the same TP/FP/FN + hallucination "
+            "scorer Stage 7 uses. Vitals out of scope (value-closeness). A hallucination is "
+            "a predicted name outside the closed vocabulary."
+        )
+        st.dataframe(
+            pd.DataFrame(
+                [
+                    {
+                        "field": name,
+                        "precision": round(s["micro_precision"], 3),
+                        "recall": round(s["micro_recall"], 3),
+                        "f1": round(s["micro_f1"], 3),
+                        "TP": s["tp"],
+                        "FP": s["fp"],
+                        "FN": s["fn"],
+                        "hallucinations": s["non_canonical_count"],
+                    }
+                    for name, s in (
+                        ("diagnosis", ext_eval["diagnosis"]),
+                        ("medication", ext_eval["medication"]),
+                    )
+                ]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+
     # --- Sample extraction ---
     st.subheader("Sample extraction (structured tool-use output)")
     idx = st.slider("Record", 0, len(extractions) - 1, 0)

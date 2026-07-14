@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+import eval_metrics
+import extraction_eval
 from extraction.extractor import (
     LOW_CONFIDENCE,
     MODEL,
@@ -112,6 +114,40 @@ def test_every_extraction_has_provenance_and_valid_confidence() -> None:
         assert e["model"] == MODEL and e["prompt_version"] == PROMPT_VERSION
         assert 0.0 <= e["confidence"] <= 1.0
         assert e["low_confidence"] == (e["confidence"] < LOW_CONFIDENCE)
+
+
+def test_extraction_eval_scores_targets_against_source_facts() -> None:
+    """The teacher-side eval: normalized Haiku extraction vs the source FHIR facts.
+    On this synthetic closed-vocab set it reproduces the facts at the name level,
+    with zero hallucinations."""
+    report = extraction_eval.build_report()
+    assert report["n_records"] == 100
+    assert report["diagnosis"]["micro_f1"] >= 0.95
+    assert report["medication"]["micro_f1"] >= 0.95
+    assert report["diagnosis"]["non_canonical_count"] == 0
+    assert report["medication"]["non_canonical_count"] == 0
+
+
+def test_committed_extraction_eval_report_reproduces() -> None:
+    committed = json.loads((DATA / "reports" / "extraction_eval.json").read_text())
+    assert committed == extraction_eval.build_report(), "committed extraction_eval.json is stale"
+
+
+def test_extraction_eval_detects_misses_and_spurious_extractions() -> None:
+    """A metric that can't register an error is worthless: plant an FN and an FP."""
+    dx0, dx1, dx2 = eval_metrics.CANONICAL_DIAGNOSES[:3]
+    gt_dx = {"p1": {dx0, dx1}}  # note actually contained dx0 + dx1
+    ext = [
+        {
+            "patient_id": "p1",
+            "diagnoses": [{"name": dx0}, {"name": dx2}],  # dropped dx1 (FN), added dx2 (FP)
+            "medications": [],
+            "vitals": [],
+        }
+    ]
+    report = extraction_eval.evaluate_extractions(ext, gt_dx, {"p1": set()})
+    d = report["diagnosis"]
+    assert (d["tp"], d["fn"], d["fp"]) == (1, 1, 1)
 
 
 def test_extraction_shape_and_alignment_with_notes() -> None:

@@ -53,7 +53,7 @@ def _prf(tp: int, fp: int, fn: int) -> tuple[float, float, float]:
     return precision, recall, f1
 
 
-def _score_field(parsed_pairs: list[tuple[dict, dict]], canonical: list[str], field: str) -> dict:
+def score_field(parsed_pairs: list[tuple[dict, dict]], canonical: list[str], field: str) -> dict:
     """Micro P/R/F1 for one field over parseable outputs. `parsed_pairs` is
     (ground_truth, parsed_output). Non-canonical predicted names are tracked, not
     scored as false positives against the canonical categories."""
@@ -125,8 +125,8 @@ def evaluate_predictions(pairs: list[tuple[dict, str]]) -> dict:
             "total": n_total,
             "rate": (n_valid / n_total) if n_total else 0.0,
         },
-        "diagnosis": _score_field(parsed_pairs, CANONICAL_DIAGNOSES, "diagnoses"),
-        "medication": _score_field(parsed_pairs, CANONICAL_MEDS, "medications"),
+        "diagnosis": score_field(parsed_pairs, CANONICAL_DIAGNOSES, "diagnoses"),
+        "medication": score_field(parsed_pairs, CANONICAL_MEDS, "medications"),
         "failure_examples": failures,
         "scope_note": (
             "diagnoses + medications (exact canonical-name micro P/R/F1). Vitals "
