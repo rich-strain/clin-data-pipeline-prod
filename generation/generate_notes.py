@@ -196,7 +196,7 @@ def build_note(record: dict, rng: random.Random) -> dict:
     # contradictory values ("Body weight 91.7 kg, Body weight 145.5 [lb_av]"),
     # which the downstream extractor rightly flags as low-confidence. Keep only
     # the most recent reading per vital (undated readings rank oldest).
-    latest: dict[str, tuple[str, str]] = {}
+    latest_vital: dict[str, tuple[str, str]] = {}
     for obs in record["observations"]:
         bp = _bp_values(obs)
         if bp:
@@ -208,9 +208,9 @@ def build_note(record: dict, rng: random.Random) -> dict:
         else:
             continue
         when = obs.get("effectiveDateTime") or ""
-        if key not in latest or when >= latest[key][0]:
-            latest[key] = (when, text)  # first appearance fixes order; latest date wins
-    vitals = [text for _, text in latest.values()]
+        if key not in latest_vital or when >= latest_vital[key][0]:
+            latest_vital[key] = (when, text)  # first appearance fixes order; latest date wins
+    vitals = [text for _, text in latest_vital.values()]
     if vitals:
         b.line(f"Vitals: {', '.join(vitals)}.")
         b.line()

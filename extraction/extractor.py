@@ -210,9 +210,7 @@ def batch_status(batch_id: str, client, *, stats: CallStats | None = None) -> st
     return batch.processing_status
 
 
-def collect_batch_results(
-    batch_id: str, client, cache, *, stats: CallStats | None = None
-) -> None:
+def collect_batch_results(batch_id: str, client, cache, *, stats: CallStats | None = None) -> None:
     """Pull a FINISHED batch's results into the cache (persisted per-write). Raises
     if the batch is not finished yet (retrieve again later) or any request failed."""
     if batch_status(batch_id, client, stats=stats) != "ended":

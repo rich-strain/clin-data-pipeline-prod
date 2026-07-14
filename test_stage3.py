@@ -100,7 +100,9 @@ def test_submit_batch_returns_none_when_everything_cached(tmp_path) -> None:
     notes = [{"note_id": "n1", "patient_id": "p1", "text": "note one"}]
     cache = IncrementalCache(tmp_path / "cache.json")
     client = _FakeClient()
-    collect_batch_results(submit_batch(notes, client, cache), client, cache)
+    batch_id = submit_batch(notes, client, cache)
+    assert batch_id is not None
+    collect_batch_results(batch_id, client, cache)
     # Second submit sees a full cache -> nothing to do.
     assert submit_batch(notes, client, cache) is None
 

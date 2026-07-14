@@ -12,6 +12,7 @@ trains — those are deliberate Lane 1 (local/manual) steps.
 """
 
 import json
+from collections import Counter
 from pathlib import Path
 
 import pandas as pd
@@ -72,8 +73,8 @@ STAGES: list[tuple[str, str, str]] = [
     ),
     (
         "4 — Curation + DQ",
-        "Normalize / redact / rebalance / synthesize, gated by Great "
-        "Expectations / Pandera data-quality checks.",
+        "Normalize / redact / rebalance / synthesize, gated by Pandera "
+        "data-quality checks that fail the pipeline.",
         "step 5",
     ),
     (
@@ -405,10 +406,94 @@ def render_extraction(label: str, description: str) -> None:
     cols[2].dataframe(pd.DataFrame(rec["vitals"]), hide_index=True, use_container_width=True)
 
 
+def render_curation(label: str, description: str) -> None:
+    """Stage 4 — curation + DQ gate, read off the committed curated artifacts."""
+    st.title(label)
+    st.caption(description)
+
+    raw = load_jsonl("data/extracted/extractions.jsonl")
+    normalized = load_jsonl("data/curated/normalized.jsonl")
+    rebalanced = load_jsonl("data/curated/rebalanced.jsonl")
+    metrics = load_json("data/curated/normalize_metrics.json")
+    gate = load_json("data/reports/dq_gate.json")
+    if not (normalized and rebalanced and metrics and gate):
+        st.warning("Stage 4 artifacts missing — run `python run_stage4.py` to generate them.")
+        return
+
+    st.info(
+        "**Curate, then gate.** The raw extraction preserves the model's wording; "
+        "curation makes it consistent (canonical names/units/dosage), rebalances "
+        "under-represented diagnoses, and synthesizes any missing category — then a "
+        "**Pandera gate fails the pipeline** on any completeness / referential / "
+        "value-range violation. Every number below is read off committed artifacts."
+    )
+
+    ov = metrics["overall"]
+    dups = sum(1 for r in rebalanced if "rebalance_duplicate_of" in r)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric(
+        "Values canonicalized", f"{ov['matched']}/{ov['total']}", f"{ov['unmatched']} unmatched"
+    )
+    c2.metric("Rebalance duplicates", f"+{dups}", f"{len(rebalanced)} records")
+    c3.metric("Synthesized (paid)", "0", "all categories present → $0")
+    c4.metric("DQ gate", "PASS" if gate["passed"] else "FAIL", f"{gate['n_records']} records")
+
+    # --- Before/after: diagnosis canonicalization ---
+    st.subheader("Normalization — before → after")
+    st.caption(
+        "The raw extraction returns diagnosis names with date contamination and "
+        "dropped qualifiers; normalization maps them to the closed terminology "
+        "vocabulary (a lookup against the generator's own source of truth, not NLP)."
+    )
+    before_dx = sorted({d["name"] for r in raw for d in r["diagnoses"]})
+    after_dx = sorted({d["name"] for r in normalized for d in r["diagnoses"]})
+    cols = st.columns(2)
+    cols[0].caption(f"Raw diagnosis names ({len(before_dx)} distinct)")
+    cols[0].dataframe(pd.DataFrame({"name": before_dx}), hide_index=True, use_container_width=True)
+    cols[1].caption(f"Canonical diagnosis names ({len(after_dx)} distinct)")
+    cols[1].dataframe(pd.DataFrame({"name": after_dx}), hide_index=True, use_container_width=True)
+
+    # --- Rebalance: category counts ---
+    st.subheader("Rebalance — diagnosis-category representation")
+    st.caption(
+        "Under-represented diagnosis categories are oversampled by duplicating "
+        "records (marked `rebalance_duplicate_of`, kept split-safe for Stage 5)."
+    )
+    before_counts = Counter(d["name"] for r in normalized for d in r["diagnoses"])
+    after_counts = Counter(d["name"] for r in rebalanced for d in r["diagnoses"])
+    counts_df = pd.DataFrame(
+        [
+            {"diagnosis": k, "before": before_counts.get(k, 0), "after": after_counts.get(k, 0)}
+            for k in after_counts
+        ]
+    ).sort_values("after", ascending=False)
+    st.dataframe(counts_df, hide_index=True, use_container_width=True)
+
+    # --- DQ gate results ---
+    st.subheader("Data-quality gate (Pandera)")
+    st.caption(
+        "Declarative checks that **raise** on violation, not just log a metric — "
+        "completeness, referential integrity (names/units in the closed vocabulary), "
+        "and value ranges (confidence 0–1, vitals within clinical bounds, BP well-formed)."
+    )
+    gate_df = pd.DataFrame(
+        [
+            {
+                "table": name,
+                "rows": e["rows"],
+                "result": "✅ PASS" if e["passed"] else f"❌ FAIL ({e.get('n_failures', 0)})",
+            }
+            for name, e in gate["tables"].items()
+        ]
+    )
+    st.dataframe(gate_df, hide_index=True, use_container_width=True)
+
+
 PAGES = {
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
     "3 — Extraction": render_extraction,
+    "4 — Curation + DQ": render_curation,
 }
 
 

@@ -6,3 +6,6 @@ pytest
 # Build-time FHIR R4 structural validation (Stage 0/1). Not needed by the app
 # at runtime (it reads the committed validation report), so it's dev-only.
 fhir.resources
+# Stage 4 data-quality gate (Pandera). Runs on committed curated artifacts
+# (free, no API), so CI re-runs it; the app only reads the committed gate report.
+pandera

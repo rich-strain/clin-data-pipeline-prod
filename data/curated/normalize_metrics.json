@@ -1,0 +1,30 @@
+{
+  "total_records": 100,
+  "overall": {
+    "total": 679,
+    "matched": 677,
+    "unmatched": 2,
+    "unmatched_rate": 0.0029455081001472753
+  },
+  "by_field": {
+    "diagnosis": {
+      "total": 186,
+      "matched": 186,
+      "unmatched": 0
+    },
+    "dosage": {
+      "total": 186,
+      "matched": 184,
+      "unmatched": 2
+    },
+    "vital": {
+      "total": 307,
+      "matched": 307,
+      "unmatched": 0
+    }
+  },
+  "unmatched_examples": [
+    "dosage for 'Phentermine 37.5 MG Oral Tablet': '37.5 MG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'"
+  ]
+}

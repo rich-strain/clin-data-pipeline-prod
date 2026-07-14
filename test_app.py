@@ -59,6 +59,15 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     assert len(at.dataframe) >= 1, "Stage 0/1 page should render at least one real table"
     assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
+    # Stage 4 curation page renders real DQ-gate content (same session — a fresh
+    # AppTest per page segfaults in this env, see module docstring).
+    _radio(at).set_value("4 — Curation + DQ").run()
+    assert not at.exception
+    curation_text = _all_text(at)
+    assert "Pandera" in curation_text, "Curation page should describe the Pandera gate"
+    assert len(at.dataframe) >= 1, "Curation page should render real before/after tables"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
     _radio(at).set_value("7 — Evaluation + Release").run()
     assert not at.exception
     assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
