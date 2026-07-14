@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local secrets — NEVER commit real credentials.
+# ANTHROPIC_API_KEY lives here (local only), never in CI. See build_spec.md
+# cost guardrails.
+.env
+
+# OS
+.DS_Store

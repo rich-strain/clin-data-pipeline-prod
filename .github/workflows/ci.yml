@@ -1,0 +1,81 @@
+name: CI
+
+# Lane 2 — free, automated, on every push/PR. This workflow runs lint,
+# type-check, and tests against committed artifacts only. It NEVER calls the
+# Anthropic API and NEVER trains (see build_spec.md, "Runtime & execution
+# boundary" and "Cost guardrails"). As the pipeline grows, the free stages
+# (normalize/redact/rebalance/split/format), the DQ gates, and the cache-only
+# extraction coverage check get added here.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      # Cost guardrail, enforced in CI itself (build_spec.md): the Anthropic
+      # API key must never be injected into a workflow and must never be present
+      # in the CI runtime environment. Lane 2 stays free by construction.
+      - name: Guardrail — no Anthropic API key in CI
+        run: |
+          # Assemble the needle from fragments so this guardrail file does not
+          # itself contain the literal key name and trip its own grep.
+          key="ANTHROPIC""_API_KEY"
+          if grep -rniE "secrets\.${key}|^[[:space:]]*${key}[[:space:]]*:" .github/; then
+            echo "::error::${key} must never be referenced by a workflow (Lane 2 is free-by-construction)."
+            exit 1
+          fi
+          if [ -n "${!key}" ]; then
+            echo "::error::${key} is present in the CI environment; it must never be."
+            exit 1
+          fi
+          echo "OK — no Anthropic API key referenced by any workflow or present in the CI env."
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Format check (ruff)
+        run: ruff format --check .
+
+      - name: Type-check (mypy)
+        run: mypy app.py test_app.py
+
+      - name: Tests (pytest)
+        run: pytest
+
+  # Deploy-to-Space skeleton (Lane 2 → Lane 3). Secret-gated: with no HF_TOKEN
+  # configured yet and no artifacts to ship, it skips cleanly. Once a Space
+  # exists, this pushes the app + the committed artifacts it needs to the
+  # Space's HF git remote (Spaces don't pull from GitHub; Actions pushes).
+  deploy:
+    needs: quality
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - name: Deploy to Hugging Face Space
+        run: |
+          if [ -z "${HF_TOKEN}" ]; then
+            echo "No HF_TOKEN secret set — skipping Space deploy (nothing to ship yet)."
+            exit 0
+          fi
+          echo "HF_TOKEN present — Space deploy will be implemented in the showcase/serving step."

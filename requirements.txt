@@ -1,0 +1,4 @@
+# Runtime dependencies for the showcase app (Lane 3).
+# Kept deliberately minimal — dependencies are added in the Working Plan step
+# that first uses them, not front-loaded. The app shell needs only Streamlit.
+streamlit

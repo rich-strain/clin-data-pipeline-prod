@@ -1,0 +1,26 @@
+[project]
+name = "clin-data-pipeline-prod"
+version = "0.1.0"
+description = "Production-true clinical data pipeline (governance, lineage, DQ gates, serving) on fully synthetic data."
+requires-python = ">=3.11"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+# Sensible default set: pyflakes (F), pycodestyle (E/W), isort (I), pyupgrade
+# (UP), flake8-bugbear (B).
+select = ["E", "W", "F", "I", "UP", "B"]
+
+[tool.mypy]
+# Matches the interpreter CI and local dev actually run (3.13); some installed
+# dependency stubs (numpy) use 3.12+ syntax, so an older target fails to parse
+# them. The package itself still supports >=3.11 per [project].requires-python.
+python_version = "3.13"
+# Streamlit and other libraries ship without type stubs; don't fail CI on that.
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+addopts = "-q"

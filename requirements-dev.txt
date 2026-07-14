@@ -1,0 +1,5 @@
+# Dev/CI tooling (Lane 2). Installed on top of requirements.txt.
+-r requirements.txt
+ruff
+mypy
+pytest
