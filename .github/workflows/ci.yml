@@ -56,7 +56,7 @@ jobs:
         run: ruff format --check .
 
       - name: Type-check (mypy)
-        run: mypy app.py test_app.py test_stage01.py test_stage2.py test_stage3.py test_stage4.py test_stage5.py test_stage6.py run_stage01.py run_stage2.py run_stage4.py run_stage5.py split.py format_jsonl.py gold.py registry.py generation omop terminology deid common extraction curation
+        run: mypy app.py test_app.py test_stage01.py test_stage2.py test_stage3.py test_stage4.py test_stage5.py test_stage6.py test_stage7.py run_stage01.py run_stage2.py run_stage4.py run_stage5.py split.py format_jsonl.py gold.py registry.py eval_metrics.py generation omop terminology deid common extraction curation
 
       - name: Tests (pytest)
         run: pytest

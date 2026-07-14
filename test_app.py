@@ -84,7 +84,16 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     assert len(at.dataframe) >= 1, "Training page should render the real loss-history table"
     assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
+    # Stage 7 evaluation page renders the release gate + per-field metrics.
     _radio(at).set_value("7 — Evaluation + Release").run()
+    assert not at.exception
+    eval_text = _all_text(at)
+    assert "gate" in eval_text.lower(), "Evaluation page should show the release gate"
+    assert len(at.dataframe) >= 2, "Evaluation page should render per-field + gate tables"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
+    # A still-unbuilt page (step 9) must still show the honest stub notice.
+    _radio(at).set_value("Provenance").run()
     assert not at.exception
     assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
         "unbuilt pages should still show the honest stub notice"

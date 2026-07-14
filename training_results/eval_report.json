@@ -1,0 +1,199 @@
+{
+  "n_examples": 12,
+  "json_validity": {
+    "valid": 12,
+    "total": 12,
+    "rate": 1.0
+  },
+  "diagnosis": {
+    "micro_precision": 1.0,
+    "micro_recall": 0.9545454545454546,
+    "micro_f1": 0.9767441860465117,
+    "tp": 21,
+    "fp": 0,
+    "fn": 1,
+    "non_canonical_count": 0,
+    "non_canonical_examples": [],
+    "per_category": [
+      {
+        "category": "Type 2 diabetes mellitus without complication",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Essential hypertension",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Uncomplicated asthma",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Hyperlipidemia",
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Chronic obstructive lung disease",
+        "tp": 3,
+        "fp": 0,
+        "fn": 1
+      },
+      {
+        "category": "Migraine",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Obesity",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Gastroesophageal reflux disease without esophagitis",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Hypothyroidism",
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Major depression, single episode",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      }
+    ]
+  },
+  "medication": {
+    "micro_precision": 1.0,
+    "micro_recall": 1.0,
+    "micro_f1": 1.0,
+    "tp": 22,
+    "fp": 0,
+    "fn": 0,
+    "non_canonical_count": 0,
+    "non_canonical_examples": [],
+    "per_category": [
+      {
+        "category": "Metformin 500 MG Oral Tablet",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Lisinopril 10 MG Oral Tablet",
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Atorvastatin 20 MG Oral Tablet",
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Albuterol 90 MCG Inhaler",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Levothyroxine 75 MCG Oral Tablet",
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Sertraline 50 MG Oral Tablet",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Omeprazole 20 MG Oral Capsule",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Amlodipine 5 MG Oral Tablet",
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Tiotropium 18 MCG Inhalation Powder",
+        "tp": 4,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Sumatriptan 50 MG Oral Tablet",
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      {
+        "category": "Phentermine 37.5 MG Oral Tablet",
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      }
+    ]
+  },
+  "failure_examples": [],
+  "scope_note": "diagnoses + medications (exact canonical-name micro P/R/F1). Vitals out of scope (value-closeness judgment). Non-canonical names tracked as hallucinations, not fuzzy-matched.",
+  "release_gate": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "json_validity_rate",
+        "value": 1.0,
+        "threshold": 0.9,
+        "op": ">=",
+        "passed": true
+      },
+      {
+        "name": "diagnosis_micro_f1",
+        "value": 0.9767,
+        "threshold": 0.8,
+        "op": ">=",
+        "passed": true
+      },
+      {
+        "name": "medication_micro_f1",
+        "value": 1.0,
+        "threshold": 0.7,
+        "op": ">=",
+        "passed": true
+      },
+      {
+        "name": "non_canonical_total",
+        "value": 0,
+        "threshold": 2,
+        "op": "<=",
+        "passed": true
+      }
+    ]
+  },
+  "thresholds": {
+    "json_validity_rate": 0.9,
+    "diagnosis_micro_f1": 0.8,
+    "medication_micro_f1": 0.7,
+    "max_non_canonical": 2
+  }
+}

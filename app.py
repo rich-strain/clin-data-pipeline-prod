@@ -634,6 +634,94 @@ def render_training(label: str, description: str) -> None:
     st.json(entry)
 
 
+def render_eval(label: str, description: str) -> None:
+    """Stage 7 — evaluation + release gate, read off the committed eval report."""
+    st.title(label)
+    st.caption(description)
+
+    report = load_json("training_results/eval_report.json")
+    card = ROOT / "training_results" / "model_card.md"
+    if not report:
+        st.warning(
+            "Stage 7 artifacts missing — run `python evaluate.py` locally (Lane 1, "
+            "compute; needs requirements-train.txt). Evaluates the committed adapter."
+        )
+        return
+
+    gate = report["release_gate"]
+    dx, med, jv = report["diagnosis"], report["medication"], report["json_validity"]
+    st.info(
+        "**Release gate on the frozen gold set.** The committed adapter is scored "
+        "against the immutable gold set; a predicted name outside the closed "
+        "vocabulary is tracked as a **hallucination**, never fuzzy-matched. The gate "
+        "is a real pass/fail, and every number is read off the committed report."
+    )
+
+    verdict = "✅ RELEASE" if gate["passed"] else "❌ BLOCKED"
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Release gate", verdict)
+    c2.metric("JSON validity", f"{jv['valid']}/{jv['total']}", f"{jv['rate']:.0%}")
+    c3.metric("Diagnosis F1", f"{dx['micro_f1']:.3f}", f"non-canon {dx['non_canonical_count']}")
+    c4.metric("Medication F1", f"{med['micro_f1']:.3f}", f"non-canon {med['non_canonical_count']}")
+
+    # --- Per-field metrics ---
+    st.subheader("Per-field metrics (frozen gold set)")
+    st.dataframe(
+        pd.DataFrame(
+            [
+                {
+                    "field": name,
+                    "precision": round(s["micro_precision"], 3),
+                    "recall": round(s["micro_recall"], 3),
+                    "f1": round(s["micro_f1"], 3),
+                    "TP": s["tp"],
+                    "FP": s["fp"],
+                    "FN": s["fn"],
+                    "hallucinations": s["non_canonical_count"],
+                }
+                for name, s in (("diagnosis", dx), ("medication", med))
+            ]
+        ),
+        hide_index=True,
+        use_container_width=True,
+    )
+
+    # --- Release gate checks ---
+    st.subheader("Release gate")
+    st.caption("Each threshold must pass for the model to be releasable.")
+    st.dataframe(
+        pd.DataFrame(
+            [
+                {
+                    "check": c["name"],
+                    "value": c["value"],
+                    "needs": f"{c['op']} {c['threshold']}",
+                    "result": "✅ pass" if c["passed"] else "❌ fail",
+                }
+                for c in gate["checks"]
+            ]
+        ),
+        hide_index=True,
+        use_container_width=True,
+    )
+
+    # --- Failing cases (honest: show misses) ---
+    dx_misses = [c for c in dx["per_category"] if c["fn"] or c["fp"]]
+    if dx_misses or report["failure_examples"]:
+        st.subheader("Where it slips (honest failure tracking)")
+        if dx_misses:
+            st.caption("Diagnosis categories the model got wrong on the gold set:")
+            st.dataframe(pd.DataFrame(dx_misses), hide_index=True, use_container_width=True)
+        if report["failure_examples"]:
+            st.caption("Unparseable / malformed outputs:")
+            st.json(report["failure_examples"])
+
+    # --- Model card ---
+    if card.exists():
+        st.subheader("Model card")
+        st.markdown(card.read_text())
+
+
 PAGES = {
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
@@ -641,6 +729,7 @@ PAGES = {
     "4 — Curation + DQ": render_curation,
     "5 — Dataset Assembly": render_dataset,
     "6 — Training": render_training,
+    "7 — Evaluation + Release": render_eval,
 }
 
 
