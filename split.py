@@ -45,8 +45,11 @@ SPLIT_PATHS = {
     "test": DATA_DIR / "curated" / "split_test.jsonl",
 }
 
-# Record-level target fractions. test doubles as the frozen gold set (Stage 7).
-SPLIT_FRACTIONS = {"train": 0.70, "val": 0.15, "test": 0.15}
+# Record-level target fractions. 80% train matches the prior projects' train
+# share (and this data-starved fine-tune's need to protect training data); the
+# held-out 20% is split evenly into val and test. test doubles as the frozen
+# gold set (Stage 7).
+SPLIT_FRACTIONS = {"train": 0.80, "val": 0.10, "test": 0.10}
 
 
 def original_patient_id(record: dict) -> str:
