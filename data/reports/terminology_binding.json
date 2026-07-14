@@ -1,0 +1,129 @@
+{
+  "overall": {
+    "matched": 1598,
+    "total": 1618,
+    "pct": 98.76
+  },
+  "by_system": {
+    "sct": {
+      "matched": 203,
+      "total": 203
+    },
+    "icd-10-cm": {
+      "matched": 203,
+      "total": 203
+    },
+    "rxnorm": {
+      "matched": 206,
+      "total": 206
+    },
+    "loinc.org": {
+      "matched": 553,
+      "total": 553
+    },
+    "unitsofmeasure.org": {
+      "matched": 433,
+      "total": 453
+    }
+  },
+  "unmatched_examples": [
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    },
+    {
+      "system": "unitsofmeasure.org",
+      "code": "[lb_av]"
+    }
+  ],
+  "snapshot_coverage": {
+    "conditions": {
+      "mapped": 10,
+      "total": 10
+    },
+    "medications": {
+      "mapped": 8,
+      "total": 8
+    },
+    "observations": {
+      "mapped": 8,
+      "total": 8
+    },
+    "units": {
+      "mapped": 8,
+      "total": 9
+    }
+  }
+}

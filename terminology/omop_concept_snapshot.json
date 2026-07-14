@@ -1,0 +1,652 @@
+{
+  "_provenance": {
+    "source": "OHDSI ATLAS demo WebAPI",
+    "api": "https://atlas-demo.ohdsi.org/WebAPI",
+    "source_key": "SYNPUF1K",
+    "resolved_date": "2026-07-13",
+    "method": "Exact source-code lookup + 'Maps to' (Non-standard to Standard map) resolution via the public ATLAS demo WebAPI vocabulary search/related endpoints. Verifiable, not fabricated.",
+    "note": "Pinned snapshot for this repo's closed synthetic vocabulary only. A full deployment resolves against the licensed OHDSI/Athena vocabulary (documented upgrade). Unresolved source codes carry standard concept_id 0 (OMOP's unmapped sentinel)."
+  },
+  "metadata_concepts": {
+    "gender": {
+      "male": {
+        "concept_id": 8507,
+        "concept_name": "MALE"
+      },
+      "female": {
+        "concept_id": 8532,
+        "concept_name": "FEMALE"
+      }
+    },
+    "type_concept": {
+      "ehr": {
+        "concept_id": 32817,
+        "concept_name": "EHR"
+      }
+    }
+  },
+  "conditions": {
+    "E11.9": {
+      "source": {
+        "concept_id": 35206882,
+        "concept_code": "E11.9",
+        "concept_name": "Type 2 diabetes mellitus without complications",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 4193704,
+        "concept_code": "313436004",
+        "concept_name": "Type 2 diabetes mellitus without complication",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "I10": {
+      "source": {
+        "concept_id": 35207668,
+        "concept_code": "I10",
+        "concept_name": "Essential (primary) hypertension",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 320128,
+        "concept_code": "59621000",
+        "concept_name": "Essential hypertension",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "J45.909": {
+      "source": {
+        "concept_id": 45562457,
+        "concept_code": "J45.909",
+        "concept_name": "Unspecified asthma, uncomplicated",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 45768910,
+        "concept_code": "707444001",
+        "concept_name": "Uncomplicated asthma",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "E78.5": {
+      "source": {
+        "concept_id": 35207065,
+        "concept_code": "E78.5",
+        "concept_name": "Hyperlipidemia, unspecified",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 432867,
+        "concept_code": "55822004",
+        "concept_name": "Hyperlipidemia",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "J44.9": {
+      "source": {
+        "concept_id": 35208025,
+        "concept_code": "J44.9",
+        "concept_name": "Chronic obstructive pulmonary disease, unspecified",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 255573,
+        "concept_code": "13645005",
+        "concept_name": "Chronic obstructive lung disease",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "G43.909": {
+      "source": {
+        "concept_id": 45600786,
+        "concept_code": "G43.909",
+        "concept_name": "Migraine, unspecified, not intractable, without status migrainosus",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 318736,
+        "concept_code": "37796009",
+        "concept_name": "Migraine",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "E66.9": {
+      "source": {
+        "concept_id": 35207024,
+        "concept_code": "E66.9",
+        "concept_name": "Obesity, unspecified",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 433736,
+        "concept_code": "414916001",
+        "concept_name": "Obesity",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "K21.9": {
+      "source": {
+        "concept_id": 35208190,
+        "concept_code": "K21.9",
+        "concept_name": "Gastro-esophageal reflux disease without esophagitis",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 4144111,
+        "concept_code": "266435005",
+        "concept_name": "Gastroesophageal reflux disease without esophagitis",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "E03.9": {
+      "source": {
+        "concept_id": 35206859,
+        "concept_code": "E03.9",
+        "concept_name": "Hypothyroidism, unspecified",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 140673,
+        "concept_code": "40930008",
+        "concept_name": "Hypothyroidism",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    },
+    "F32.9": {
+      "source": {
+        "concept_id": 35207155,
+        "concept_code": "F32.9",
+        "concept_name": "Major depressive disorder, single episode, unspecified",
+        "vocabulary_id": "ICD10CM",
+        "domain_id": "Condition",
+        "standard": "N"
+      },
+      "standard": {
+        "concept_id": 4282096,
+        "concept_code": "36923009",
+        "concept_name": "Major depression, single episode",
+        "vocabulary_id": "SNOMED",
+        "domain_id": "Condition",
+        "standard": "S"
+      }
+    }
+  },
+  "medications": {
+    "6809": {
+      "source": {
+        "concept_id": 1503297,
+        "concept_code": "6809",
+        "concept_name": "metformin",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1503297,
+        "concept_code": "6809",
+        "concept_name": "metformin",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "29046": {
+      "source": {
+        "concept_id": 1308216,
+        "concept_code": "29046",
+        "concept_name": "lisinopril",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1308216,
+        "concept_code": "29046",
+        "concept_name": "lisinopril",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "83367": {
+      "source": {
+        "concept_id": 1545958,
+        "concept_code": "83367",
+        "concept_name": "atorvastatin",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1545958,
+        "concept_code": "83367",
+        "concept_name": "atorvastatin",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "435": {
+      "source": {
+        "concept_id": 1154343,
+        "concept_code": "435",
+        "concept_name": "albuterol",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1154343,
+        "concept_code": "435",
+        "concept_name": "albuterol",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "10582": {
+      "source": {
+        "concept_id": 1501700,
+        "concept_code": "10582",
+        "concept_name": "levothyroxine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1501700,
+        "concept_code": "10582",
+        "concept_name": "levothyroxine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "36437": {
+      "source": {
+        "concept_id": 739138,
+        "concept_code": "36437",
+        "concept_name": "sertraline",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 739138,
+        "concept_code": "36437",
+        "concept_name": "sertraline",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "7646": {
+      "source": {
+        "concept_id": 923645,
+        "concept_code": "7646",
+        "concept_name": "omeprazole",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 923645,
+        "concept_code": "7646",
+        "concept_name": "omeprazole",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "17767": {
+      "source": {
+        "concept_id": 1332418,
+        "concept_code": "17767",
+        "concept_name": "amlodipine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1332418,
+        "concept_code": "17767",
+        "concept_name": "amlodipine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    }
+  },
+  "observations": {
+    "8867-4": {
+      "source": {
+        "concept_id": 3027018,
+        "concept_code": "8867-4",
+        "concept_name": "Heart rate",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3027018,
+        "concept_code": "8867-4",
+        "concept_name": "Heart rate",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "85354-9": {
+      "source": {
+        "concept_id": 36203185,
+        "concept_code": "85354-9",
+        "concept_name": "Blood pressure panel with all children optional",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 36203185,
+        "concept_code": "85354-9",
+        "concept_name": "Blood pressure panel with all children optional",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "8480-6": {
+      "source": {
+        "concept_id": 3004249,
+        "concept_code": "8480-6",
+        "concept_name": "Systolic blood pressure",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3004249,
+        "concept_code": "8480-6",
+        "concept_name": "Systolic blood pressure",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "8462-4": {
+      "source": {
+        "concept_id": 3012888,
+        "concept_code": "8462-4",
+        "concept_name": "Diastolic blood pressure",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3012888,
+        "concept_code": "8462-4",
+        "concept_name": "Diastolic blood pressure",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "8310-5": {
+      "source": {
+        "concept_id": 3020891,
+        "concept_code": "8310-5",
+        "concept_name": "Body temperature",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3020891,
+        "concept_code": "8310-5",
+        "concept_name": "Body temperature",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "29463-7": {
+      "source": {
+        "concept_id": 3025315,
+        "concept_code": "29463-7",
+        "concept_name": "Body weight",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3025315,
+        "concept_code": "29463-7",
+        "concept_name": "Body weight",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "8302-2": {
+      "source": {
+        "concept_id": 3036277,
+        "concept_code": "8302-2",
+        "concept_name": "Body height",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3036277,
+        "concept_code": "8302-2",
+        "concept_name": "Body height",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    },
+    "2339-0": {
+      "source": {
+        "concept_id": 3000483,
+        "concept_code": "2339-0",
+        "concept_name": "Glucose [Mass/volume] in Blood",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 3000483,
+        "concept_code": "2339-0",
+        "concept_name": "Glucose [Mass/volume] in Blood",
+        "vocabulary_id": "LOINC",
+        "domain_id": "Measurement",
+        "standard": "S"
+      }
+    }
+  },
+  "units": {
+    "mm[Hg]": {
+      "source": {
+        "concept_id": 8876,
+        "concept_code": "mm[Hg]",
+        "concept_name": "millimeter mercury column",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 8876,
+        "concept_code": "mm[Hg]",
+        "concept_name": "millimeter mercury column",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "Cel": {
+      "source": {
+        "concept_id": 586323,
+        "concept_code": "Cel",
+        "concept_name": "degree Celsius",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 586323,
+        "concept_code": "Cel",
+        "concept_name": "degree Celsius",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "[degF]": {
+      "source": {
+        "concept_id": 9289,
+        "concept_code": "[degF]",
+        "concept_name": "degree Fahrenheit",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 9289,
+        "concept_code": "[degF]",
+        "concept_name": "degree Fahrenheit",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "kg": {
+      "source": {
+        "concept_id": 9529,
+        "concept_code": "kg",
+        "concept_name": "kilogram",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 9529,
+        "concept_code": "kg",
+        "concept_name": "kilogram",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "[lb_av]": {
+      "source": null,
+      "standard": null
+    },
+    "cm": {
+      "source": {
+        "concept_id": 8582,
+        "concept_code": "cm",
+        "concept_name": "centimeter",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 8582,
+        "concept_code": "cm",
+        "concept_name": "centimeter",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "[in_i]": {
+      "source": {
+        "concept_id": 9327,
+        "concept_code": "[in_i]",
+        "concept_name": "inch (international)",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 9327,
+        "concept_code": "[in_i]",
+        "concept_name": "inch (international)",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "mg/dL": {
+      "source": {
+        "concept_id": 8840,
+        "concept_code": "mg/dL",
+        "concept_name": "milligram per deciliter",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 8840,
+        "concept_code": "mg/dL",
+        "concept_name": "milligram per deciliter",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    },
+    "/min": {
+      "source": {
+        "concept_id": 8541,
+        "concept_code": "/min",
+        "concept_name": "per minute",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 8541,
+        "concept_code": "/min",
+        "concept_name": "per minute",
+        "vocabulary_id": "UCUM",
+        "domain_id": "Unit",
+        "standard": "S"
+      }
+    }
+  }
+}

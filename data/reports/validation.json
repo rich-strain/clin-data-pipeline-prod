@@ -1,0 +1,27 @@
+{
+  "engine": "fhir.resources R4B (base-FHIR structural)",
+  "total": 862,
+  "valid": 862,
+  "invalid": 0,
+  "us_core_profiled": 862,
+  "by_type": {
+    "Condition": {
+      "valid": 203,
+      "total": 203
+    },
+    "MedicationRequest": {
+      "valid": 206,
+      "total": 206
+    },
+    "Observation": {
+      "valid": 353,
+      "total": 353
+    },
+    "Patient": {
+      "valid": 100,
+      "total": 100
+    }
+  },
+  "failures": [],
+  "note": "Base-FHIR structural validation only. Full US Core profile conformance and terminology binding validity are the HL7 FHIR Validator + Inferno (documented upgrade)."
+}

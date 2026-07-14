@@ -11,11 +11,27 @@ artifacts (Lane 3). It never calls the Anthropic API, runs extraction, or
 trains — those are deliberate Lane 1 (local/manual) steps.
 """
 
+import json
 from pathlib import Path
 
+import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).parent
+DATA = ROOT / "data"
+
+
+@st.cache_data
+def load_json(relpath: str):
+    path = ROOT / relpath
+    return json.loads(path.read_text()) if path.exists() else None
+
+
+@st.cache_data
+def load_csv(relpath: str):
+    path = ROOT / relpath
+    return pd.read_csv(path) if path.exists() else None
+
 
 # (label, one-line description, Working Plan step that fills this page).
 # Order mirrors the pipeline; the two trailing "cross-cutting" pages and the
@@ -108,6 +124,117 @@ def render_stub(label: str, description: str, planned_step: str) -> None:
     )
 
 
+def render_stage01(label: str, description: str) -> None:
+    """Stage 0/1 — real data read off the committed Stage 0/1 artifacts."""
+    st.title(label)
+    st.caption(description)
+
+    bundles = load_json("data/canonical/fhir_bundles.json")
+    binding = load_json("data/reports/terminology_binding.json")
+    validation = load_json("data/reports/validation.json")
+    if not (bundles and binding and validation):
+        st.warning("Stage 0/1 artifacts missing — run `python run_stage01.py` to generate them.")
+        return
+
+    # --- Immutable raw landing layer ---
+    st.subheader("Immutable raw landing layer (NDJSON `$export`)")
+    st.caption(
+        "The authoritative record — exactly what the source sent. Everything "
+        "below is a reproducible derivation FROM this layer, never a second "
+        "source of truth."
+    )
+    counts: dict[str, int] = {}
+    for bundle in bundles:
+        for entry in bundle["entry"]:
+            rt = entry["resource"]["resourceType"]
+            counts[rt] = counts.get(rt, 0) + 1
+    cols = st.columns(len(counts))
+    for col, (rt, n) in zip(cols, sorted(counts.items()), strict=False):
+        col.metric(rt, n)
+
+    # --- Sample US Core bundle ---
+    st.subheader("Sample US Core FHIR bundle")
+    st.caption(
+        "Note the two production-true upgrades over the demo: blood pressure is "
+        "one Observation (LOINC 85354-9) with **systolic + diastolic "
+        "components**, and Conditions are **dual-coded** (SNOMED CT problem + "
+        "ICD-10-CM billing)."
+    )
+    idx = st.slider("Patient", 0, len(bundles) - 1, 0)
+    bundle = bundles[idx]
+    bp = next(
+        (
+            e["resource"]
+            for e in bundle["entry"]
+            if e["resource"]["resourceType"] == "Observation"
+            and e["resource"].get("code", {}).get("coding", [{}])[0].get("code") == "85354-9"
+        ),
+        None,
+    )
+    if bp:
+        with st.expander("Blood pressure panel (LOINC 85354-9) — components", expanded=True):
+            st.json(bp)
+    with st.expander("Full bundle JSON"):
+        st.json(bundle)
+
+    # --- Terminology binding + validation ---
+    st.subheader("Terminology binding + conformance")
+    c1, c2, c3 = st.columns(3)
+    c1.metric(
+        "Coded fields matched",
+        f"{binding['overall']['pct']}%",
+        f"{binding['overall']['matched']}/{binding['overall']['total']}",
+    )
+    c2.metric("Base-FHIR valid", f"{validation['valid']}/{validation['total']}")
+    c3.metric("US Core-profiled", validation["us_core_profiled"])
+
+    per_system = pd.DataFrame(
+        [
+            {
+                "vocabulary": k,
+                "matched": v["matched"],
+                "total": v["total"],
+                "pct": round(100 * v["matched"] / v["total"], 1),
+            }
+            for k, v in binding["by_system"].items()
+        ]
+    )
+    st.dataframe(per_system, hide_index=True, use_container_width=True)
+    st.caption(
+        "Binding uses a pinned value-set snapshot with **real, verified OMOP "
+        "concept_ids** (OHDSI ATLAS, not fabricated). The only misses are "
+        "messy-mode `[lb_av]` weight units, genuinely absent from the snapshot "
+        "and left unmapped (concept_id 0) rather than invented. Full US Core "
+        "profile conformance is the HL7 Validator + Inferno (documented "
+        "upgrade); this page reports base-FHIR structural validity."
+    )
+
+    # --- OMOP CDM ---
+    st.subheader("OMOP CDM v5.4 (the analytics model)")
+    st.caption(
+        "FHIR is transformed into OMOP CDM tables. Standard `*_concept_id`s are "
+        "verified; `*_source_value`/`*_source_concept_id` preserve the original "
+        "code, exactly as a real ETL does. A BP panel becomes two `measurement` "
+        "rows (systolic + diastolic), which is how OMOP stores it."
+    )
+    tabs = st.tabs(
+        ["person", "condition_occurrence", "drug_exposure", "measurement", "observation_period"]
+    )
+    for tab, name in zip(
+        tabs,
+        ["person", "condition_occurrence", "drug_exposure", "measurement", "observation_period"],
+        strict=True,
+    ):
+        with tab:
+            df = load_csv(f"data/omop/{name}.csv")
+            if df is not None:
+                st.caption(f"{len(df):,} rows")
+                st.dataframe(df.head(15), hide_index=True, use_container_width=True)
+
+
+PAGES = {"0/1 — Ingestion + Canonical Storage": render_stage01}
+
+
 def main() -> None:
     st.set_page_config(page_title="Clinical Data Pipeline — Production-True", layout="wide")
 
@@ -118,7 +245,11 @@ def main() -> None:
         choice = st.radio("Stage", labels, label_visibility="collapsed")
 
     label, description, planned_step = next(s for s in STAGES if s[0] == choice)
-    render_stub(label, description, planned_step)
+    renderer = PAGES.get(label)
+    if renderer:
+        renderer(label, description)
+    else:
+        render_stub(label, description, planned_step)
 
 
 if __name__ == "__main__":

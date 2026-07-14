@@ -1,4 +1,6 @@
 # Runtime dependencies for the showcase app (Lane 3).
 # Kept deliberately minimal — dependencies are added in the Working Plan step
-# that first uses them, not front-loaded. The app shell needs only Streamlit.
+# that first uses them, not front-loaded. The app reads committed artifacts
+# (JSON/CSV) and renders tables; it does not re-run the pipeline.
 streamlit
+pandas

@@ -1,8 +1,10 @@
-"""Headless verification for app.py (Working Plan step 1 verify gate: "app
-launches locally, navigation works, no page has real content yet").
+"""Headless verification for app.py (verify gate for each Working Plan step:
+"app launches locally, navigation works, and each built page renders its real
+committed data").
 
 Loads the app and clicks each sidebar stage, asserting zero uncaught
-exceptions on the initial load and on every page.
+exceptions on the initial load and on every page. Also checks that a built
+page (Stage 0/1) renders real content while an unbuilt page stays a stub.
 
 Reuses ONE AppTest session across all clicks rather than re-instantiating
 AppTest.from_file() per page: the sibling clin-data-pipeline-scale repo
@@ -40,6 +42,31 @@ def test_app_loads_and_every_stage_renders() -> None:
         assert not at.exception, f"stage {label!r} raised: {at.exception}"
 
 
+def _all_text(at: AppTest) -> str:
+    return " ".join(
+        el.value for el in (*at.markdown, *at.info, *at.warning, *at.subheader) if el.value
+    )
+
+
+def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
+    at = AppTest.from_file("app.py")
+    at.run()
+
+    _radio(at).set_value("0/1 — Ingestion + Canonical Storage").run()
+    assert not at.exception
+    text = _all_text(at)
+    assert "OMOP CDM" in text, "Stage 0/1 page should render real OMOP content"
+    assert len(at.dataframe) >= 1, "Stage 0/1 page should render at least one real table"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
+    _radio(at).set_value("7 — Evaluation + Release").run()
+    assert not at.exception
+    assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
+        "unbuilt pages should still show the honest stub notice"
+    )
+
+
 if __name__ == "__main__":
     test_app_loads_and_every_stage_renders()
-    print(f"OK — app loaded and all {len(STAGE_LABELS)} stages rendered with no exceptions.")
+    test_stage01_page_renders_real_content_and_stub_pages_stay_stubs()
+    print(f"OK — app loaded, all {len(STAGE_LABELS)} stages rendered, Stage 0/1 shows real data.")
