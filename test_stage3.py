@@ -118,14 +118,16 @@ def test_every_extraction_has_provenance_and_valid_confidence() -> None:
 
 def test_extraction_eval_scores_targets_against_source_facts() -> None:
     """The teacher-side eval: normalized Haiku extraction vs the source FHIR facts.
-    On this synthetic closed-vocab set it reproduces the facts at the name level,
-    with zero hallucinations."""
+    Names reproduce the facts (closed vocab); dosage — free text — is where it
+    slips, so dosage accuracy is high but below 1.0."""
     report = extraction_eval.build_report()
     assert report["n_records"] == 100
     assert report["diagnosis"]["micro_f1"] >= 0.95
     assert report["medication"]["micro_f1"] >= 0.95
     assert report["diagnosis"]["non_canonical_count"] == 0
-    assert report["medication"]["non_canonical_count"] == 0
+    dosage = report["dosage"]
+    assert 0.90 <= dosage["accuracy"] < 1.0, "dosage should be strong but imperfect"
+    assert dosage["hallucinated"] >= 0 and dosage["total"] > 0
 
 
 def test_committed_extraction_eval_report_reproduces() -> None:
@@ -133,7 +135,7 @@ def test_committed_extraction_eval_report_reproduces() -> None:
     assert committed == extraction_eval.build_report(), "committed extraction_eval.json is stale"
 
 
-def test_extraction_eval_detects_misses_and_spurious_extractions() -> None:
+def test_extraction_eval_detects_misses_and_spurious_diagnoses() -> None:
     """A metric that can't register an error is worthless: plant an FN and an FP."""
     dx0, dx1, dx2 = eval_metrics.CANONICAL_DIAGNOSES[:3]
     gt_dx = {"p1": {dx0, dx1}}  # note actually contained dx0 + dx1
@@ -145,9 +147,41 @@ def test_extraction_eval_detects_misses_and_spurious_extractions() -> None:
             "vitals": [],
         }
     ]
-    report = extraction_eval.evaluate_extractions(ext, gt_dx, {"p1": set()})
+    report = extraction_eval.evaluate_extractions(ext, gt_dx, {"p1": {}})
     d = report["diagnosis"]
     assert (d["tp"], d["fn"], d["fp"]) == (1, 1, 1)
+
+
+def test_extraction_eval_dosage_flags_wrong_missing_and_hallucinated() -> None:
+    """Dosage exact-match must distinguish correct, wrong, missing, and hallucinated."""
+    med = eval_metrics.CANONICAL_MEDS[0]  # a real canonical med label
+    full = "Take 500 mg by mouth twice daily"  # its canonical dosage
+    gt_med = {
+        "ok": {med: full},
+        "wrong": {med: full},
+        "missing": {med: full},
+        "halluc": {med: None},  # source had no sig
+    }
+
+    def rec(pid, dosage):
+        return {
+            "patient_id": pid,
+            "diagnoses": [],
+            "vitals": [],
+            "medications": [{"name": med, "dosage": dosage}],
+        }
+
+    ext = [
+        rec("ok", full),  # correct
+        rec("wrong", "Take 5 mg at bedtime"),  # wrong value
+        rec("missing", None),  # source had a sig, model gave none
+        rec("halluc", "37.5 MG"),  # source had no sig, model invented one
+    ]
+    d = extraction_eval.evaluate_extractions(ext, {}, gt_med)["dosage"]
+    assert d["exact_match"] == 1 and d["total"] == 4
+    assert d["hallucinated"] == 1
+    kinds = {m["type"] for m in d["mismatch_examples"]}
+    assert kinds == {"wrong", "missing", "hallucinated"}
 
 
 def test_extraction_shape_and_alignment_with_notes() -> None:

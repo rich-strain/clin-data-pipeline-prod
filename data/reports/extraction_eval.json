@@ -152,5 +152,31 @@
       }
     ]
   },
-  "scope_note": "diagnoses + medications by canonical name (normalized). Vitals out of scope (value-closeness). Raw formatting quality is tracked in normalize_metrics.json."
+  "dosage": {
+    "exact_match": 183,
+    "total": 186,
+    "accuracy": 0.9838709677419355,
+    "hallucinated": 2,
+    "mismatch_examples": [
+      {
+        "medication": "Phentermine 37.5 MG Oral Tablet",
+        "predicted": "37.5 MG",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Atorvastatin 20 MG Oral Tablet",
+        "predicted": "20 MG",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Albuterol 90 MCG Inhaler",
+        "predicted": null,
+        "expected": "Inhale 2 puffs every 4 hours as needed",
+        "type": "missing"
+      }
+    ]
+  },
+  "scope_note": "diagnoses + medications by canonical name, plus medication dosage exact-match. Vitals out of scope (value-closeness). Raw formatting quality is tracked in normalize_metrics.json."
 }

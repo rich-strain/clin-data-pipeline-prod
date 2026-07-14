@@ -427,6 +427,30 @@ def render_extraction(label: str, description: str) -> None:
             hide_index=True,
             use_container_width=True,
         )
+        dos = ext_eval.get("dosage")
+        if dos:
+            st.caption(
+                "**Names are the easy part** (closed vocabulary → perfect). **Dosage** is "
+                "free text, and it's where the extraction genuinely slips:"
+            )
+            d1, d2, d3 = st.columns(3)
+            d1.metric(
+                "Dosage exact-match",
+                f"{dos['exact_match']}/{dos['total']}",
+                f"{dos['accuracy']:.1%}",
+            )
+            d2.metric("Hallucinated dosages", dos["hallucinated"], "invented, no source sig")
+            d3.metric(
+                "Other mismatches",
+                len(dos["mismatch_examples"]) - dos["hallucinated"],
+                "wrong / missing",
+            )
+            if dos["mismatch_examples"]:
+                st.dataframe(
+                    pd.DataFrame(dos["mismatch_examples"]),
+                    hide_index=True,
+                    use_container_width=True,
+                )
 
     # --- Sample extraction ---
     st.subheader("Sample extraction (structured tool-use output)")

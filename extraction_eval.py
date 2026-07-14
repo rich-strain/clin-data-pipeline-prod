@@ -23,7 +23,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import eval_metrics
-from curation.normalize import normalize_record
+from curation.normalize import normalize_dosage, normalize_record
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
@@ -31,6 +31,8 @@ EXTRACTED_PATH = DATA_DIR / "extracted" / "extractions.jsonl"
 CONDITION_PATH = DATA_DIR / "landing" / "Condition.ndjson"
 MEDICATION_PATH = DATA_DIR / "landing" / "MedicationRequest.ndjson"
 REPORT_PATH = DATA_DIR / "reports" / "extraction_eval.json"
+
+MAX_MISMATCH_EXAMPLES = 10
 
 
 def _read_ndjson(path: Path) -> list[dict]:
@@ -46,15 +48,59 @@ def _condition_name(cond: dict) -> str:
 
 
 def ground_truth(conditions: list[dict], medications: list[dict]) -> tuple[dict, dict]:
-    """Per-patient canonical diagnosis / medication names, straight from the FHIR
-    facts that generated the notes."""
+    """Per-patient ground truth from the FHIR facts that generated the notes:
+    diagnosis names (set), and medications as {name: canonical_dosage_or_None}
+    (the FHIR sig, canonicalized the same way the extraction is)."""
     gt_dx: dict[str, set] = defaultdict(set)
-    gt_med: dict[str, set] = defaultdict(set)
+    gt_med: dict[str, dict] = defaultdict(dict)
     for c in conditions:
         gt_dx[_patient_id(c)].add(_condition_name(c))
     for m in medications:
-        gt_med[_patient_id(m)].add(m["medicationCodeableConcept"].get("text", ""))
+        name = m["medicationCodeableConcept"].get("text", "")
+        sig = (m.get("dosageInstruction") or [{}])[0].get("text")
+        gt_med[_patient_id(m)][name] = normalize_dosage(name, sig)[0]
     return gt_dx, gt_med
+
+
+def _score_dosage(extractions: list[dict], gt_med: dict) -> dict:
+    """Exact-match on the value the name check can't catch — this is where the
+    extraction genuinely slips. For each medication matched by name, compare the
+    normalized dosage to the source sig (both canonicalized). Three failure kinds:
+    `wrong` (different value), `missing` (source had a sig, model produced none),
+    and `hallucinated` (source had NO sig, model invented one — e.g. echoing the
+    strength from the drug name). A source-None ↔ predicted-None pair agrees."""
+    matched = total = hallucinated = 0
+    mismatches: list[dict] = []
+    for e in extractions:
+        normalized, _ = normalize_record(e)
+        gt = gt_med.get(e["patient_id"], {})
+        for m in normalized["medications"]:
+            name, dose = m["name"], m.get("dosage")
+            if name not in gt:
+                continue  # spurious drug — already an FP in the name metric
+            total += 1
+            expected = gt[name]  # canonical dosage, or None if the source had no sig
+            if dose == expected:
+                matched += 1
+                continue
+            if expected is None:
+                hallucinated += 1
+                kind = "hallucinated"
+            elif dose is None:
+                kind = "missing"
+            else:
+                kind = "wrong"
+            if len(mismatches) < MAX_MISMATCH_EXAMPLES:
+                mismatches.append(
+                    {"medication": name, "predicted": dose, "expected": expected, "type": kind}
+                )
+    return {
+        "exact_match": matched,
+        "total": total,
+        "accuracy": (matched / total) if total else 0.0,
+        "hallucinated": hallucinated,
+        "mismatch_examples": mismatches,
+    }
 
 
 def evaluate_extractions(extractions: list[dict], gt_dx: dict, gt_med: dict) -> dict:
@@ -64,9 +110,7 @@ def evaluate_extractions(extractions: list[dict], gt_dx: dict, gt_med: dict) -> 
         normalized, _ = normalize_record(e)
         pid = e["patient_id"]
         dx_pairs.append(({"diagnoses": [{"name": n} for n in gt_dx.get(pid, set())]}, normalized))
-        med_pairs.append(
-            ({"medications": [{"name": n} for n in gt_med.get(pid, set())]}, normalized)
-        )
+        med_pairs.append(({"medications": [{"name": n} for n in gt_med.get(pid, {})]}, normalized))
 
     return {
         "n_records": len(extractions),
@@ -78,9 +122,11 @@ def evaluate_extractions(extractions: list[dict], gt_dx: dict, gt_med: dict) -> 
         "medication": eval_metrics.score_field(
             med_pairs, eval_metrics.CANONICAL_MEDS, "medications"
         ),
+        "dosage": _score_dosage(extractions, gt_med),
         "scope_note": (
-            "diagnoses + medications by canonical name (normalized). Vitals out of scope "
-            "(value-closeness). Raw formatting quality is tracked in normalize_metrics.json."
+            "diagnoses + medications by canonical name, plus medication dosage "
+            "exact-match. Vitals out of scope (value-closeness). Raw formatting "
+            "quality is tracked in normalize_metrics.json."
         ),
     }
 
@@ -107,6 +153,12 @@ def main() -> None:
             f"  {field:10} P/R/F1 {prf}  TP={s['tp']} FP={s['fp']} "
             f"FN={s['fn']} hallucinations={s['non_canonical_count']}"
         )
+    d = report["dosage"]
+    print(
+        f"  dosage     exact-match {d['exact_match']}/{d['total']} "
+        f"({d['accuracy']:.1%}), {d['hallucinated']} hallucinated, "
+        f"{len(d['mismatch_examples'])} mismatch example(s)"
+    )
     print(f"Wrote extraction eval ({report['n_records']} records) to {args.report_out}")
 
 
