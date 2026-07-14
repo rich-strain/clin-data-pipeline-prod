@@ -489,11 +489,80 @@ def render_curation(label: str, description: str) -> None:
     st.dataframe(gate_df, hide_index=True, use_container_width=True)
 
 
+def render_dataset(label: str, description: str) -> None:
+    """Stage 5 — dataset assembly, read off the committed splits + gold set."""
+    st.title(label)
+    st.caption(description)
+
+    splits = {name: load_jsonl(f"data/splits/{name}.jsonl") for name in ("train", "val", "test")}
+    gold = load_jsonl("data/gold/gold.jsonl")
+    manifest = load_json("data/gold/gold_manifest.json")
+    curated = {
+        name: load_jsonl(f"data/curated/split_{name}.jsonl") for name in ("train", "val", "test")
+    }
+    if not (all(splits.values()) and gold and manifest):
+        st.warning("Stage 5 artifacts missing — run `python run_stage5.py` to generate them.")
+        return
+
+    st.info(
+        "**Group-aware, leakage-safe splits.** Records are split by **original "
+        "patient** — a rebalance duplicate never lands in a different split from "
+        "its original, so no near-identical example crosses the train/eval "
+        "boundary. The instruction is the already-de-identified note text (Stage "
+        "2, upstream); the response is the curated clinical fields as JSON."
+    )
+
+    total = sum(len(v) for v in splits.values())
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Train", len(splits["train"]), f"{len(splits['train']) / total:.0%}")
+    c2.metric("Val", len(splits["val"]), f"{len(splits['val']) / total:.0%}")
+    c3.metric("Test / gold", len(splits["test"]), f"{len(splits['test']) / total:.0%}")
+    c4.metric("Gold set", manifest["version"], f"{manifest['n_examples']} frozen")
+
+    # --- Leakage check (zero patient groups crossing splits) ---
+    st.subheader("Leakage check — zero patient groups crossing splits")
+    where: dict[str, set[str]] = {}
+    for name, records in curated.items():
+        for r in records:
+            base = r.get("rebalance_duplicate_of", r["patient_id"])
+            where.setdefault(base, set()).add(name)
+    crossing = {pid for pid, names in where.items() if len(names) > 1}
+    st.caption(
+        f"{len(where)} original patient groups across {total} records; a group's "
+        "records (original + rebalance duplicates) always share one split."
+    )
+    if crossing:
+        st.error(f"LEAKAGE: {len(crossing)} patient group(s) cross splits: {sorted(crossing)}")
+    else:
+        st.success("✅ No original patient group appears in more than one split.")
+
+    # --- Sample instruction/response pair ---
+    st.subheader("Sample instruction / response pair")
+    st.caption("What a fine-tuning example looks like: de-identified note in, canonical JSON out.")
+    idx = st.slider("Train example", 0, len(splits["train"]) - 1, 0)
+    ex = splits["train"][idx]
+    cols = st.columns(2)
+    cols[0].caption("instruction (de-identified note)")
+    cols[0].code(ex["instruction"], language="text")
+    cols[1].caption("response (canonical fields)")
+    cols[1].code(json.dumps(json.loads(ex["response"]), indent=2), language="json")
+
+    # --- Frozen gold set ---
+    st.subheader("Frozen, versioned gold set")
+    st.caption(
+        "The held-out test split, frozen with a content hash so Stage 7's release "
+        "gate evaluates a fixed, versioned reference — a changed hash means a "
+        "deliberate re-freeze (version bump), not silent drift."
+    )
+    st.json(manifest)
+
+
 PAGES = {
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
     "3 — Extraction": render_extraction,
     "4 — Curation + DQ": render_curation,
+    "5 — Dataset Assembly": render_dataset,
 }
 
 
