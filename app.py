@@ -883,6 +883,89 @@ def render_scale(label: str, description: str) -> None:
     )
 
 
+ADAPTER_DIR = ROOT / "training_results" / "adapter"
+BASE_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
+INFERENCE_SYSTEM_PROMPT = (
+    "You are a clinical data extraction assistant. Extract the patient's "
+    "diagnoses, medications, and vitals from the clinical note below. Respond "
+    "with only a single JSON object with keys diagnoses, medications, vitals — "
+    "no other text."
+)
+
+
+@st.cache_resource
+def _load_inference_model():
+    """Base model + committed adapter on CPU. Cached across reruns; the heavy ML
+    imports are here (lazy) so the app imports fine without torch (CI/Lane 2)."""
+    import torch  # noqa: PLC0415
+    from peft import PeftModel  # noqa: PLC0415
+    from transformers import AutoModelForCausalLM, AutoTokenizer  # noqa: PLC0415
+
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
+    base = AutoModelForCausalLM.from_pretrained(BASE_MODEL, dtype=torch.float32)
+    model = PeftModel.from_pretrained(base, str(ADAPTER_DIR))
+    model.eval()
+    return model, tokenizer
+
+
+def _run_inference(note_text: str) -> str:
+    import torch  # noqa: PLC0415
+
+    model, tokenizer = _load_inference_model()
+    messages = [
+        {"role": "system", "content": INFERENCE_SYSTEM_PROMPT},
+        {"role": "user", "content": note_text},
+    ]
+    prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=False)
+    with torch.no_grad():
+        out = model.generate(
+            **inputs, max_new_tokens=320, do_sample=False, pad_token_id=tokenizer.pad_token_id
+        )
+    return tokenizer.decode(
+        out[0][inputs["input_ids"].shape[1] :], skip_special_tokens=True
+    ).strip()
+
+
+def render_live(label: str, description: str) -> None:
+    """Stage 9 — live inference: a note in, structured JSON out, from the committed
+    adapter. Space-only in spirit (needs the ML runtime); the model loads lazily
+    on first Extract, not at page render, so the showcase stays light."""
+    st.title(label)
+    st.caption(description)
+
+    if not ADAPTER_DIR.exists():
+        st.warning("No committed adapter — run `python train_runner.py` (Lane 1) first.")
+        return
+
+    st.info(
+        "**Real inference against the committed LoRA adapter** (base Qwen2.5-0.5B + "
+        "the 4 MB adapter, on CPU). The first Extract loads the model (slow cold "
+        "start on a free Space); subsequent runs are cached. No API, no PHI — paste "
+        "a **de-identified** note."
+    )
+    sample = load_jsonl("data/gold/gold.jsonl")
+    default_note = sample[0]["instruction"] if sample else ""
+    note = st.text_area("De-identified clinical note", value=default_note, height=260)
+
+    if st.button("Extract structured fields"):
+        try:
+            with st.spinner("Loading model + generating (first run is slow) …"):
+                output = _run_inference(note)
+        except Exception as exc:  # noqa: BLE001 — surface any runtime/ML-dep issue to the user
+            st.error(
+                f"Live inference needs the ML runtime (torch/transformers/peft) and the "
+                f"committed adapter. This runs on the deployed Space. Details: {exc}"
+            )
+            return
+        st.subheader("Extraction")
+        try:
+            st.json(json.loads(output))
+        except (json.JSONDecodeError, ValueError):
+            st.caption("Raw model output (not valid JSON):")
+            st.code(output)
+
+
 PAGES = {
     "Intro": render_intro,
     "0/1 — Ingestion + Canonical Storage": render_stage01,
@@ -895,6 +978,7 @@ PAGES = {
     "Provenance": render_provenance,
     "Scale & Production Readiness": render_scale,
     "Analytics": render_analytics,
+    "Live Inference": render_live,
 }
 
 

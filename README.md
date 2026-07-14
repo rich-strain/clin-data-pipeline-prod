@@ -1,3 +1,17 @@
+---
+title: Clinical Data Pipeline — Production-True
+emoji: 🏥
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+app_file: app.py
+pinned: false
+license: mit
+---
+
+<!-- The YAML above is Hugging Face Spaces config (front matter); it's consumed by
+     the Space on deploy and renders as page metadata on GitHub. -->
+
 # Clinical Data Pipeline — Production-True
 
 Third companion repo in the clinical-data-pipeline portfolio arc. Where the

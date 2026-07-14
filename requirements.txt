@@ -1,10 +1,14 @@
-# Runtime dependencies for the showcase app (Lane 3).
-# Kept deliberately minimal — dependencies are added in the Working Plan step
-# that first uses them, not front-loaded. The app reads committed artifacts
-# (JSON/CSV/Parquet) and renders tables; it does not re-run the pipeline.
+# Runtime dependencies for the DEPLOYED showcase Space (Lane 3).
+# CI does NOT install this file — it's Lane 2 and deliberately torch-free (see
+# requirements-dev.txt, which lists the light app deps explicitly). The HF Space
+# installs this, including the ML runtime the Live Inference page needs.
 streamlit
 pandas
-# Stage 9 Analytics page — in-process columnar queries over the committed
-# Parquet analytics table (no server, no Spark).
+# Analytics page — in-process columnar queries over the committed Parquet table.
 duckdb
 pyarrow
+# Live Inference page (Space): base Qwen2.5-0.5B + the committed LoRA adapter on
+# CPU. Heavy (~GB build, slow cold start on a free CPU Space) but real.
+torch
+transformers
+peft

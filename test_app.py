@@ -108,12 +108,12 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     assert len(at.dataframe) >= 1, "Analytics page should render a live query result"
     assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
-    # A still-unbuilt page (Live Inference, wired next) must still show the stub.
+    # Live Inference renders its input UI (the model loads only on button click,
+    # not at page render, so this stays light and torch-free in CI).
     _radio(at).set_value("Live Inference").run()
     assert not at.exception
-    assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
-        "unbuilt pages should still show the honest stub notice"
-    )
+    assert len(at.button) >= 1 and len(at.text_area) >= 1, "Live Inference should render its UI"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
 
 if __name__ == "__main__":

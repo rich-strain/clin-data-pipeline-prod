@@ -1,5 +1,12 @@
-# Dev/CI tooling (Lane 2). Installed on top of requirements.txt.
--r requirements.txt
+# Dev/CI tooling (Lane 2 — deliberately torch-free: CI never trains or runs live
+# inference). Lists the light app deps explicitly rather than `-r requirements.txt`
+# so CI doesn't pull the heavy ML runtime that file carries for the Space. Keep
+# the light app deps here in sync with requirements.txt.
+streamlit
+pandas
+duckdb
+pyarrow
+# Tooling.
 ruff
 mypy
 pytest
