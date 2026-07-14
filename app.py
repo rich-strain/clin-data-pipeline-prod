@@ -212,7 +212,7 @@ def render_stage01(label: str, description: str) -> None:
             for k, v in binding["by_system"].items()
         ]
     )
-    st.dataframe(per_system, hide_index=True, use_container_width=True)
+    st.dataframe(per_system, hide_index=True, width="stretch")
     st.caption(
         "Binding uses a pinned value-set snapshot with **real, verified OMOP "
         "concept_ids** (OHDSI ATLAS, not fabricated). The only misses are "
@@ -242,7 +242,7 @@ def render_stage01(label: str, description: str) -> None:
             df = load_csv(f"data/omop/{name}.csv")
             if df is not None:
                 st.caption(f"{len(df):,} rows")
-                st.dataframe(df.head(15), hide_index=True, use_container_width=True)
+                st.dataframe(df.head(15), hide_index=True, width="stretch")
 
 
 def render_deid(label: str, description: str) -> None:
@@ -336,7 +336,7 @@ def render_deid(label: str, description: str) -> None:
             for t, v in recall["by_type"].items()
         ]
     ).sort_values("recall %")
-    st.dataframe(by_type, hide_index=True, use_container_width=True)
+    st.dataframe(by_type, hide_index=True, width="stretch")
     st.caption(
         "The gaps are real and instructive: Presidio catches names, dates, MRN "
         "(custom recognizer), and provider names well, but under-detects address "
@@ -347,7 +347,7 @@ def render_deid(label: str, description: str) -> None:
         st.dataframe(
             pd.DataFrame(recall["missed_sample"]).head(15),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
 
 
@@ -425,7 +425,7 @@ def render_extraction(label: str, description: str) -> None:
                 ]
             ),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
         dos = ext_eval.get("dosage")
         if dos:
@@ -449,7 +449,7 @@ def render_extraction(label: str, description: str) -> None:
                 st.dataframe(
                     pd.DataFrame(dos["mismatch_examples"]),
                     hide_index=True,
-                    use_container_width=True,
+                    width="stretch",
                 )
 
     # --- Sample extraction ---
@@ -461,11 +461,11 @@ def render_extraction(label: str, description: str) -> None:
     )
     cols = st.columns(3)
     cols[0].caption("Diagnoses")
-    cols[0].dataframe(pd.DataFrame(rec["diagnoses"]), hide_index=True, use_container_width=True)
+    cols[0].dataframe(pd.DataFrame(rec["diagnoses"]), hide_index=True, width="stretch")
     cols[1].caption("Medications")
-    cols[1].dataframe(pd.DataFrame(rec["medications"]), hide_index=True, use_container_width=True)
+    cols[1].dataframe(pd.DataFrame(rec["medications"]), hide_index=True, width="stretch")
     cols[2].caption("Vitals")
-    cols[2].dataframe(pd.DataFrame(rec["vitals"]), hide_index=True, use_container_width=True)
+    cols[2].dataframe(pd.DataFrame(rec["vitals"]), hide_index=True, width="stretch")
 
 
 def render_curation(label: str, description: str) -> None:
@@ -511,9 +511,9 @@ def render_curation(label: str, description: str) -> None:
     after_dx = sorted({d["name"] for r in normalized for d in r["diagnoses"]})
     cols = st.columns(2)
     cols[0].caption(f"Raw diagnosis names ({len(before_dx)} distinct)")
-    cols[0].dataframe(pd.DataFrame({"name": before_dx}), hide_index=True, use_container_width=True)
+    cols[0].dataframe(pd.DataFrame({"name": before_dx}), hide_index=True, width="stretch")
     cols[1].caption(f"Canonical diagnosis names ({len(after_dx)} distinct)")
-    cols[1].dataframe(pd.DataFrame({"name": after_dx}), hide_index=True, use_container_width=True)
+    cols[1].dataframe(pd.DataFrame({"name": after_dx}), hide_index=True, width="stretch")
 
     # --- Rebalance: category counts ---
     st.subheader("Rebalance — diagnosis-category representation")
@@ -529,7 +529,7 @@ def render_curation(label: str, description: str) -> None:
             for k in after_counts
         ]
     ).sort_values("after", ascending=False)
-    st.dataframe(counts_df, hide_index=True, use_container_width=True)
+    st.dataframe(counts_df, hide_index=True, width="stretch")
 
     # --- DQ gate results ---
     st.subheader("Data-quality gate (Pandera)")
@@ -548,7 +548,7 @@ def render_curation(label: str, description: str) -> None:
             for name, e in gate["tables"].items()
         ]
     )
-    st.dataframe(gate_df, hide_index=True, use_container_width=True)
+    st.dataframe(gate_df, hide_index=True, width="stretch")
 
 
 def render_dataset(label: str, description: str) -> None:
@@ -659,14 +659,14 @@ def render_training(label: str, description: str) -> None:
     )
     cols = st.columns([3, 2])
     if curve.exists():
-        cols[0].image(str(curve), use_container_width=True)
+        cols[0].image(str(curve), width="stretch")
     hist = config["loss_history"]
     cols[1].dataframe(
         pd.DataFrame(
             {"epoch": hist["epoch"], "train_loss": hist["train_loss"], "val_loss": hist["val_loss"]}
         ),
         hide_index=True,
-        use_container_width=True,
+        width="stretch",
     )
 
     # --- Before/after ---
@@ -745,7 +745,7 @@ def render_eval(label: str, description: str) -> None:
             ]
         ),
         hide_index=True,
-        use_container_width=True,
+        width="stretch",
     )
 
     # --- Release gate checks ---
@@ -764,7 +764,7 @@ def render_eval(label: str, description: str) -> None:
             ]
         ),
         hide_index=True,
-        use_container_width=True,
+        width="stretch",
     )
 
     # --- Failing cases (honest: show misses) ---
@@ -773,7 +773,7 @@ def render_eval(label: str, description: str) -> None:
         st.subheader("Where it slips (honest failure tracking)")
         if dx_misses:
             st.caption("Diagnosis categories the model got wrong on the gold set:")
-            st.dataframe(pd.DataFrame(dx_misses), hide_index=True, use_container_width=True)
+            st.dataframe(pd.DataFrame(dx_misses), hide_index=True, width="stretch")
         if report["failure_examples"]:
             st.caption("Unparseable / malformed outputs:")
             st.json(report["failure_examples"])
@@ -806,7 +806,7 @@ def render_intro(label: str, description: str) -> None:
     svg = ROOT / "docs" / "architecture.svg"
     if svg.exists():
         st.subheader("Architecture")
-        st.image(str(svg), use_container_width=True)
+        st.image(str(svg), width="stretch")
     st.caption(
         "Use the sidebar to walk each pipeline stage — every page reads committed artifacts."
     )
@@ -841,7 +841,7 @@ def render_provenance(label: str, description: str) -> None:
     st.subheader("Run / lineage log")
     df = pd.DataFrame(prov)
     df["sha256"] = df["sha256"].str.slice(0, 16) + "…"
-    st.dataframe(df, hide_index=True, use_container_width=True)
+    st.dataframe(df, hide_index=True, width="stretch")
 
     if model:
         st.subheader("Model lineage")
@@ -900,7 +900,7 @@ def render_analytics(label: str, description: str) -> None:
     # DDL can't bind parameters; the path is a trusted local constant.
     con.execute(f"CREATE VIEW tbl AS SELECT * FROM read_parquet('{ANALYTICS_PARQUET}')")
     result = con.execute(sql).df()  # sql references the `tbl` view
-    st.dataframe(result, hide_index=True, use_container_width=True)
+    st.dataframe(result, hide_index=True, width="stretch")
     st.caption(f"{len(result)} rows · queried over {ANALYTICS_PARQUET.name} at render time.")
 
 

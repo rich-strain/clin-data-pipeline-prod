@@ -2,7 +2,11 @@
 # CI does NOT install this file — it's Lane 2 and deliberately torch-free (see
 # requirements-dev.txt, which lists the light app deps explicitly). The HF Space
 # installs this, including the ML runtime the Live Inference page needs.
-streamlit
+# Pinned: the Space rebuilds from scratch on every deploy, so an unpinned
+# `streamlit` would silently pull whatever is latest — and use_container_width
+# (used across the app, now migrated to width="stretch") is slated for removal.
+# Pin to the version local dev + this migration were verified against.
+streamlit==1.59.2
 pandas
 # Analytics page — in-process columnar queries over the committed Parquet table.
 duckdb
