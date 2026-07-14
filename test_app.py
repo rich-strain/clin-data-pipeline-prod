@@ -52,7 +52,7 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     at = AppTest.from_file("app.py")
     at.run()
 
-    _radio(at).set_value("0/1 — Ingestion + Canonical Storage").run()
+    _radio(at).set_value("0/1 — Generation + Canonical Storage").run()
     assert not at.exception
     text = _all_text(at)
     assert "OMOP CDM" in text, "Stage 0/1 page should render real OMOP content"

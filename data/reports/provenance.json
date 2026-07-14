@@ -1,6 +1,6 @@
 [
   {
-    "stage": "0/1 Ingestion",
+    "stage": "0/1 Generation",
     "artifact": "data/landing/Patient.ndjson",
     "sha256": "0c48299680d68bb31f4f2b1ef630235a1b6f553ea2dc25ab2cf871bec33ea6ad",
     "record_count": 100

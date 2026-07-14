@@ -24,7 +24,7 @@ PROVENANCE_PATH = DATA / "reports" / "provenance.json"
 
 # (stage, output artifact) in pipeline order. Each is a committed derivation.
 STAGE_OUTPUTS: list[tuple[str, str]] = [
-    ("0/1 Ingestion", "data/landing/Patient.ndjson"),
+    ("0/1 Generation", "data/landing/Patient.ndjson"),
     ("0/1 Canonical (FHIR)", "data/canonical/fhir_bundles.json"),
     ("0/1 OMOP CDM", "data/omop/condition_occurrence.csv"),
     ("2 De-identification", "data/deid/notes_deid.jsonl"),

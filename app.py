@@ -57,7 +57,7 @@ STAGES: list[tuple[str, str, str]] = [
         "populated across the build; polished in step 9",
     ),
     (
-        "0/1 — Ingestion + Canonical Storage",
+        "0/1 — Generation + Canonical Storage",
         "Synthetic US Core FHIR (BP as panel + components), terminology binding, "
         "and the flattened feature table.",
         "step 2",
@@ -968,7 +968,7 @@ def render_live(label: str, description: str) -> None:
 
 PAGES = {
     "Intro": render_intro,
-    "0/1 — Ingestion + Canonical Storage": render_stage01,
+    "0/1 — Generation + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
     "3 — Extraction": render_extraction,
     "4 — Curation + DQ": render_curation,
