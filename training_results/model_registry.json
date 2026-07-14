@@ -1,0 +1,33 @@
+[
+  {
+    "version": "v1",
+    "git_sha": "d4a2b3d538005b41e67d44d8e3f7069e2f83e17f",
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "lora_config": {
+      "r": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "task_type": "CAUSAL_LM"
+    },
+    "best_epoch": 5,
+    "best_val_loss": 0.01769156333682869,
+    "final_train_loss": 0.006969824930827462,
+    "final_val_loss": 0.02401684169027416,
+    "train_examples": 98,
+    "val_examples": 12,
+    "adapter_bytes": 4356653,
+    "mlflow_run_id": "1a48d787986348c987a35e7e1991f3f0",
+    "data_lineage": {
+      "train_sha256": "46ce38dff2bc58a680bbf364284370cee583586cb799e590feb49b270cabf665",
+      "val_sha256": "2e9599e951776035ac83bb2855f824f9b3213ea996ffcab774d6ccb200ba5780",
+      "gold_sha256": "824f0497d65c6ebe049b611a5339a3ddfc28eaa4b18bee4dbfe0db58ba450473",
+      "gold_version": "v1"
+    }
+  }
+]

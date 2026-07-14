@@ -73,3 +73,18 @@ def test_register_run_appends_versioned_entry_with_lineage(tmp_path) -> None:
     assert len(registry.load_registry(path)) == 2
     newest = registry.latest(path)
     assert newest is not None and newest["version"] == "v2"
+
+
+def test_committed_model_registry_lineage_matches_committed_data() -> None:
+    """The committed adapter's registry entry must trace to the committed data
+    snapshot — its recorded gold hash equals the current gold file's hash. (If
+    Stage 5 is regenerated without retraining, this fails: the model is stale.)"""
+    reg = registry.load_registry()
+    if not reg:  # training is Lane 1 / local — skip cleanly if not yet run
+        return
+    entry = reg[-1]
+    assert entry["base_model"] == "Qwen/Qwen2.5-0.5B-Instruct"
+    assert entry["best_epoch"] >= 1 and 0.0 <= entry["best_val_loss"] <= 5.0
+    lineage = entry["data_lineage"]
+    assert lineage["gold_sha256"] == registry.file_sha256(registry.LINEAGE_FILES["gold"])
+    assert lineage["train_sha256"] == registry.file_sha256(registry.LINEAGE_FILES["train"])

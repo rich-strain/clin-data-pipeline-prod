@@ -557,12 +557,90 @@ def render_dataset(label: str, description: str) -> None:
     st.json(manifest)
 
 
+def render_training(label: str, description: str) -> None:
+    """Stage 6 — LoRA training, read off the committed training_results + registry."""
+    st.title(label)
+    st.caption(description)
+
+    config = load_json("training_results/config.json")
+    registry = load_json("training_results/model_registry.json")
+    samples = load_json("training_results/samples.json")
+    curve = ROOT / "training_results" / "loss_curve.png"
+    if not (config and registry):
+        st.warning(
+            "Stage 6 artifacts missing — run `pip install -r requirements-train.txt && "
+            "python train_runner.py` locally (Lane 1, compute). CI/the app never train."
+        )
+        return
+
+    entry = registry[-1]
+    st.info(
+        "**A real LoRA fine-tune on real hardware** (Apple Silicon MPS), not a "
+        "placeholder. A 4 MB adapter over Qwen2.5-0.5B teaches the exact JSON "
+        "extraction schema; every number below is read off the committed run. "
+        f"Honest scope: {config['train_examples']} training examples + a 0.5B model "
+        "is a demonstration of the mechanics, not a production-accuracy claim."
+    )
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Base model", "Qwen2.5-0.5B", "≈0.5B params")
+    c2.metric("Adapter size", f"{entry['adapter_bytes'] / 1e6:.1f} MB", "LoRA r=8")
+    c3.metric("Best epoch", entry["best_epoch"], f"val {entry['best_val_loss']:.4f}")
+    c4.metric("Registry", entry["version"], f"git {entry['git_sha'][:7]}")
+
+    # --- Loss curve + history ---
+    st.subheader("Training loss")
+    st.caption(
+        "Declining train/val loss over epochs. Val loss bottoms out then ticks up "
+        f"(overfit on {config['train_examples']} examples), so the registry selects the "
+        f"**best epoch ({entry['best_epoch']})** by val loss, not the last."
+    )
+    cols = st.columns([3, 2])
+    if curve.exists():
+        cols[0].image(str(curve), use_container_width=True)
+    hist = config["loss_history"]
+    cols[1].dataframe(
+        pd.DataFrame(
+            {"epoch": hist["epoch"], "train_loss": hist["train_loss"], "val_loss": hist["val_loss"]}
+        ),
+        hide_index=True,
+        use_container_width=True,
+    )
+
+    # --- Before/after ---
+    if samples:
+        st.subheader("Base vs. fine-tuned (same note)")
+        st.caption(
+            "The adapter's whole job: make the model emit the exact target schema. "
+            "The base model free-forms (markdown fences, `code`/`description` keys); "
+            "the fine-tuned model matches the ground-truth JSON."
+        )
+        s = samples[0]
+        cols = st.columns(3)
+        cols[0].caption("Ground truth")
+        cols[0].code(s["ground_truth"], language="json")
+        cols[1].caption("Base model (no adapter)")
+        cols[1].code(s["base_model_output"], language="json")
+        cols[2].caption("Fine-tuned (with adapter)")
+        cols[2].code(s["fine_tuned_output"], language="json")
+
+    # --- Lineage + experiment tracking ---
+    st.subheader("Model registry — data↔model lineage")
+    st.caption(
+        "The committed model traces to the exact code (git SHA) and data snapshot "
+        "(content hashes of the train/val/gold splits + gold version) it was trained "
+        f"on, plus its MLflow run id (`{entry['mlflow_run_id'][:12]}…`)."
+    )
+    st.json(entry)
+
+
 PAGES = {
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
     "3 — Extraction": render_extraction,
     "4 — Curation + DQ": render_curation,
     "5 — Dataset Assembly": render_dataset,
+    "6 — Training": render_training,
 }
 
 

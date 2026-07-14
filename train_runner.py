@@ -54,7 +54,7 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 TRAIN_PATH = DATA_DIR / "splits" / "train.jsonl"
 VAL_PATH = DATA_DIR / "splits" / "val.jsonl"
 OUT_DIR = Path(__file__).resolve().parent / "training_results"
-MLRUNS_DIR = Path(__file__).resolve().parent / "mlruns"
+MLFLOW_DB = Path(__file__).resolve().parent / "mlflow.db"  # sqlite backend (file store is EOL)
 
 BASE_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 EXPERIMENT = "clin-extraction-lora"
@@ -203,8 +203,9 @@ def main() -> None:
     model = get_peft_model(base_model, LoraConfig(**LORA_CONFIG))
     model.to(device)
     model.print_trainable_parameters()
-    model.gradient_checkpointing_enable()
-    model.enable_input_require_grads()
+    # No gradient checkpointing: at 0.5B / batch 2 / short notes it fits in memory
+    # on 17 GB, and the recompute it trades for memory roughly doubles MPS step
+    # time for no benefit here (the sibling repos enabled it for a tighter box).
 
     train_encoded = [
         encode_example(tokenizer, e["instruction"], e["response"], MAX_LENGTH) for e in train_data
@@ -219,7 +220,7 @@ def main() -> None:
     checkpoints_dir = args.out / "checkpoints"
     best_epoch, best_val_loss = 1, float("inf")
 
-    mlflow.set_tracking_uri(MLRUNS_DIR.as_uri())
+    mlflow.set_tracking_uri(f"sqlite:///{MLFLOW_DB}")
     mlflow.set_experiment(EXPERIMENT)
     with mlflow.start_run() as run:
         mlflow.log_params(
@@ -355,7 +356,9 @@ def main() -> None:
         (args.out / "samples.md").write_text("\n".join(samples_md))
         (args.out / "samples.json").write_text(json.dumps(samples, indent=2))
 
-        mlflow.log_artifacts(str(args.out), artifact_path="training_results")
+        # Artifacts live in committed training_results/; MLflow tracks params +
+        # per-epoch metrics + the run id (recorded in the registry), not a
+        # duplicate artifact copy.
         entry = registry.register_run(
             base_model=BASE_MODEL,
             lora_config=LORA_CONFIG,

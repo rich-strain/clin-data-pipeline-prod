@@ -31,6 +31,8 @@ data/curated/*.staging.jsonl
 # Stage 6 local training state (regenerable). The committed adapter, metrics,
 # and model_registry.json are what the app/CI consume; MLflow's local store and
 # the per-epoch checkpoints are intermediate.
+mlflow.db
+mlartifacts/
 mlruns/
 training_results/checkpoints/
 

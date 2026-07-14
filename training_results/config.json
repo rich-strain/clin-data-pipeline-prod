@@ -1,0 +1,53 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "device": "mps",
+  "lora_config": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "task_type": "CAUSAL_LM"
+  },
+  "epochs": 6,
+  "batch_size": 2,
+  "learning_rate": 0.0002,
+  "max_length": 768,
+  "training_seconds": 741.9,
+  "loss_history": {
+    "epoch": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "train_loss": [
+      0.14452478475569877,
+      0.021555438730522868,
+      0.01373525116332934,
+      0.010198792547486879,
+      0.008880213360983286,
+      0.006969824930827462
+    ],
+    "val_loss": [
+      0.04443715292286083,
+      0.02760371883255495,
+      0.021333540090805247,
+      0.019825557216197394,
+      0.01769156333682869,
+      0.02401684169027416
+    ]
+  },
+  "best_epoch": 5,
+  "best_val_loss": 0.01769156333682869,
+  "final_train_loss": 0.006969824930827462,
+  "final_val_loss": 0.02401684169027416,
+  "train_examples": 98,
+  "val_examples": 12
+}

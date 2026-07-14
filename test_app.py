@@ -78,6 +78,12 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     )
     assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
+    # Stage 6 training page renders the real run (loss history + lineage).
+    _radio(at).set_value("6 — Training").run()
+    assert not at.exception
+    assert len(at.dataframe) >= 1, "Training page should render the real loss-history table"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
     _radio(at).set_value("7 — Evaluation + Release").run()
     assert not at.exception
     assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
