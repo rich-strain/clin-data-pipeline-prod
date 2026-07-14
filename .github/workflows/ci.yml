@@ -98,11 +98,16 @@ jobs:
           import os
           from huggingface_hub import HfApi
 
+          # Strip: values typed into the GitHub Variables/Secrets UI can pick up a
+          # stray trailing newline, which HF's repo-id validator rejects.
+          space_id = os.environ["HF_SPACE_ID"].strip()
+          token = os.environ["HF_TOKEN"].strip()
+
           HfApi().upload_folder(
               folder_path=".",
-              repo_id=os.environ["HF_SPACE_ID"],
+              repo_id=space_id,
               repo_type="space",
-              token=os.environ["HF_TOKEN"],
+              token=token,
               commit_message=f"Deploy {os.environ.get('GITHUB_SHA', 'local')[:12]} from CI",
               # Ship the app + committed artifacts; never the venv, caches, git, or
               # regenerable local training state.
@@ -112,5 +117,5 @@ jobs:
                   ".ruff_cache/*", ".pytest_cache/*", "training_results/checkpoints/*",
               ],
           )
-          print(f"Deployed to Space {os.environ['HF_SPACE_ID']}")
+          print(f"Deployed to Space {space_id}")
           PY
