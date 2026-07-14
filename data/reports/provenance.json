@@ -1,0 +1,68 @@
+[
+  {
+    "stage": "0/1 Ingestion",
+    "artifact": "data/landing/Patient.ndjson",
+    "sha256": "0c48299680d68bb31f4f2b1ef630235a1b6f553ea2dc25ab2cf871bec33ea6ad",
+    "record_count": 100
+  },
+  {
+    "stage": "0/1 Canonical (FHIR)",
+    "artifact": "data/canonical/fhir_bundles.json",
+    "sha256": "431359e67ff0c5a77d590a8fc75204429c139f4ae8b99e9bcfabbdb490aa2e88",
+    "record_count": 100
+  },
+  {
+    "stage": "0/1 OMOP CDM",
+    "artifact": "data/omop/condition_occurrence.csv",
+    "sha256": "604f4af4f55b69f7c770208a53b43211c0f1bb62f83336e3ab9cc69f464bba0e",
+    "record_count": 201
+  },
+  {
+    "stage": "2 De-identification",
+    "artifact": "data/deid/notes_deid.jsonl",
+    "sha256": "77c640fcb26ccd930b3a16f7e041d46c89958237047fa0c403945359739f12d1",
+    "record_count": 100
+  },
+  {
+    "stage": "3 Extraction",
+    "artifact": "data/extracted/extractions.jsonl",
+    "sha256": "c790fc6bb49a075cb899e462c41062a9d19143d59d3c7f14b4a305c5abb0757e",
+    "record_count": 100
+  },
+  {
+    "stage": "4 Curation (gated)",
+    "artifact": "data/curated/synthesized.jsonl",
+    "sha256": "b53c3c5e0f3789717732d4d7673f9c5f2eb91df7fba69b98426c5b4beda81678",
+    "record_count": 122
+  },
+  {
+    "stage": "5 Split \u2014 train",
+    "artifact": "data/splits/train.jsonl",
+    "sha256": "46ce38dff2bc58a680bbf364284370cee583586cb799e590feb49b270cabf665",
+    "record_count": 98
+  },
+  {
+    "stage": "5 Split \u2014 val",
+    "artifact": "data/splits/val.jsonl",
+    "sha256": "2e9599e951776035ac83bb2855f824f9b3213ea996ffcab774d6ccb200ba5780",
+    "record_count": 12
+  },
+  {
+    "stage": "5 Gold (frozen)",
+    "artifact": "data/gold/gold.jsonl",
+    "sha256": "824f0497d65c6ebe049b611a5339a3ddfc28eaa4b18bee4dbfe0db58ba450473",
+    "record_count": 12
+  },
+  {
+    "stage": "6 Training (adapter)",
+    "artifact": "training_results/adapter/adapter_model.safetensors",
+    "sha256": "67618608ab387b1ca09fa533e25f3f9857156f1641012055aab6534361548987",
+    "record_count": null
+  },
+  {
+    "stage": "7 Evaluation",
+    "artifact": "training_results/eval_report.json",
+    "sha256": "9b513b899134d157551f754a0ad460a4f296af94b040223a514b6d2c4b875a8c",
+    "record_count": null
+  }
+]

@@ -1,6 +1,10 @@
 # Runtime dependencies for the showcase app (Lane 3).
 # Kept deliberately minimal — dependencies are added in the Working Plan step
 # that first uses them, not front-loaded. The app reads committed artifacts
-# (JSON/CSV) and renders tables; it does not re-run the pipeline.
+# (JSON/CSV/Parquet) and renders tables; it does not re-run the pipeline.
 streamlit
 pandas
+# Stage 9 Analytics page — in-process columnar queries over the committed
+# Parquet analytics table (no server, no Spark).
+duckdb
+pyarrow

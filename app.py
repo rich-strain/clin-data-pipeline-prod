@@ -18,8 +18,11 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+import registry
+
 ROOT = Path(__file__).parent
 DATA = ROOT / "data"
+ANALYTICS_PARQUET = ROOT / "data" / "analytics" / "pipeline_analytics.parquet"
 
 
 @st.cache_data
@@ -722,7 +725,166 @@ def render_eval(label: str, description: str) -> None:
         st.markdown(card.read_text())
 
 
+def render_intro(label: str, description: str) -> None:
+    """The narrative front door — what this is, why, and how to read it."""
+    st.title("Clinical Data Pipeline — Production-True")
+    st.caption(description)
+    st.markdown(
+        "The third repo in a portfolio arc. The first demonstrates the clinical "
+        "**domain** end to end; the second runs the **LLM-calling parts at volume**; "
+        "**this** one builds the **production-true patterns** the first two stubbed — "
+        "the governance spine (de-identification, BAAs, audit), data-quality gates, "
+        "data/model **lineage**, and a real **serving/analytics** layer."
+    )
+    st.info(
+        "**Honest framing.** Everything is **fully synthetic** — no real patients, no "
+        "PHI. Where a capability can be built for real on synthetic data it is (and "
+        "shown, with real numbers); where it genuinely needs a real deployment (a "
+        "signed BAA, real access logs, a lakehouse) it's **documented honestly, not "
+        "faked**. No invented benchmarks. A 0.5B local fine-tune is a mechanics "
+        "demonstration, not a production-accuracy claim."
+    )
+    svg = ROOT / "docs" / "architecture.svg"
+    if svg.exists():
+        st.subheader("Architecture")
+        st.image(str(svg), use_container_width=True)
+    st.caption(
+        "Use the sidebar to walk each pipeline stage — every page reads committed artifacts."
+    )
+
+
+def render_provenance(label: str, description: str) -> None:
+    """The pipeline run/lineage log as a real, content-addressed table (Tier 1)."""
+    st.title(label)
+    st.caption(description)
+
+    prov = load_json("data/reports/provenance.json")
+    if not prov:
+        st.warning("Provenance log missing — run `python provenance.py`.")
+        return
+
+    st.info(
+        "**Real lineage, not a fabricated run log.** Each stage's committed output is "
+        "content-hashed (sha256) with its record count, so any artifact traces to the "
+        "exact bytes it was derived from. Paired with the live git SHA and the model "
+        "registry below. The Tier-2 **access/audit** log is documented (not shown) on "
+        "the Scale & Production Readiness page — real access events need real users."
+    )
+
+    model = registry.latest()
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Pipeline stages logged", len(prov))
+    c2.metric("Code version (git)", registry.git_sha()[:12])
+    c3.metric(
+        "Model registry", model["version"] if model else "—", "not trained" if not model else ""
+    )
+
+    st.subheader("Run / lineage log")
+    df = pd.DataFrame(prov)
+    df["sha256"] = df["sha256"].str.slice(0, 16) + "…"
+    st.dataframe(df, hide_index=True, use_container_width=True)
+
+    if model:
+        st.subheader("Model lineage")
+        st.caption("The committed adapter's tie back to the exact data snapshot + code.")
+        st.json(
+            {
+                "version": model["version"],
+                "git_sha": model["git_sha"],
+                "best_epoch": model["best_epoch"],
+                "mlflow_run_id": model["mlflow_run_id"],
+                "data_lineage": model["data_lineage"],
+            }
+        )
+
+
+ANALYTICS_QUERIES = {
+    "Diagnosis prevalence (distinct patients + mean confidence)": (
+        "SELECT diagnosis, COUNT(DISTINCT patient_id) AS patients, "
+        "ROUND(AVG(confidence), 3) AS avg_confidence\n"
+        "FROM tbl GROUP BY diagnosis ORDER BY patients DESC"
+    ),
+    "Split distribution (rows, patients, duplicates)": (
+        "SELECT split, COUNT(*) AS rows, COUNT(DISTINCT patient_id) AS patients, "
+        "SUM(is_rebalance_duplicate::INT) AS rebalance_dupes\n"
+        "FROM tbl GROUP BY split ORDER BY rows DESC"
+    ),
+    "Comorbidity load (avg diagnoses & meds per record)": (
+        "SELECT diagnosis, ROUND(AVG(n_diagnoses), 2) AS avg_dx_per_record, "
+        "ROUND(AVG(n_medications), 2) AS avg_meds\n"
+        "FROM tbl GROUP BY diagnosis ORDER BY avg_dx_per_record DESC"
+    ),
+}
+
+
+def render_analytics(label: str, description: str) -> None:
+    """Real in-process duckdb queries over the committed Parquet table."""
+    st.title(label)
+    st.caption(description)
+
+    if not ANALYTICS_PARQUET.exists():
+        st.warning("Analytics Parquet missing — run `python analytics.py`.")
+        return
+    import duckdb  # noqa: PLC0415 — app-runtime dep; kept out of the import-time path
+
+    st.info(
+        "**A real columnar analytics store, not a screenshot.** The committed Parquet "
+        "table is queried **live, in-process** via duckdb (a library — no server, no "
+        "Spark) each time this page renders. Delta/Iceberg (ACID, time-travel) is the "
+        "documented lakehouse upgrade."
+    )
+
+    choice = st.selectbox("Query", list(ANALYTICS_QUERIES))
+    sql = ANALYTICS_QUERIES[choice]
+    st.code(sql.replace("tbl", "'pipeline_analytics.parquet'"), language="sql")
+    con = duckdb.connect()
+    # DDL can't bind parameters; the path is a trusted local constant.
+    con.execute(f"CREATE VIEW tbl AS SELECT * FROM read_parquet('{ANALYTICS_PARQUET}')")
+    result = con.execute(sql).df()  # sql references the `tbl` view
+    st.dataframe(result, hide_index=True, use_container_width=True)
+    st.caption(f"{len(result)} rows · queried over {ANALYTICS_PARQUET.name} at render time.")
+
+
+def render_scale(label: str, description: str) -> None:
+    """The honest-gaps page: what's Tier 2 (documented) and why."""
+    st.title(label)
+    st.caption(description)
+    st.info(
+        "Not everything a production deployment needs can be built truthfully on "
+        "synthetic data. Rather than fabricate it, those capabilities are documented "
+        "here — what they'd do, and exactly why they can't be shown."
+    )
+    st.subheader("Access / audit log — Tier 2 (documented, not shown)")
+    st.markdown(
+        "HIPAA requires logging **who accessed which record when**. A real audit log "
+        "needs real users and real PHI access events — neither exists here, and "
+        "fabricating entries would violate this repo's honesty rule. In production it "
+        "would be an append-only, immutable store (the same immutability the landing "
+        "layer already demonstrates), queried for breach investigation and the HIPAA "
+        "accounting-of-disclosures right."
+    )
+    st.subheader("Storage format — Parquet (built) vs Delta / Iceberg (upgrade)")
+    st.markdown(
+        "The Analytics page runs on **real Parquet + duckdb** (built). The documented "
+        "upgrade is a **Delta Lake / Iceberg** lakehouse: ACID transactions, concurrent "
+        "multi-writer safety, schema evolution, and time-travel — none of which a "
+        "single-writer synthetic rebuild exercises, so they're named as the upgrade "
+        "rather than stood up for show."
+    )
+    st.subheader("Other honest gaps")
+    st.markdown(
+        "- **BAA / vendor access:** real de-id→external-LLM flow needs a signed BAA — "
+        "documented; the pipeline demonstrates the de-identify-before-extraction "
+        "ordering that makes it possible.\n"
+        "- **Orchestration:** stages run as scripts + CI; Airflow/Dagster is the "
+        "documented scheduler upgrade.\n"
+        "- **Drift monitoring** (Evidently) and a full **US Core + Inferno** validator "
+        "are named upgrades over the built base-FHIR validation."
+    )
+
+
 PAGES = {
+    "Intro": render_intro,
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
     "3 — Extraction": render_extraction,
@@ -730,6 +892,9 @@ PAGES = {
     "5 — Dataset Assembly": render_dataset,
     "6 — Training": render_training,
     "7 — Evaluation + Release": render_eval,
+    "Provenance": render_provenance,
+    "Scale & Production Readiness": render_scale,
+    "Analytics": render_analytics,
 }
 
 

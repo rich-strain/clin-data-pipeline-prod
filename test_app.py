@@ -92,8 +92,24 @@ def test_stage01_page_renders_real_content_and_stub_pages_stay_stubs() -> None:
     assert len(at.dataframe) >= 2, "Evaluation page should render per-field + gate tables"
     assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
 
-    # A still-unbuilt page (step 9) must still show the honest stub notice.
+    # Provenance page renders the real run/lineage log.
     _radio(at).set_value("Provenance").run()
+    assert not at.exception
+    assert "lineage" in _all_text(at).lower(), "Provenance page should show the lineage log"
+    assert len(at.dataframe) >= 1, "Provenance page should render the lineage table"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
+    # Analytics page runs a real in-process duckdb query over the Parquet.
+    _radio(at).set_value("Analytics").run()
+    assert not at.exception
+    assert any("duckdb" in (m.value or "").lower() for m in at.info), (
+        "Analytics page describes duckdb"
+    )
+    assert len(at.dataframe) >= 1, "Analytics page should render a live query result"
+    assert not any("Stub — not built yet" in (m.value or "") for m in at.info)
+
+    # A still-unbuilt page (Live Inference, wired next) must still show the stub.
+    _radio(at).set_value("Live Inference").run()
     assert not at.exception
     assert any("Stub — not built yet" in (m.value or "") for m in at.info), (
         "unbuilt pages should still show the honest stub notice"
