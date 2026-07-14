@@ -24,5 +24,9 @@ env/
 # Transient batch handoff between `--mode batch-submit` and `batch-retrieve`.
 extraction/cache/pending_batch.json
 
+# Stage 4 DQ gate staging file — promoted to synthesized.jsonl only on pass;
+# a leftover means the last run failed the gate. Never committed.
+data/curated/*.staging.jsonl
+
 # OS
 .DS_Store

@@ -172,6 +172,30 @@ def read_records(path: Path) -> list[dict]:
         return [json.loads(line) for line in f if line.strip()]
 
 
+def _write_jsonl(path: Path, records: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w") as f:
+        for record in records:
+            f.write(json.dumps(record) + "\n")
+
+
+def gate_and_promote(
+    records: list[dict], staging_path: Path, final_path: Path, report_path: Path
+) -> dict:
+    """Stage-then-promote: write `records` to `staging_path`, run the DQ gate, and
+    promote staging -> final ONLY if the gate passes — so the final (committed)
+    artifact existing is equivalent to it having passed. On failure `final_path`
+    is left untouched (last-good), and the staging file + report remain for
+    triage. Returns the report; the caller decides how to fail the pipeline."""
+    _write_jsonl(staging_path, records)
+    report = validate_records(records)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(report, indent=2))
+    if report["passed"]:
+        staging_path.replace(final_path)  # atomic on the same filesystem
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Stage 4 Pandera DQ gate (fails the pipeline).")
     parser.add_argument("--in", dest="in_path", type=Path, default=SYNTHESIZED_PATH)

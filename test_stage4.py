@@ -128,3 +128,37 @@ def test_dq_gate_actually_fails_on_violations() -> None:
 def test_committed_dq_report_is_green() -> None:
     report = json.loads((ROOT / "data" / "reports" / "dq_gate.json").read_text())
     assert report["passed"] and all(e["passed"] for e in report["tables"].values())
+
+
+# --- stage-then-promote ----------------------------------------------------
+
+
+def test_gate_promotes_only_on_pass(tmp_path) -> None:
+    """Good data: staging is promoted to the final artifact and consumed."""
+    staging = tmp_path / "synth.staging.jsonl"
+    final = tmp_path / "synth.jsonl"
+    report = tmp_path / "report.json"
+    good = _committed_curated()[:3]
+
+    result = dq.gate_and_promote(good, staging, final, report)
+    assert result["passed"]
+    assert final.exists() and not staging.exists(), "passing gate must promote staging -> final"
+    assert len(final.read_text().splitlines()) == 3
+
+
+def test_gate_does_not_touch_final_artifact_on_failure(tmp_path) -> None:
+    """Bad data: the final artifact is left untouched and staging is kept for triage."""
+    staging = tmp_path / "synth.staging.jsonl"
+    final = tmp_path / "synth.jsonl"
+    report = tmp_path / "report.json"
+    final.write_text('{"last":"good"}\n')  # a pre-existing last-good artifact
+
+    bad = json.loads(json.dumps(_committed_curated()[0]))
+    bad["confidence"] = 2.0  # out of [0,1]
+    result = dq.gate_and_promote([bad], staging, final, report)
+
+    assert not result["passed"]
+    assert final.read_text() == '{"last":"good"}\n', (
+        "failing gate must NOT overwrite the final artifact"
+    )
+    assert staging.exists(), "failing gate should keep the staged data for triage"
