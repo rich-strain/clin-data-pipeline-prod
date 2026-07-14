@@ -1,0 +1,12 @@
+# Stage 6 LoRA training (Lane 1, LOCAL ONLY — compute-heavy; deliberately NOT in
+# CI). `train_runner.py` fine-tunes Qwen2.5-0.5B-Instruct on Apple Silicon MPS;
+# the committed training_results/ (adapter, loss curve, metrics, samples) + the
+# model registry let the app and CI use the result without re-training. The pure-
+# Python model registry/lineage (`registry.py`) needs none of these.
+#
+# Install:  pip install -r requirements-train.txt
+torch
+transformers
+peft
+mlflow
+matplotlib

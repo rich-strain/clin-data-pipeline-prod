@@ -28,5 +28,11 @@ extraction/cache/pending_batch.json
 # a leftover means the last run failed the gate. Never committed.
 data/curated/*.staging.jsonl
 
+# Stage 6 local training state (regenerable). The committed adapter, metrics,
+# and model_registry.json are what the app/CI consume; MLflow's local store and
+# the per-epoch checkpoints are intermediate.
+mlruns/
+training_results/checkpoints/
+
 # OS
 .DS_Store
