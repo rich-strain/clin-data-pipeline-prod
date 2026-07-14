@@ -53,8 +53,15 @@ Built incrementally, one verified Working Plan step per commit.
   extraction (Haiku) from the *de-identified* notes, with confidence scoring +
   provenance; committed `extractions.jsonl` + cache; CI runs a free `--no-api`
   cache-only coverage check.
-- [ ] Step 5 — Stage 4: curation + DQ gates
-- [ ] Step 6 — Stage 5: dataset assembly
+- [x] **Step 5 — Stage 4: curation + DQ gates.** Normalize (canonical
+  lookup grounded in the pinned terminology snapshot, with vitals/meds
+  dedup) / redact / rebalance / synthesize, gated by a Pandera data-quality
+  check built as **stage-then-promote** — curation writes to staging first,
+  and the committed artifact is only overwritten if the gate passes.
+- [x] **Step 6 — Stage 5: dataset assembly.** Group-aware, leakage-safe
+  train/val/test split (`split.py`), instruction/response JSONL formatting
+  via de-identified note join (`format_jsonl.py`), and a frozen, versioned
+  held-out gold set (`gold.py`).
 - [ ] Step 7 — Stage 6: training + model lifecycle (Lane 1, compute)
 - [ ] Step 8 — Stage 7: evaluation + release gate
 - [ ] Step 9 — Showcase polish + serving
@@ -77,4 +84,12 @@ python run_stage01.py         # Stage 0/1: FHIR + terminology + OMOP CDM
 # the committed outputs instead of re-running it):
 pip install -r requirements-deid.txt
 python run_stage2.py          # Stage 2: de-identification + recall + leakage
+
+# Stage 3 extraction is Lane 1 — paid (calls the Anthropic API) and local-only;
+# never run from CI. CI only runs the --no-api cache-only coverage check.
+pip install -r requirements-extract.txt
+python -m extraction.extractor       # Stage 3: LLM extraction (needs ANTHROPIC_API_KEY)
+
+python run_stage4.py          # Stage 4: curation + Pandera DQ gate (free)
+python run_stage5.py          # Stage 5: split + format + frozen gold set (free)
 ```

@@ -21,6 +21,13 @@ invented benchmarks, no "leveraged advanced techniques" language), **explain
 trade-offs rather than just picking one**, **fully synthetic data only**, and
 **build incrementally, one verified step at a time**.
 
+**Status:** tracked in [`README.md`](README.md)'s Build status checklist,
+updated as each Working Plan step lands — check there, not here, for current
+progress. This spec stays the durable architecture/design doc; where a
+section below describes a choice that's since been made for real (a specific
+tool, a resolved trade-off), it's been updated to say so, but it isn't a
+live progress tracker.
+
 ## The organizing principle: source of truth vs. reproducible derivation
 
 The single fact that reshapes this repo relative to the other two: once the
@@ -73,7 +80,7 @@ layer**, the **access/audit log**, the **Parquet analytics store**, and
 - The raw NDJSON is written **once, immutably** to the landing layer — the
   authoritative record everything downstream regenerates from.
 
-### Stage 1 — Canonical storage + terminology binding
+### Stage 1 — Canonical storage + terminology binding *(built)*
 - Store **FHIR R4 constrained to US Core** profiles (US-realm baseline).
   Model resources properly — e.g. blood pressure is **one Observation
   (LOINC 85354-9) with `component` entries** for systolic (8480-6) and
@@ -81,47 +88,82 @@ layer**, the **access/audit log**, the **Parquet analytics store**, and
   repos made and documented).
 - Bind coded fields to real terminologies: **SNOMED CT** (problems),
   **ICD-10-CM** (billing dx), **LOINC** (labs/vitals), **RxNorm** (meds),
-  **UCUM** (units). The demo's closed-vocabulary lookup tables become
-  **terminology-service** calls or a pinned value-set snapshot.
-- Validate conformance with the **HL7 FHIR Validator** / `$validate` (Inferno
-  for US Core).
+  **UCUM** (units). **Resolved:** a **pinned value-set snapshot**
+  (`terminology/omop_concept_snapshot.json`), not live terminology-service
+  calls — free, offline, deterministic, CI-safe. Medication↔diagnosis
+  comorbidity pairing uses a real **RxClass `may_treat`** lookup
+  (`terminology/build_dxmed_lookup.py`), not an invented pairing.
+- **Resolved analytics model:** both — FHIR stays the canonical store, and a
+  real **OMOP CDM ETL** (`omop/etl.py`) projects it for research-shaped
+  analytics. Not either/or (see Open Decisions, formerly #4).
+- **Resolved validation split:** base-FHIR structural conformance is
+  checked for real with the pure-Python **`fhir.resources` R4B** models
+  (free, offline, CI-safe) — cardinality, datatypes, enforced value sets.
+  Full **US Core profile + terminology-binding** validation is explicitly
+  named as the heavier, Java-based **HL7 FHIR Validator + Inferno** upgrade
+  and is **not built** — the gap between "base-valid" and "US
+  Core-conformant" is reported, not hidden.
 
-### Stage 2 — De-identification + governance (the biggest addition)
+### Stage 2 — De-identification + governance (the biggest addition) *(built)*
 - Legal frame: **HIPAA §164.514** — **Safe Harbor** (strip all 18
   identifiers; dates collapse to year, ages >89 aggregated) or **Expert
   Determination**. Shifted-but-preserved dates survive only under a
   **Limited Data Set + Data Use Agreement**, *not* Safe Harbor.
 - Keep the demo's **per-entity, interval-preserving date-shift** (diagnosis→
   treatment gaps intact) — it is exactly the LDS pattern; just situate it
-  legally.
+  legally. **Built:** DOB is shifted independently from other dates, and the
+  shift ceiling is computed dynamically (not a hardcoded date) — same
+  reasoning the ceiling bug fix in the prior repos already established.
 - Free-text de-id (the demo's known-string find-and-replace does **not**
-  generalize to real notes): use **NLP de-id** (Presidio / Philter / NLM
-  Scrubber / Comprehend Medical) with a **human QA sample** and a measured
-  recall target, since missed PHI is a breach.
+  generalize to real notes): use NLP de-id with a **human QA sample** and a
+  measured recall target, since missed PHI is a breach. **Resolved:
+  Microsoft Presidio** (`presidio-analyzer` + `en_core_web_lg`) — run
+  **local-only** (deliberately not installed in CI; it's a heavy model).
+  The de-identified notes and the recall report are committed; CI validates
+  those committed artifacts (leakage == 0, recall report) without
+  re-running the model.
 - **BAA** with any vendor before PHI touches it — cloud *and* the LLM API.
+  *(Documented only — no real vendor/BAA on a synthetic-data portfolio
+  repo.)*
 
-### Stage 3 — LLM extraction
-- Ordering decision: de-identify notes **before** extraction (de-id keeps
-  clinical content, so a de-identified note can go to a BAA-covered external
-  model), **or self-host** the extraction model inside the compliance
-  boundary (**vLLM** / **TGI**) when de-id can't be trusted enough. Both are
-  legitimate; document the choice.
+### Stage 3 — LLM extraction *(built)*
+- **Resolved ordering decision:** de-identify notes **before** extraction —
+  extraction runs on the *de-identified* Stage 2 output, not raw notes, so a
+  de-identified note is what would go to a BAA-covered external model. The
+  self-host-inside-the-boundary path (**vLLM** / **TGI**) remains documented
+  as the alternative for when de-id can't be trusted enough, not built.
 - Carry forward the demo's **constrained/tool-use structured output**,
-  **cache-first**, and **Batches API** bulk mode. Add **confidence scoring +
-  human-in-the-loop review** for low-confidence outputs, and **provenance**
-  (which model + prompt version produced each field).
+  **cache-first**, and **Batches API** bulk mode. **Built:** the Batches
+  submit/retrieve flow is deliberately **decoupled** (submit, then a
+  separate retrieve step) so a long-running batch survives the local
+  machine sleeping mid-run. Add **confidence scoring + human-in-the-loop
+  review** for low-confidence outputs, and **provenance** (which model +
+  prompt version produced each field) — both built. A real accuracy win
+  found along the way: **deduping repeated vitals/meds mentions within a
+  note** measurably lifts extraction confidence, over and above the
+  ordering/provenance additions above.
 
-### Stage 4 — Curation / normalization / validation
+### Stage 4 — Curation / normalization / validation *(built)*
 - The demo's normalize/redact/rebalance/synthesize maps directly here.
-  Production addition: **declarative data-quality tests as a gate**
-  (**Great Expectations** or **Pandera**) — completeness, referential
-  integrity, value ranges — that **fail the pipeline**, not just print a
-  metric.
+  Normalize is grounded in the same pinned terminology snapshot Stage 1
+  uses (closed-vocabulary lookup, not NLP) — see the answer above on
+  normalization method for the full mechanics.
+- Production addition: **declarative data-quality tests as a gate.**
+  **Resolved: Pandera** (schema-as-code checks over the curated output —
+  completeness, referential integrity against the closed terminology
+  vocabulary, value ranges) that **fail the pipeline**, not just print a
+  metric. **Built as stage-then-promote:** curation writes to a staging
+  path first; the committed artifact is only overwritten if the DQ gate
+  passes — so the gate gatekeeps the actual artifact CI/the app consume,
+  not just the process exit code.
 
-### Stage 5 — Dataset assembly
+### Stage 5 — Dataset assembly *(built)*
 - Train/val/test in **JSONL** (the de facto fine-tuning format). The demo's
   **group-aware, leakage-safe splitting** is already production-correct —
   keep it verbatim. Add a frozen, versioned **held-out gold set** for eval.
+  Built as `split.py` (group-aware split), `format_jsonl.py`
+  (instruction/response format), and `gold.py` (frozen gold set) — matches
+  this section as written, no deviation.
 
 ### Stage 6 — Training + model lifecycle
 - Keep the demo's real LoRA run. Add **experiment tracking** (MLflow / W&B),
@@ -153,12 +195,12 @@ layer**, the **access/audit log**, the **Parquet analytics store**, and
 | Interchange | FHIR R4 + US Core; HL7 v2; C-CDA; **NDJSON** (Bulk Data) |
 | Terminologies | SNOMED CT, ICD-10-CM, LOINC, RxNorm, UCUM |
 | Vitals modeling | FHIR vital-signs profile (BP as panel + components) |
-| Analytics model | OMOP CDM (optional, for research) |
+| Analytics model | OMOP CDM ETL over FHIR (**built**) — additive, not a replacement for FHIR-as-canonical |
 | De-identification | HIPAA Safe Harbor **or** Expert Determination; **LDS + DUA** for shifted dates |
 | Date handling | Per-entity consistent shift, interval-preserving |
-| Free-text PHI | NLP de-id (Presidio/Philter) + human QA |
+| Free-text PHI | NLP de-id — **Presidio (built)**, local-only, committed recall report |
 | Vendor access | **BAA** before any PHI; or self-hosted model |
-| Data quality | Great Expectations / Pandera as pipeline gates |
+| Data quality | **Pandera (built)**, stage-then-promote gate |
 | Orchestration | Airflow / Dagster / Prefect |
 | Storage/format | Parquet, queried via duckdb (**built**); Delta/Iceberg (**documented upgrade**) |
 | Dataset format | JSONL, group-aware leakage-safe splits |
@@ -275,7 +317,10 @@ on the per-push path.
 
 - **No `ANTHROPIC_API_KEY` in GitHub/CI.** CI has no credential to bill
   with, so no bug or loop can spend money. The key stays on the local
-  machine only.
+  machine only. **Built as an enforced CI step, not just a convention:** CI
+  greps every workflow file for the key name and checks it's absent from
+  the CI runtime environment, failing the build if either check trips —
+  see `.github/workflows/ci.yml`'s "Guardrail" step.
 - Paid stages (extract, synthesize) are **manual local targets** (e.g.
   `make regenerate`), never push-triggered.
 - Extraction is **cache-first**, keyed on a hash of note text — committed
@@ -331,7 +376,7 @@ throughout the build:
 | **0/1 — Ingestion + canonical storage** | Sample FHIR bundle (US Core, BP as panel + components — expandable); terminology-binding results (% of coded fields matched, validator pass/fail count); the flattened feature table (raw/unredacted, same labeling discipline as the original repo's Stage A) |
 | **2 — De-identification** | Before/after de-id diff for a sample record; per-patient leakage-check result (0/N leaks — the actual check, not an assertion); free-text de-id **measured recall** on a labeled sample, stated honestly if imperfect |
 | **3 — Extraction** | Notes-extracted / cache-hit counts (inherited pattern from the scale repo); the 3-way sequential/concurrent/batch benchmark if re-run at this scale; confidence-score distribution on outputs; provenance (model + prompt version) per record |
-| **4 — Curation + DQ** | Normalize/redact/rebalance/synthesize before/after tables (inherited pattern); DQ gate results — which Great Expectations/Pandera checks ran, pass/fail, and on failure what value violated what rule |
+| **4 — Curation + DQ** | Normalize/redact/rebalance/synthesize before/after tables (inherited pattern); Pandera DQ gate results — which checks ran, pass/fail, and on failure what value violated what rule |
 | **5 — Dataset assembly** | Train/val/test counts and ratio; the group-aware leakage check (zero patient-groups crossing splits); a sample instruction/response pair; frozen gold-set size and version |
 | **6 — Training** | Loss curve image + loss-history table; adapter size vs. base model size (real, read off disk); the experiment-tracking run ID/link; the model registry version selected and why (best-epoch, same as the demo's own best-epoch selection) |
 | **7 — Evaluation + release** | Per-field precision/recall/F1 (inherited per-category table pattern), DOB/date exact-match, non-canonical/hallucination tracking, raw per-example outputs for the cases that failed, model card summary, release-gate pass/fail |
@@ -487,19 +532,32 @@ layered onto the steps they belong to, not saved for a big final step.
 - Not a claim of production-grade extraction accuracy from the small local
   fine-tune (same honest limit the demo documents).
 
-## Open decisions (to resolve before/while building)
+## Open decisions
+
+Resolved decisions (numbering kept stable for reference — see each stage
+section above for the full rationale):
+
+2. ~~De-id ordering~~ — **Resolved: de-identify before extraction.**
+   Stage 3 runs on Stage 2's de-identified output. Self-hosting the
+   extraction model inside the compliance boundary stays documented as the
+   alternative, not built.
+4. ~~OMOP CDM vs. FHIR-native~~ — **Resolved: both.** FHIR stays the
+   canonical store (source of truth); a real OMOP CDM ETL projects it
+   additively for research-shaped analytics. Not an either/or.
+
+Still open (to resolve before/while building the remaining stages):
 
 1. Repo name — currently `clin-data-pipeline-prod`; rename if a clearer one
    fits the portfolio naming.
-2. De-id ordering: de-identify-before-external-extraction vs. self-hosted
-   extraction inside the boundary — pick one as the primary demonstrated
-   path, document the other.
-3. Which OSS stack to actually stand up vs. document (cost-conscious: favor
-   free/local — DVC, Great Expectations, MLflow, Dagster, vLLM — and reserve
-   "document only" for anything needing paid infra or a BAA-covered env).
-4. Whether the analytics branch adopts **OMOP CDM** or stays FHIR-native
-   with a flatten step (the demo's existing pattern).
+3. Which OSS stack to actually stand up vs. document, for the
+   **not-yet-built** stages — **Presidio and Pandera are resolved** (Stages
+   2 and 4, above); still open: MLflow/W&B (experiment tracking, Stage 6),
+   DVC/lakeFS (versioning), Dagster/Airflow/Prefect (the orchestration
+   cross-cutting concern — currently just GitHub Actions), vLLM/TGI
+   (self-hosted serving, only relevant if decision #2 above is revisited).
+   Cost-conscious default still applies: favor free/local, reserve
+   "document only" for anything needing paid infra or a BAA-covered env.
 5. Frontend split: one combined HF Space (showcase + live inference) vs. a
    GitHub Pages dashboard (`duckdb-wasm`, always-on) plus an inference-only
    Space. Combined is simpler; split gives no-cold-start display and cleaner
-   separation.
+   separation. Not yet reached (this is step 9 work).
