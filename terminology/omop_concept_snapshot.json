@@ -5,7 +5,13 @@
     "source_key": "SYNPUF1K",
     "resolved_date": "2026-07-13",
     "method": "Exact source-code lookup + 'Maps to' (Non-standard to Standard map) resolution via the public ATLAS demo WebAPI vocabulary search/related endpoints. Verifiable, not fabricated.",
-    "note": "Pinned snapshot for this repo's closed synthetic vocabulary only. A full deployment resolves against the licensed OHDSI/Athena vocabulary (documented upgrade). Unresolved source codes carry standard concept_id 0 (OMOP's unmapped sentinel)."
+    "note": "Pinned snapshot for this repo's closed synthetic vocabulary only. A full deployment resolves against the licensed OHDSI/Athena vocabulary (documented upgrade). Unresolved source codes carry standard concept_id 0 (OMOP's unmapped sentinel).",
+    "amendments": [
+      {
+        "resolved_date": "2026-07-14",
+        "change": "Added RxNorm ingredients tiotropium (69120 -> OMOP 1106776), sumatriptan (37418 -> 1140643), phentermine (8152 -> 735340) so every generated diagnosis has an in-vocabulary may_treat medication (see terminology/dxmed_lookup.json). Concept_ids resolved the same way as the base snapshot, against ATLAS SYNPUF1K."
+      }
+    ]
   },
   "metadata_concepts": {
     "gender": {
@@ -347,6 +353,60 @@
         "concept_id": 1332418,
         "concept_code": "17767",
         "concept_name": "amlodipine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "69120": {
+      "source": {
+        "concept_id": 1106776,
+        "concept_code": "69120",
+        "concept_name": "tiotropium",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1106776,
+        "concept_code": "69120",
+        "concept_name": "tiotropium",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "37418": {
+      "source": {
+        "concept_id": 1140643,
+        "concept_code": "37418",
+        "concept_name": "sumatriptan",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 1140643,
+        "concept_code": "37418",
+        "concept_name": "sumatriptan",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      }
+    },
+    "8152": {
+      "source": {
+        "concept_id": 735340,
+        "concept_code": "8152",
+        "concept_name": "phentermine",
+        "vocabulary_id": "RxNorm",
+        "domain_id": "Drug",
+        "standard": "S"
+      },
+      "standard": {
+        "concept_id": 735340,
+        "concept_code": "8152",
+        "concept_name": "phentermine",
         "vocabulary_id": "RxNorm",
         "domain_id": "Drug",
         "standard": "S"

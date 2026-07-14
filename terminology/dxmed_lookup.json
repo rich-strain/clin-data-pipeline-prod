@@ -1,0 +1,188 @@
+{
+  "_provenance": {
+    "source": "NLM RxClass API (may_treat, MED-RT)",
+    "api": "https://rxnav.nlm.nih.gov/REST/rxclass",
+    "relationship": "may_treat",
+    "rela_source": "MEDRT",
+    "resolved_date": "2026-07-14",
+    "method": "Per generated ICD-10 diagnosis: resolve a RxClass DISEASE class (curated search term), pull may_treat ingredient members, intersect with this repo's closed RxNorm vocabulary (omop_concept_snapshot.json). Pairings are RxClass-derived, not hand-authored.",
+    "class_search_terms": {
+      "E11.9": "Type 2 Diabetes Mellitus",
+      "I10": "Hypertension",
+      "J45.909": "Asthma",
+      "E78.5": "Hyperlipidemia",
+      "J44.9": "Pulmonary Disease, Chronic Obstructive",
+      "G43.909": "Migraine Disorders",
+      "E66.9": "Obesity",
+      "K21.9": "Gastroesophageal Reflux",
+      "E03.9": "Hypothyroidism",
+      "F32.9": "Depressive Disorder"
+    },
+    "weights_note": "prevalence weights are a rough MANUAL seed (RxClass exposes no prevalence); single-option diagnoses default to 1.0."
+  },
+  "conditions": {
+    "E11.9": {
+      "display": "Type 2 diabetes mellitus without complication",
+      "rxclass": {
+        "classId": "D003924",
+        "className": "Diabetes Mellitus, Type 2"
+      },
+      "medications": [
+        {
+          "rxcui": "6809",
+          "display": "metformin",
+          "weight": 1.0
+        }
+      ]
+    },
+    "I10": {
+      "display": "Essential hypertension",
+      "rxclass": {
+        "classId": "D006973",
+        "className": "Hypertension"
+      },
+      "medications": [
+        {
+          "rxcui": "29046",
+          "display": "lisinopril",
+          "weight": 0.55
+        },
+        {
+          "rxcui": "17767",
+          "display": "amlodipine",
+          "weight": 0.45
+        }
+      ]
+    },
+    "J45.909": {
+      "display": "Uncomplicated asthma",
+      "rxclass": {
+        "classId": "D001249",
+        "className": "Asthma"
+      },
+      "medications": [
+        {
+          "rxcui": "435",
+          "display": "albuterol",
+          "weight": 1.0
+        }
+      ]
+    },
+    "E78.5": {
+      "display": "Hyperlipidemia",
+      "rxclass": {
+        "classId": "D006949",
+        "className": "Hyperlipidemias"
+      },
+      "medications": [
+        {
+          "rxcui": "83367",
+          "display": "atorvastatin",
+          "weight": 1.0
+        }
+      ]
+    },
+    "J44.9": {
+      "display": "Chronic obstructive lung disease",
+      "rxclass": {
+        "classId": "D029424",
+        "className": "Pulmonary Disease, Chronic Obstructive"
+      },
+      "medications": [
+        {
+          "rxcui": "69120",
+          "display": "tiotropium",
+          "weight": 1.0
+        }
+      ]
+    },
+    "G43.909": {
+      "display": "Migraine",
+      "rxclass": {
+        "classId": "D008881",
+        "className": "Migraine Disorders"
+      },
+      "medications": [
+        {
+          "rxcui": "37418",
+          "display": "sumatriptan",
+          "weight": 1.0
+        }
+      ]
+    },
+    "E66.9": {
+      "display": "Obesity",
+      "rxclass": {
+        "classId": "D009765",
+        "className": "Obesity"
+      },
+      "medications": [
+        {
+          "rxcui": "8152",
+          "display": "phentermine",
+          "weight": 1.0
+        }
+      ]
+    },
+    "K21.9": {
+      "display": "Gastroesophageal reflux disease without esophagitis",
+      "rxclass": {
+        "classId": "D005764",
+        "className": "Gastroesophageal Reflux"
+      },
+      "medications": [
+        {
+          "rxcui": "7646",
+          "display": "omeprazole",
+          "weight": 1.0
+        }
+      ]
+    },
+    "E03.9": {
+      "display": "Hypothyroidism",
+      "rxclass": {
+        "classId": "D007037",
+        "className": "Hypothyroidism"
+      },
+      "medications": [
+        {
+          "rxcui": "10582",
+          "display": "levothyroxine",
+          "weight": 1.0
+        }
+      ]
+    },
+    "F32.9": {
+      "display": "Major depression, single episode",
+      "rxclass": {
+        "classId": "D003866",
+        "className": "Depressive Disorder"
+      },
+      "medications": [
+        {
+          "rxcui": "36437",
+          "display": "sertraline",
+          "weight": 1.0
+        }
+      ]
+    }
+  },
+  "_flags": [
+    {
+      "icd10": "J44.9",
+      "reason": "only option is newly-added med ['69120']; review fit + dosage"
+    },
+    {
+      "icd10": "G43.909",
+      "reason": "only option is newly-added med ['37418']; review fit + dosage"
+    },
+    {
+      "icd10": "E66.9",
+      "reason": "only option is newly-added med ['8152']; review fit + dosage"
+    },
+    {
+      "icd10": "E66.9",
+      "reason": "RxClass may_treat for obesity is heavy with withdrawn drugs; phentermine chosen as a still-approved classic agent \u2014 verify."
+    }
+  ]
+}

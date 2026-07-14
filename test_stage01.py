@@ -13,11 +13,15 @@ from pathlib import Path
 
 import pandas as pd
 
-from generation.generate_fhir import generate_dataset
+import terminology as t
+from generation.generate_fhir import _condition_icd10, generate_dataset
 from generation.landing import group_by_patient, read_landing
 from omop.etl import CDM_TABLES, fhir_to_omop
 from terminology.bind import binding_report
 from terminology.validate import validate_resources
+
+ICD10_SYSTEM = "http://hl7.org/fhir/sid/icd-10-cm"
+RXNORM_SYSTEM = "http://www.nlm.nih.gov/research/umls/rxnorm"
 
 ROOT = Path(__file__).parent
 DATA = ROOT / "data"
@@ -86,6 +90,33 @@ def test_conditions_are_dual_coded_and_bp_is_a_panel() -> None:
             assert comp_codes == {"8480-6", "8462-4"}, (
                 "BP panel must have systolic + diastolic components"
             )
+
+
+def test_medications_are_paired_to_a_plausible_condition() -> None:
+    """Every generated MedicationRequest must reasonReference a Condition of the
+    same patient, and its RxNorm code must be one the dx->med lookup lists for
+    that Condition's diagnosis (i.e. not a random drug)."""
+    for group in generate_dataset(30, messy=True, seed=7):
+        conditions = {r["id"]: r for r in group if r["resourceType"] == "Condition"}
+        meds = [r for r in group if r["resourceType"] == "MedicationRequest"]
+        for med in meds:
+            reasons = med.get("reasonReference", [])
+            assert reasons, f"med {med['id']} has no reasonReference"
+            cond_id = reasons[0]["reference"].split("/", 1)[1]
+            assert cond_id in conditions, "reasonReference must point at this patient's Condition"
+            icd10 = _condition_icd10(conditions[cond_id])
+            allowed = {m["rxcui"] for m in t.medications_for(icd10)}
+            rxcui = med["medicationCodeableConcept"]["coding"][0]["code"]
+            assert rxcui in allowed, (
+                f"med {rxcui} not a may_treat option for {icd10} (allowed: {allowed})"
+            )
+
+
+def test_every_generated_diagnosis_has_an_in_vocab_medication() -> None:
+    """Guards the coverage the lookup was built for: no generated diagnosis should
+    fall through to zero medications (the migraine/obesity/COPD gap we closed)."""
+    for icd10 in t.list_conditions():
+        assert t.medications_for(icd10), f"diagnosis {icd10} has no medication in the lookup"
 
 
 def test_measurements_all_have_verified_standard_concepts() -> None:

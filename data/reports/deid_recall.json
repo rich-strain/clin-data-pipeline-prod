@@ -1,7 +1,7 @@
 {
-  "caught": 868,
-  "total": 1020,
-  "recall": 0.851,
+  "caught": 888,
+  "total": 1028,
+  "recall": 0.8638,
   "by_type": {
     "PATIENT_NAME": {
       "caught": 100,
@@ -12,28 +12,28 @@
       "total": 100
     },
     "MRN": {
-      "caught": 90,
-      "total": 90
+      "caught": 87,
+      "total": 87
     },
     "ADDRESS": {
-      "caught": 38,
-      "total": 80
+      "caught": 44,
+      "total": 85
     },
     "CITY": {
-      "caught": 75,
-      "total": 80
+      "caught": 83,
+      "total": 85
     },
     "STATE": {
-      "caught": 36,
-      "total": 80
+      "caught": 53,
+      "total": 85
     },
     "ZIP": {
-      "caught": 19,
-      "total": 80
+      "caught": 20,
+      "total": 85
     },
     "DATE": {
-      "caught": 310,
-      "total": 310
+      "caught": 301,
+      "total": 301
     },
     "PROVIDER_NAME": {
       "caught": 100,
@@ -47,11 +47,11 @@
     },
     {
       "type": "ADDRESS",
-      "text": "278 Cedar Ln"
+      "text": "5146 Sunset Dr"
     },
     {
-      "type": "STATE",
-      "text": "OR"
+      "type": "ZIP",
+      "text": "16180"
     },
     {
       "type": "ADDRESS",
@@ -60,6 +60,10 @@
     {
       "type": "ZIP",
       "text": "70538"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "4064 Pine Rd"
     },
     {
       "type": "ADDRESS",
@@ -75,59 +79,39 @@
     },
     {
       "type": "ZIP",
-      "text": "10261"
-    },
-    {
-      "type": "ADDRESS",
-      "text": "6041 Elm St"
-    },
-    {
-      "type": "STATE",
-      "text": "OR"
-    },
-    {
-      "type": "ADDRESS",
-      "text": "9092 Maple Dr"
-    },
-    {
-      "type": "CITY",
-      "text": "Franklin"
+      "text": "19078"
     },
     {
       "type": "ZIP",
-      "text": "60413"
-    },
-    {
-      "type": "ADDRESS",
-      "text": "9734 Washington Ave"
-    },
-    {
-      "type": "STATE",
-      "text": "OH"
+      "text": "55810"
     },
     {
       "type": "ZIP",
-      "text": "70450"
+      "text": "96672"
     },
     {
       "type": "ADDRESS",
-      "text": "5739 Cedar Ln"
-    },
-    {
-      "type": "CITY",
-      "text": "Franklin"
+      "text": "3370 Washington Ave"
     },
     {
       "type": "STATE",
-      "text": "TX"
+      "text": "CT"
     },
     {
       "type": "ZIP",
-      "text": "18621"
+      "text": "21228"
     },
     {
       "type": "ADDRESS",
-      "text": "4446 Washington Ave"
+      "text": "9460 Elm St"
+    },
+    {
+      "type": "STATE",
+      "text": "IL"
+    },
+    {
+      "type": "ZIP",
+      "text": "13637"
     },
     {
       "type": "STATE",
@@ -135,11 +119,27 @@
     },
     {
       "type": "ZIP",
-      "text": "29191"
+      "text": "39701"
+    },
+    {
+      "type": "CITY",
+      "text": "Franklin"
     },
     {
       "type": "ZIP",
-      "text": "71597"
+      "text": "69913"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "5602 Pine Rd"
+    },
+    {
+      "type": "ZIP",
+      "text": "85836"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "9638 Washington Ave"
     }
   ],
   "engine": "Microsoft Presidio (spaCy en_core_web_lg) + custom MRN recognizer"

@@ -1,44 +1,32 @@
 {
   "overall": {
-    "matched": 1641,
-    "total": 1662,
-    "pct": 98.74
+    "matched": 1570,
+    "total": 1587,
+    "pct": 98.93
   },
   "by_system": {
     "sct": {
-      "matched": 210,
-      "total": 210
+      "matched": 201,
+      "total": 201
     },
     "icd-10-cm": {
-      "matched": 210,
-      "total": 210
+      "matched": 201,
+      "total": 201
     },
     "rxnorm": {
-      "matched": 198,
-      "total": 198
+      "matched": 201,
+      "total": 201
     },
     "loinc.org": {
-      "matched": 572,
-      "total": 572
+      "matched": 542,
+      "total": 542
     },
     "unitsofmeasure.org": {
-      "matched": 451,
-      "total": 472
+      "matched": 425,
+      "total": 442
     }
   },
   "unmatched_examples": [
-    {
-      "system": "unitsofmeasure.org",
-      "code": "[lb_av]"
-    },
-    {
-      "system": "unitsofmeasure.org",
-      "code": "[lb_av]"
-    },
-    {
-      "system": "unitsofmeasure.org",
-      "code": "[lb_av]"
-    },
     {
       "system": "unitsofmeasure.org",
       "code": "[lb_av]"
@@ -114,8 +102,8 @@
       "total": 10
     },
     "medications": {
-      "mapped": 8,
-      "total": 8
+      "mapped": 11,
+      "total": 11
     },
     "observations": {
       "mapped": 8,

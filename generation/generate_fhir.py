@@ -190,6 +190,21 @@ MED_CONTENT = {
         "short": "5mg PO QD",
         "full": "Take 5 mg by mouth once daily",
     },
+    "69120": {
+        "label": "Tiotropium 18 MCG Inhalation Powder",
+        "short": "1cap inh QD",
+        "full": "Inhale the contents of 1 capsule once daily",
+    },
+    "37418": {
+        "label": "Sumatriptan 50 MG Oral Tablet",
+        "short": "50mg PO PRN",
+        "full": "Take 50 mg by mouth at onset of migraine; may repeat once after 2 hours",
+    },
+    "8152": {
+        "label": "Phentermine 37.5 MG Oral Tablet",
+        "short": "37.5mg PO QAM",
+        "full": "Take 37.5 mg by mouth every morning before breakfast",
+    },
 }
 
 # Simple (single-value) vital signs + the one lab, keyed by LOINC. BP is
@@ -445,10 +460,26 @@ def make_simple_observation(
     return resource
 
 
+def _condition_icd10(condition: dict) -> str:
+    """The ICD-10-CM code a Condition is dual-coded with (used to look up meds)."""
+    for c in condition["code"]["coding"]:
+        if c["system"] == ICD10_SYSTEM:
+            return c["code"]
+    raise ValueError(f"Condition {condition.get('id')} has no ICD-10-CM coding")
+
+
 def make_medication_request(
-    rng: random.Random, patient_id: str, birth_date: date, messy: bool
-) -> dict:
-    rxnorm = rng.choice(t.list_medications())
+    rng: random.Random, patient_id: str, birth_date: date, messy: bool, condition: dict
+) -> dict | None:
+    """A MedicationRequest that plausibly treats `condition`: the RxNorm code is
+    weighted-sampled from the diagnosis's RxClass may_treat lookup, and
+    reasonReference points back at the Condition (both share the Patient subject).
+    Returns None if the diagnosis has no in-vocabulary medication (a code flagged
+    in dxmed_lookup.json for review)."""
+    icd10 = _condition_icd10(condition)
+    rxnorm = t.sample_medication(icd10, rng)
+    if rxnorm is None:
+        return None
     med = t.get_medication(rxnorm)
     content = MED_CONTENT[rxnorm]
     authored = _random_date(rng, max(birth_date, date(2020, 1, 1)), GENERATION_CEILING)
@@ -469,6 +500,7 @@ def make_medication_request(
         "subject": {"reference": f"Patient/{patient_id}"},
         "authoredOn": authored.isoformat(),
         "dosageInstruction": [{"text": dosage_text}],
+        "reasonReference": [{"reference": f"Condition/{condition['id']}"}],
     }
     if messy and rng.random() < 0.15:
         del resource["dosageInstruction"]
@@ -479,13 +511,20 @@ def generate_patient_resources(rng: random.Random, messy: bool) -> list[dict]:
     """One patient's full resource group; Patient resource is always first."""
     patient, patient_id, birth_date = make_patient(rng, messy)
     resources = [patient]
-    for _ in range(rng.randint(1, 3)):
-        resources.append(make_condition(rng, patient_id, birth_date, messy))
+    conditions = [
+        make_condition(rng, patient_id, birth_date, messy) for _ in range(rng.randint(1, 3))
+    ]
+    resources.extend(conditions)
     resources.append(make_bp_observation(rng, patient_id, birth_date, messy))
     for _ in range(rng.randint(1, 4)):
         resources.append(make_simple_observation(rng, patient_id, birth_date, messy))
-    for _ in range(rng.randint(1, 3)):
-        resources.append(make_medication_request(rng, patient_id, birth_date, messy))
+    # One medication per condition, plausibly treating it (dx->med lookup +
+    # reasonReference), instead of drugs drawn at random. A condition whose
+    # diagnosis has no in-vocabulary medication simply gets none.
+    for cond in conditions:
+        med = make_medication_request(rng, patient_id, birth_date, messy, cond)
+        if med is not None:
+            resources.append(med)
     return resources
 
 
