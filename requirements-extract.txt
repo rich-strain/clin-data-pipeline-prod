@@ -1,0 +1,7 @@
+# Stage 3 extraction (Lane 1, LOCAL ONLY — paid; deliberately NOT in CI).
+# Running `extraction/extractor.py` without --no-api calls the Anthropic API.
+# CI only runs the cache-only coverage check (`--no-api`), which imports neither.
+#
+# Install:  pip install -r requirements-extract.txt
+anthropic
+python-dotenv

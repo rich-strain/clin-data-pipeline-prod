@@ -343,9 +343,68 @@ def render_deid(label: str, description: str) -> None:
         )
 
 
+def render_extraction(label: str, description: str) -> None:
+    """Stage 3 — LLM extraction, read off the committed extractions + cache."""
+    st.title(label)
+    st.caption(description)
+
+    extractions = load_jsonl("data/extracted/extractions.jsonl")
+    cache = load_json("extraction/cache/extraction_cache.json")
+    if not extractions:
+        st.warning(
+            "Stage 3 artifacts missing — run `python -m extraction.extractor` locally "
+            "(Lane 1, paid). CI only runs the free cache-only coverage check."
+        )
+        return
+
+    st.info(
+        "**De-identify → then extract (decision #2).** Extraction runs on the "
+        "**de-identified** notes, so the text sent to the external model (Anthropic "
+        "Haiku) carries no PHI. It's **cache-first**, keyed on a hash of the note "
+        "text + model + prompt version: the committed cache means **zero API calls** "
+        "on rerun, and CI's coverage check (`--no-api`) is free by construction."
+    )
+
+    model = extractions[0].get("model", "?")
+    prompt_v = extractions[0].get("prompt_version", "?")
+    cache_n = len(cache) if cache else 0
+    low = sum(1 for e in extractions if e.get("low_confidence"))
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Notes extracted", len(extractions))
+    c2.metric("Cache coverage", f"{cache_n}/{len(extractions)}", "committed → $0 rerun")
+    c3.metric("Low-confidence (HITL)", low, f"< {0.7:.2f}")
+    c4.metric("Provenance", model, f"prompt {prompt_v}")
+
+    # --- Confidence distribution ---
+    st.subheader("Confidence distribution")
+    st.caption(
+        "The model's **self-assessed** confidence per record (honestly labeled — the "
+        "API exposes no token logprobs). Low-confidence records are flagged for "
+        "human-in-the-loop review rather than trusted blindly."
+    )
+    confs = pd.DataFrame({"confidence": [e.get("confidence", 0.0) for e in extractions]})
+    st.bar_chart(confs["confidence"].value_counts().sort_index())
+
+    # --- Sample extraction ---
+    st.subheader("Sample extraction (structured tool-use output)")
+    idx = st.slider("Record", 0, len(extractions) - 1, 0)
+    rec = extractions[idx]
+    st.caption(
+        f"confidence {rec.get('confidence')} · {rec.get('model')} · {rec.get('prompt_version')}"
+    )
+    cols = st.columns(3)
+    cols[0].caption("Diagnoses")
+    cols[0].dataframe(pd.DataFrame(rec["diagnoses"]), hide_index=True, use_container_width=True)
+    cols[1].caption("Medications")
+    cols[1].dataframe(pd.DataFrame(rec["medications"]), hide_index=True, use_container_width=True)
+    cols[2].caption("Vitals")
+    cols[2].dataframe(pd.DataFrame(rec["vitals"]), hide_index=True, use_container_width=True)
+
+
 PAGES = {
     "0/1 — Ingestion + Canonical Storage": render_stage01,
     "2 — De-identification": render_deid,
+    "3 — Extraction": render_extraction,
 }
 
 

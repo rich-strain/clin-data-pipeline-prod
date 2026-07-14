@@ -56,10 +56,18 @@ jobs:
         run: ruff format --check .
 
       - name: Type-check (mypy)
-        run: mypy app.py test_app.py test_stage01.py test_stage2.py run_stage01.py run_stage2.py generation omop terminology deid
+        run: mypy app.py test_app.py test_stage01.py test_stage2.py test_stage3.py run_stage01.py run_stage2.py generation omop terminology deid common extraction
 
       - name: Tests (pytest)
         run: pytest
+
+      # Free coverage check (Lane 2): asserts the committed extraction cache
+      # covers every committed de-identified note. Never calls the Anthropic API
+      # (the extractor lazy-imports the SDK; --no-api never reaches that path) —
+      # a cache miss fails the build, so a note can't ship without its committed
+      # extraction.
+      - name: Cache-only extraction coverage (no API)
+        run: python -m extraction.extractor --no-api --out /tmp/coverage_check.jsonl
 
   # Deploy-to-Space skeleton (Lane 2 → Lane 3). Secret-gated: with no HF_TOKEN
   # configured yet and no artifacts to ship, it skips cleanly. Once a Space

@@ -49,7 +49,10 @@ Built incrementally, one verified Working Plan step per commit.
 - [x] **Step 3 — Stage 2: de-identification framework.** Interval-preserving
   date shift (LDS) + structured redaction, layered free-text NLP de-id
   (Presidio) with measured recall, and the per-patient leakage check (0/N).
-- [ ] Step 4 — Stage 3: LLM extraction (Lane 1, paid)
+- [x] **Step 4 — Stage 3: LLM extraction (Lane 1, paid).** Cache-first structured
+  extraction (Haiku) from the *de-identified* notes, with confidence scoring +
+  provenance; committed `extractions.jsonl` + cache; CI runs a free `--no-api`
+  cache-only coverage check.
 - [ ] Step 5 — Stage 4: curation + DQ gates
 - [ ] Step 6 — Stage 5: dataset assembly
 - [ ] Step 7 — Stage 6: training + model lifecycle (Lane 1, compute)

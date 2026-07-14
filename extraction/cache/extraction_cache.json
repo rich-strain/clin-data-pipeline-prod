@@ -1,0 +1,3962 @@
+{
+  "000d36796396472e95ffca12574713543a59706170f036e06407e05139b6379c": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "Take 50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "115/86"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "73.4"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.3"
+      }
+    ]
+  },
+  "075f7eed41865b1ed6ce347a570db541b55eef44d1417ce4901d626fdefe21aa": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "120/71"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "67.0"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "99.9"
+      }
+    ]
+  },
+  "0c738feff5c47d9599c36cde2c9d0e383a7ba7a28c7ddebd53072a2d39a4542c": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "140/69"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "89.7"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "87.0"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "97.5"
+      }
+    ]
+  },
+  "0dbaf2a1e737e4cbed9078605cc3b67230546ce7423cfe4f589045c11e56bcfd": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "131/87"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.8"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "182.1"
+      }
+    ]
+  },
+  "118e78a288002497695cc4eba8c26e15d4516108eba6e0f5865f83797fbcac24": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "Take 20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "118/73"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "153.6"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "98.2"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "59.1"
+      }
+    ]
+  },
+  "154a02a27eba71daa642b3a11d1c61349f2784d0576ed9bbd117ada56cec52f7": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "103/68"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "188.8"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "181.5"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "123.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "79.6"
+      }
+    ]
+  },
+  "175e55be35fba0d961ceac890836d92411245ff4e59be18f546c6c46cf685bdf": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 MG Oral Tablet - Take 10 mg by mouth once daily",
+        "name": "Lisinopril"
+      },
+      {
+        "dosage": "90 MCG Inhaler - 2puff q4h PRN",
+        "name": "Albuterol"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "140/69"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "97.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "177.6"
+      }
+    ]
+  },
+  "1c1c000157a09348b23206115ccf7fe20021b7a3805855287b7e1c6cbb1e6672": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "121/88"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.6"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.5"
+      }
+    ]
+  },
+  "1eb05dc191e1b443c0b61d43c9e8659fa519810aedb4f3519c230806bc9d5ebc": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "109/75"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "215.0"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "156.3"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.3"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "108.1"
+      }
+    ]
+  },
+  "1f24375ac44f632c4fbae1a25415ed74a7104fbee904943f679cbe32263eb0b1": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "136/75"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.1"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.2"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "85.2"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "90.1"
+      }
+    ]
+  },
+  "213a0d3de5c297f390ce0ad764c724ac7a4c1306d7825b0c457b27d0ffab6cb9": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "113/82"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "180.4"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "114.4"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "100.3"
+      }
+    ]
+  },
+  "219f0f9bfd080550d38af9a4867996ee07bda41a6a6fca7f3babb50767380043": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "130/83"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "67.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "81.0"
+      }
+    ]
+  },
+  "2262ac1fdc2cafc4a7338bafe64a49cbcf5035133c199fee78bb4036cdecc06d": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "121/82"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "87.6"
+      }
+    ]
+  },
+  "23e2c970bb42113aad7cba351462f32f73ac4a34ad6e79a79c57b5163a22d7d1": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "102/68"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "56.3"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "153.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "73.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "67.8"
+      }
+    ]
+  },
+  "247622185d45db6b1a0add65820c71f0b3efc96212bb5da1695280882f9de225": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Major depression, single episode"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "75 mcg by mouth",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "130/65"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "59.2"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "87.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "100.6"
+      }
+    ]
+  },
+  "26ac376f93e6423b42eb1e4858e80661b873b71f807229990e487696e859109e": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "116/61"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "97.3"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.6"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "153.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "73.2"
+      }
+    ]
+  },
+  "2ef8f19f22ba8c27eb0f3c4140a79f6264673c57cdcdf4532b4934229e7d79ea": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "Take 20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "121/73"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "98.4"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "62.5"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "70.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.7"
+      }
+    ]
+  },
+  "317e2100bcf84801a965d8d1d5537fff3696fb3c28411f656b7eea9a9bb8b441": {
+    "confidence": 0.75,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "137/77"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "97.9"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "113.9"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "93.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "72.3"
+      }
+    ]
+  },
+  "3346b0ef5898b1f14f0751c62641e4b63be5e30a37fa2a8feabde32c1c2b5801": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "139/69"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "121.5"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "208.3"
+      }
+    ]
+  },
+  "33782ef2e571efb01753f94edec3f0f499a49914f96cf06b37c51ff1422e3205": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "108/64"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "161.8"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.4"
+      }
+    ]
+  },
+  "3a821d80c09918a8b3b93028c96b1d105966745f6dc81da4ef2ffaff97c72deb": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Major depression, single episode"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "109/72"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.8"
+      }
+    ]
+  },
+  "3af4b57ebb7dad734658a2afefc8ab4d21610480f046122f8c757d891be458a1": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "n/a",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "Take 10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "126/74"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "133.2"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "200.6"
+      }
+    ]
+  },
+  "3f919653b82c4b20c7e4e0b50a128d440879a68c55c794ef3cc007388a7c9d92": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 MG Oral Tablet",
+        "name": "Lisinopril"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "100/85"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "135.1"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "66.2"
+      }
+    ]
+  },
+  "41c990462779ddc92cc23cb2296f1a8ca46695a67a9dadd2f39b6669e1144ca7": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "122/68"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "70.0"
+      }
+    ]
+  },
+  "465ed0ed829a2134ec9913be4a5a9fca5baeefc6fb3f866c8043927a4718a2c1": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "123/77"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "69.1"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "62.4"
+      }
+    ]
+  },
+  "478ab38fbd9f0f11343ddeff4777b4c895d834e823148e91bc3c8a700d982fa8": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "n/a",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "131/62"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.3"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.1"
+      }
+    ]
+  },
+  "4835aeca3114a53fe27824b3b58cc49ead7a11a9a7808181dff5048f6ba0e45f": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "120/86"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "81.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "135.4"
+      }
+    ]
+  },
+  "489ac6fb522aaf6273e126f47b07bddb1488f4e715f2290e841a7d262b91c910": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      },
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "128/71"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "102.4"
+      },
+      {
+        "name": "height",
+        "unit": "cm",
+        "value": "161.0"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "84.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "215.4"
+      }
+    ]
+  },
+  "4958d3f5815ed9fa9b581101276cfafcf215d34b716f4dfca0ec4740110a479b": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 MG Oral Tablet",
+        "name": "Atorvastatin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "106/72"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "64.7"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "114.9"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "226.0"
+      }
+    ]
+  },
+  "4abec95da3d0853d94e8c509aac0868d2ef8a945ea9342c1fe200e71841f0678": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50 MG Oral Tablet",
+        "name": "Sertraline"
+      },
+      {
+        "dosage": "10 MG Oral Tablet - 10mg PO QD",
+        "name": "Lisinopril"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "107/66"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "92.5"
+      },
+      {
+        "name": "Glucose",
+        "unit": "mg/dL",
+        "value": "83.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.2"
+      }
+    ]
+  },
+  "4be639eb5012e4f44e578fde11afb85f6c27332ac6defcc4c6fcd5de66cb4b10": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "136/82"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "86.7"
+      }
+    ]
+  },
+  "4c0ceb75d1916d71599daaf3d522a2bd001065ecd62234ebd55da85a5814b09a": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 MG Oral Capsule - Take 20 mg by mouth once daily",
+        "name": "Omeprazole"
+      },
+      {
+        "dosage": "50 MG Oral Tablet - Take 50 mg by mouth once daily",
+        "name": "Sertraline"
+      },
+      {
+        "dosage": "75 MCG Oral Tablet - Take 75 mcg by mouth",
+        "name": "Levothyroxine"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "124/86"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.8"
+      }
+    ]
+  },
+  "5194ba2bcec800577f678097c7c6ee51d3b3fe3c3af18298f4823604d76f6863": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "5 mg by mouth once daily",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "127/85"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "101.8"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.3"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "84.3"
+      }
+    ]
+  },
+  "51cc04192cc7cf616349c3479afcf726240fc73f4436b5d6c14e337b26b95cfb": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 MG Oral Tablet",
+        "name": "Amlodipine"
+      },
+      {
+        "dosage": "10 MG Oral Tablet - 10mg PO QD",
+        "name": "Lisinopril"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "113/77"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "98.8"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "185.2"
+      }
+    ]
+  },
+  "52ad177f7304aaa0c3f826d7cd9b245069ce13566491223c597071039cb2739d": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/83"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "94.2"
+      }
+    ]
+  },
+  "53a407762a68513b55dc60fdbb01ff6ec6fc90f525958a8af6b4646868d8e236": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "75 MCG Oral Tablet - Take 75 mcg by mouth",
+        "name": "Levothyroxine"
+      },
+      {
+        "dosage": "5 MG Oral Tablet - Take 5 mg by mouth once daily",
+        "name": "Amlodipine"
+      },
+      {
+        "dosage": "20 MG Oral Capsule - Take 20 mg by mouth once daily",
+        "name": "Omeprazole"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "139/63"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "173.4"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "170.7"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.9"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "77.6"
+      }
+    ]
+  },
+  "53c239f2bf7d48ca672506d46d07946f9fba4b4c7a4142963a76a3bc7f8ef5ce": {
+    "confidence": 0.75,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "105/62"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "81.2"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "[PERSON]",
+        "value": "37.6"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "56.9"
+      }
+    ]
+  },
+  "5a7cffdc0d452a7df29a291de726e657474f0ad89c7f70b2f9aa4eecce663c71": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine"
+      },
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "126/88"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "62.3"
+      }
+    ]
+  },
+  "5ade8dfd7430d9b47070e1af351e6765929e4a4c742d98d1ed68a39294629234": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "129/86"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.3"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "57.7"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "119.3"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "74.9"
+      }
+    ]
+  },
+  "5b6ca69670bb6049c81cbb36aa2d5542a25100e64ca2cba85a59b776b1767a2a": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "116/85"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "182.6"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "162.6"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "156.0"
+      }
+    ]
+  },
+  "5db18cdccb5d1453f3fcbf28e734b6895aad518a35dae6acf74c9a8509b8af2c": {
+    "confidence": 0.9,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "110/85"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "76.1"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "188.7"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "75.5"
+      }
+    ]
+  },
+  "62d4d9dc6bf7f075548015f95b7311f38bad7267f887b4523e51efee6b9a7a02": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "121/70"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.2"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "65.0"
+      }
+    ]
+  },
+  "6334ceea7384abc7a59b034e4944f8aa91a7e33e4372c898a0b907dccad1aa57": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "Take 20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "Take 5 mg by mouth once daily",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "112/70"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "71.9"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "81.9"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "95.0"
+      }
+    ]
+  },
+  "63d9bf2f7ac5e3ffd8b535f1d5b427d81829850dbcec54f9f2f73c93b2a034f2": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "112/62"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "77.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "116.3"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "55.8"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "170.3"
+      }
+    ]
+  },
+  "64d0493dc3944ff36f2fc51d243521f812540fd5c0557d7e6cee51d338637bf5": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin"
+      },
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "105/71"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "60.7"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "183.4"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "103.2"
+      }
+    ]
+  },
+  "67efea0e6afce64f79edf1104e7d6f0154182f4428ae58549a5d7bf362494c42": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "132/76"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "79.9"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "171.5"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.8"
+      }
+    ]
+  },
+  "682569ebc3ce450befceab95344e43aa5702e0eb19788c9d1a47858cfced2d25": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 MG Oral Tablet - Take 5 mg by mouth once daily",
+        "name": "Amlodipine"
+      },
+      {
+        "dosage": "50 MG Oral Tablet - 50mg PO QD",
+        "name": "Sertraline"
+      },
+      {
+        "dosage": "500 MG Oral Tablet",
+        "name": "Metformin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "134/67"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "67.2"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "74.3"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "86.8"
+      }
+    ]
+  },
+  "6981922cd5c4e128bee9233346bee9e7b114824c7e76fa2680b6858f7e0e6731": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "113/76"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.2"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "186.2"
+      }
+    ]
+  },
+  "6b4a311a2f9ffff44a83bb072a441b955ebd5e6ca5a128c85bbf376552422194": {
+    "confidence": 0.65,
+    "diagnoses": [
+      {
+        "name": "[LOCATION]"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "132/78"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "156.2"
+      }
+    ]
+  },
+  "6e802b328763cd20c39acdace7f824f7d1feb37891c97e894d429baf394e08b5": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "104/63"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "76.6"
+      },
+      {
+        "name": "height",
+        "unit": "cm",
+        "value": "184.7"
+      }
+    ]
+  },
+  "7221a2bdb37e7d7960862f7dc6ea7a3e2eb7823f2779793df27a1e405b2c6156": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "Take 20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "120/74"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "61.7"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "97.9"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "158.6"
+      }
+    ]
+  },
+  "74f777bbc4135138c7df2975ad13cfceac040bb88ccf1735d517285e0641ef05": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "110/81"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "175.0"
+      }
+    ]
+  },
+  "793c9f925442961b98f1ae33828514862a83e32676e3a74c04abf670af48b84d": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "75 mcg by mouth",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "124/83"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "80.3"
+      }
+    ]
+  },
+  "795f4d3caec99bc2bbf7f1b71563ff8460898f972b743592e1eef23bfef22053": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "127/65"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "55.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "93.3"
+      }
+    ]
+  },
+  "7966c983f3ce713560432ded0281cc85ff8bf89fe4ce6b64abdcc772a4b6fc82": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 MG",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "104/87"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "151.6"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "114.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "161.0"
+      }
+    ]
+  },
+  "79887fb9f538a847a2c94b00defe729edebd098c3fdfb5e88fcc2b942f54454d": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "114/86"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "107.7"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "75.1"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.5"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "98.4"
+      }
+    ]
+  },
+  "7a00cbc6ab873a475e951fb8f725bacd1e0361a0ed40971250cad277166cb23b": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "120/74"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "81.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.8"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "97.5"
+      }
+    ]
+  },
+  "7d4b63dcc9f2ec2e228dcc3449938a03334a15b4a70eb560e952d409f107aeb3": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "123/77"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "63.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "106.8"
+      }
+    ]
+  },
+  "7df4850d2b5c5c10fa5da47d2aa0737c9f30b959358cc7407e82775cd88bf3e0": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "111/82"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "74.2"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.3"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "123.1"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "88.6"
+      }
+    ]
+  },
+  "8471ca879b35842cfadd103729280f0f26b2c6382569e1cca9734a1ab57327c4": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      },
+      {
+        "name": "Type 2 diabetes mellitus"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "n/a",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "75mcg PO QAM",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "139/61"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "178.3"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "150.1"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "82.9"
+      }
+    ]
+  },
+  "856304a45a5c77d0635d630cc69bad909cf6aaa31c8bfc4e07212594958882d4": {
+    "confidence": 0.9,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "137/72"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "81.5"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "72.9"
+      }
+    ]
+  },
+  "87cfc1535e9455e3123975ca0355e99b3d50ca8471c45fb164309ce835367948": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "121/88"
+      },
+      {
+        "name": "Glucose",
+        "unit": "mg/dL",
+        "value": "135.3"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.0"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "55.5"
+      }
+    ]
+  },
+  "88129c66fa88610b56e8312fa10d8c0cf078a6e9a1748d91afd58a7ed4b9bef7": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "101/86"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "74.7"
+      }
+    ]
+  },
+  "88d994bd18ec005b3887fd5c9e1e249e28caa6f1ba4caee1a7aae8638eea8f22": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "Take 500 mg by mouth",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "108/83"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.1"
+      }
+    ]
+  },
+  "8c2ca7c05b0338c2f6ebe4cca9de964834d228d23f9b8710501f8969db50f7fc": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Obesity"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "105/87"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "150.2"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "155.9"
+      }
+    ]
+  },
+  "8ed0a4f36b9ea79cf4756b9a7fb853ceeee43ca54cad33dbd784aefc036c829e": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "Blood Pressure",
+        "unit": "mmHg",
+        "value": "133/62"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "162.6"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "92.2"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "74.0"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "136.0"
+      }
+    ]
+  },
+  "902848aa5df1b2dfee50f8e5d7a576ea89bceee94b2ece079e8319d1451422ca": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "100/68"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "185.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "113.7"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "85.9"
+      }
+    ]
+  },
+  "90d9cea488d33fbe314479e6d8b3fd05e346dd79c65407f639afa47c941a2eba": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "125/73"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "158.1"
+      },
+      {
+        "name": "Body height",
+        "unit": "[in_i]",
+        "value": "59.6"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.3"
+      }
+    ]
+  },
+  "921de36bef2762e39485516d5cfe6284b95de122a29a5623058ee2e9ce27c1ef": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline"
+      },
+      {
+        "dosage": "75 mcg PO QAM",
+        "name": "Levothyroxine"
+      },
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "125/84"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "56.0"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "71.8"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.3"
+      }
+    ]
+  },
+  "939ac789aa8b5800a96bf9ea672913deb71c80e4667bbba147d2d4a143c157f1": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 MG Oral Tablet - 5 mg by mouth once daily",
+        "name": "Amlodipine"
+      },
+      {
+        "dosage": "20 MG Oral Tablet - 20 mg by mouth at bedtime",
+        "name": "Atorvastatin"
+      },
+      {
+        "dosage": "90 MCG Inhaler - 2puff q4h PRN",
+        "name": "Albuterol"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "115/72"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "217.2"
+      }
+    ]
+  },
+  "9419cf5e457b174d68fd8f23289130cbe1b06ef5325ef021819b6ac066e53ed9": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Migraine"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      },
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "139/84"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "87.9"
+      }
+    ]
+  },
+  "9b15e5f380613fc2d82006f309d544d2e1ae9f6015ee51c2c95a1411c67704ba": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin"
+      },
+      {
+        "dosage": "90 MCG Inhaler",
+        "name": "Albuterol"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "111/84"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "101.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "137.1"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "158.5"
+      }
+    ]
+  },
+  "a3e683bfffa2329d4e4937381dea7733829627c2c7f333a7812d38b4be5e680d": {
+    "confidence": 0.88,
+    "diagnoses": [
+      {
+        "name": "Hyperlipidemia"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "5 mg by mouth once daily",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "125/84"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "129.3"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "178.4"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "99.7"
+      }
+    ]
+  },
+  "a998f0ab95157520e5df1cebc8a9caf89d50f6ecfa0b0d6b8afa956e73daaf62": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "136/81"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "195.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "77.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.3"
+      }
+    ]
+  },
+  "a9fb584f32425d66020e11224ae43f052076b888f3338e73b8c18b48a01a8f27": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "75 mcg by mouth",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "107/75"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "73.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.0"
+      }
+    ]
+  },
+  "aa7baeb6b8beb3000b30f255842251d4334e56d8ee420729fbbadfa36092ef21": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 MG Oral Tablet - Take 500 mg by mouth",
+        "name": "Metformin"
+      },
+      {
+        "dosage": "90 MCG Inhaler - 2puff q4h PRN",
+        "name": "Albuterol"
+      },
+      {
+        "dosage": "5 MG Oral Tablet - 5mg PO QD",
+        "name": "Amlodipine"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "138/76"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.2"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.4"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "58.7"
+      }
+    ]
+  },
+  "b6984bf89024c12b89494a37389983a29c645334f929c32dee024d51e8489cd4": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "10mg PO QD",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/63"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "177.9"
+      }
+    ]
+  },
+  "b82484eaae739fd4b2a71c0cfabdd72235ce392e0488e82d851fdbb7fa94af8d": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "n/a",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "103/82"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "66.2"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "94.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "79.4"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "173.3"
+      }
+    ]
+  },
+  "b9e2b6a3524209aec6b1fa8d91a57a2886a72056e8ba46e60a96895c7ec93fb3": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Migraine"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/83"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "72.9"
+      }
+    ]
+  },
+  "be48a38583427985c7edd3d99533eb1a4a56d6e46a329d7a584b089f8f7c655b": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": null,
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "122/68"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "151.8"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "128.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "[in_i]",
+        "value": "72.2"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.1"
+      }
+    ]
+  },
+  "be6f6b62f57be7a313cb33d0d2cad4648e394b2ea6ef82ae0a8cd66b0f624e44": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Hyperlipidemia"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "5mg PO QD",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "136/66"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.3"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "91.1"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "77.8"
+      }
+    ]
+  },
+  "be98814812997a156f8b2a70fb0308ac4bae51ddcdade14943c090c080870acd": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "123/75"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "83.2"
+      }
+    ]
+  },
+  "c0749dd9fe460d9c2154298a1e5870f0f44a28018e50cc5c6473234610f1c777": {
+    "confidence": 0.75,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 MG Oral Tablet",
+        "name": "Amlodipine"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/74"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "140.4"
+      }
+    ]
+  },
+  "c91ab61c401d9832140c077813557506dd01913c3b0fdc8c6323a3469057dd83": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20mg PO QD",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "Take 10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "126/80"
+      },
+      {
+        "name": "Glucose",
+        "unit": "mg/dL",
+        "value": "87.6"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.4"
+      }
+    ]
+  },
+  "cc3466560207586f10f2f45ce2cea58f29c1a4a4c79f3c22918da12015958f3f": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "129/75"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "97.0"
+      },
+      {
+        "name": "Body height",
+        "unit": "in_i",
+        "value": "65.6"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "152.1"
+      }
+    ]
+  },
+  "da544810b203954377da9f037a6ee539a3b2750692a2068a32e35f8946e83a59": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "75 mcg by mouth",
+        "name": "Levothyroxine 75 MCG Oral Tablet"
+      },
+      {
+        "dosage": "20mg PO QHS",
+        "name": "[PERSON] 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "137/88"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "36.6"
+      }
+    ]
+  },
+  "da7de859bac3db2feee721d829a680212f379da430ec23221e0e4c0640572555": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      },
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "120/81"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "132.8"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "182.3"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "212.3"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "66.2"
+      }
+    ]
+  },
+  "daaeb93fa221723e7ed885875329ec115905436bf474d2c9f5ab9d8cbf784ad6": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "500mg PO BID",
+        "name": "Metformin 500 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "139/74"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "241.6"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "84.6"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "99.1"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "116.7"
+      }
+    ]
+  },
+  "e1e0517da8369f28b8b3089a44669ce30f457b28903c313b31c90ab99b8b4d0a": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "107/80"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "72.8"
+      }
+    ]
+  },
+  "e4cf758e8f4b8b2e481b93e9bafb93a668c94f6d0212b44ac50e93ce8d997396": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Chronic obstructive lung disease"
+      },
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Major depression, single episode"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 MG",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "127/88"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "64.1"
+      }
+    ]
+  },
+  "e5bd809b2c001e9e57b9157c87735da664d8021a96b40d375ae5f585bf25e115": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "10 mg by mouth once daily",
+        "name": "Lisinopril 10 MG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "107/68"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "96.4"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "100.0"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "88.9"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "degF",
+        "value": "98.4"
+      }
+    ]
+  },
+  "e69c4b77a850d095a0736c66b9d675c4a7098689531cd2b4e97f7b5aece749fb": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "Inhale 2 puffs as needed",
+        "name": "Albuterol 90 MCG Inhaler"
+      },
+      {
+        "dosage": "Take 20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "102/70"
+      },
+      {
+        "name": "Glucose",
+        "unit": "mg/dL",
+        "value": "159.0"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.7"
+      }
+    ]
+  },
+  "e6ce39820bf7d37d74c741742e9c9758d3bcedb906861c8b81d7b041f5c7d6de": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 MG Oral Tablet",
+        "name": "Atorvastatin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "129/64"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "177.0"
+      }
+    ]
+  },
+  "e79c9e87609bc21085aa83d1c12b1c670f03fda54bd224606b792086ffaa474d": {
+    "confidence": 0.85,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      },
+      {
+        "name": "Uncomplicated asthma"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin 500 MG Oral Tablet"
+      },
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin 20 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "127/75"
+      },
+      {
+        "name": "weight",
+        "unit": "kg",
+        "value": "91.7"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "187.8"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "145.5"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "241.6"
+      }
+    ]
+  },
+  "ec80a1e8bd03511e99c74905d9c132b3f1adf29666cc8a6befbfedc9f5b9cb5e": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Type 2 diabetes mellitus without complication"
+      },
+      {
+        "name": "Major depression, single episode"
+      },
+      {
+        "name": "Migraine"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      },
+      {
+        "dosage": "50 mg by mouth once daily",
+        "name": "Sertraline 50 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "118/73"
+      },
+      {
+        "name": "Body height",
+        "unit": "in",
+        "value": "65.5"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "80.1"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "166.1"
+      }
+    ]
+  },
+  "f3c50d8d59d35f4c5267853860fb70e666d5382b3aa8374143e574daee4dae6f": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Migraine"
+      },
+      {
+        "name": "Chronic obstructive lung disease"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "123/65"
+      },
+      {
+        "name": "Glucose [Mass/volume] in Blood",
+        "unit": "mg/dL",
+        "value": "109.4"
+      }
+    ]
+  },
+  "f8d1dcfd44e3bccaba63d943b991508ef48a54ebcd07241a349de040ac0f57b0": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Essential hypertension"
+      },
+      {
+        "name": "Hyperlipidemia"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "2puff q4h PRN",
+        "name": "Albuterol 90 MCG Inhaler"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/77"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "90.0"
+      }
+    ]
+  },
+  "fa5a22f9bca762982611312f5666f70325e1a3ad2cc4dd29c982aff44facb787": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Hypothyroidism"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "5 mg by mouth once daily",
+        "name": "Amlodipine 5 MG Oral Tablet"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "111/88"
+      },
+      {
+        "name": "Body weight",
+        "unit": "lb_av",
+        "value": "146.4"
+      },
+      {
+        "name": "Heart rate",
+        "unit": "/min",
+        "value": "96.4"
+      }
+    ]
+  },
+  "fc4fb5ae03e5d391d9eb03838f61f783919dd984930f3c6a5f65450a49f6659e": {
+    "confidence": 0.92,
+    "diagnoses": [
+      {
+        "name": "Major depression, single episode"
+      },
+      {
+        "name": "Uncomplicated asthma"
+      },
+      {
+        "name": "Obesity"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "50mg PO QD",
+        "name": "Sertraline 50 MG Oral Tablet"
+      },
+      {
+        "dosage": "20 mg by mouth once daily",
+        "name": "Omeprazole 20 MG Oral Capsule"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "123/68"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.7"
+      }
+    ]
+  },
+  "fcb30d6a7289cb53ab7f69949da8dc5b0cfe61dd92d09c87f2d96b7cdd5003b2": {
+    "confidence": 0.95,
+    "diagnoses": [
+      {
+        "name": "Gastroesophageal reflux disease without esophagitis"
+      },
+      {
+        "name": "Essential hypertension"
+      }
+    ],
+    "medications": [
+      {
+        "dosage": "500 mg by mouth",
+        "name": "Metformin"
+      },
+      {
+        "dosage": "20 mg by mouth at bedtime",
+        "name": "Atorvastatin"
+      }
+    ],
+    "vitals": [
+      {
+        "name": "BP",
+        "unit": "mmHg",
+        "value": "135/71"
+      },
+      {
+        "name": "Body temperature",
+        "unit": "Cel",
+        "value": "37.5"
+      },
+      {
+        "name": "Body weight",
+        "unit": "kg",
+        "value": "99.4"
+      },
+      {
+        "name": "Body height",
+        "unit": "cm",
+        "value": "188.6"
+      }
+    ]
+  }
+}
