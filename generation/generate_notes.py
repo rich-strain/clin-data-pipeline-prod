@@ -174,22 +174,43 @@ def build_note(record: dict, rng: random.Random) -> dict:
         b.line()
 
     if record["medications"]:
-        meds = "; ".join(
-            f"{_med_label(m)} - {(m.get('dosageInstruction') or [{}])[0].get('text', 'n/a')}"
-            for m in record["medications"]
-        )
+        # One entry per medication, most recent prescription wins (mirrors the
+        # vitals dedup below). The same drug recurs across encounters, and
+        # listing it twice — often once with a dosage and once without — reads
+        # as one visit contradicting itself, which the extractor flags as
+        # low-confidence. Undated prescriptions rank oldest.
+        latest_med: dict[str, tuple[str, str]] = {}
+        for m in record["medications"]:
+            label = _med_label(m)
+            dose = (m.get("dosageInstruction") or [{}])[0].get("text", "n/a")
+            when = m.get("authoredOn") or ""
+            if label not in latest_med or when >= latest_med[label][0]:
+                latest_med[label] = (when, f"{label} - {dose}")  # first use fixes order
+        meds = "; ".join(text for _, text in latest_med.values())
         b.line(f"Current Medications: {meds}.")
         b.line()
 
-    vitals = []
+    # One reading per vital. A patient has multiple encounters' worth of
+    # Observations for the same measurement (often in different units); dumping
+    # them all into a single Vitals line reads as one visit reporting
+    # contradictory values ("Body weight 91.7 kg, Body weight 145.5 [lb_av]"),
+    # which the downstream extractor rightly flags as low-confidence. Keep only
+    # the most recent reading per vital (undated readings rank oldest).
+    latest: dict[str, tuple[str, str]] = {}
     for obs in record["observations"]:
         bp = _bp_values(obs)
         if bp:
-            vitals.append(f"BP {bp[0]:.0f}/{bp[1]:.0f} mmHg")
+            key, text = "BP", f"BP {bp[0]:.0f}/{bp[1]:.0f} mmHg"
         elif "valueQuantity" in obs:
-            disp = obs.get("code", {}).get("text", "value")
+            key = obs.get("code", {}).get("text", "value")
             q = obs["valueQuantity"]
-            vitals.append(f"{disp} {q['value']} {q.get('unit', '')}".strip())
+            text = f"{key} {q['value']} {q.get('unit', '')}".strip()
+        else:
+            continue
+        when = obs.get("effectiveDateTime") or ""
+        if key not in latest or when >= latest[key][0]:
+            latest[key] = (when, text)  # first appearance fixes order; latest date wins
+    vitals = [text for _, text in latest.values()]
     if vitals:
         b.line(f"Vitals: {', '.join(vitals)}.")
         b.line()
