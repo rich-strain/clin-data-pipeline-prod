@@ -1,29 +1,29 @@
 {
   "overall": {
-    "matched": 1598,
-    "total": 1618,
-    "pct": 98.76
+    "matched": 1641,
+    "total": 1662,
+    "pct": 98.74
   },
   "by_system": {
     "sct": {
-      "matched": 203,
-      "total": 203
+      "matched": 210,
+      "total": 210
     },
     "icd-10-cm": {
-      "matched": 203,
-      "total": 203
+      "matched": 210,
+      "total": 210
     },
     "rxnorm": {
-      "matched": 206,
-      "total": 206
+      "matched": 198,
+      "total": 198
     },
     "loinc.org": {
-      "matched": 553,
-      "total": 553
+      "matched": 572,
+      "total": 572
     },
     "unitsofmeasure.org": {
-      "matched": 433,
-      "total": 453
+      "matched": 451,
+      "total": 472
     }
   },
   "unmatched_examples": [

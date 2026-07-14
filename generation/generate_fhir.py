@@ -42,13 +42,15 @@ UCUM_SYSTEM = "http://unitsofmeasure.org"
 
 US_CORE = "http://hl7.org/fhir/us/core/StructureDefinition"
 
-# Stage 5's per-entity date shift (curation/redact) moves event dates by up to
-# +/- SHIFT_RANGE_DAYS. Generation must never emit a date whose post-shift
-# value could exceed the true ceiling, so the generation ceiling is reduced by
-# that amount up front. Defined here (the producer); Stage 5 imports it, so the
-# two never drift.
-SHIFT_RANGE_DAYS = 30
-TRUE_CEILING = date(2026, 7, 13)
+# Stage 2's per-entity date shift (deid/dateshift) moves event dates by up to
+# +/- SHIFT_RANGE_DAYS. Generation must never emit a date whose post-shift value
+# could exceed "now", so event dates are bounded to TRUE_CEILING - SHIFT_RANGE_DAYS.
+# TRUE_CEILING is DYNAMIC (date.today()) — not a hard-coded constant — so a
+# rebuild can never leave a shifted date in the future, and the landing honestly
+# reflects "captured at time T". Defined here (the producer); dateshift imports
+# SHIFT_RANGE_DAYS, so the shift range and the generation bound never drift.
+SHIFT_RANGE_DAYS = 365
+TRUE_CEILING = date.today()
 GENERATION_CEILING = TRUE_CEILING - timedelta(days=SHIFT_RANGE_DAYS)
 
 FIRST_NAMES_MALE = [

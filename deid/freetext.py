@@ -1,19 +1,21 @@
 """Free-text de-identification (Microsoft Presidio) + measured recall.
 
-Layered de-id for clinical notes:
-  Layer 1 (deterministic) — remove the identifiers KNOWN from the structured
-    record / note metadata (patient name, MRN, DOB, address, encounter dates,
-    authoring provider). In production you already hold these; you don't rely
-    on NLP to catch the patient's own MRN.
-  Layer 2 (generalizable NLP) — Microsoft Presidio catches identifiers you do
-    NOT hold structurally (names/dates/locations appearing in narrative). A
-    custom recognizer adds the clinical MRN pattern.
-The committed de-identified note applies both layers.
+Two actions on the two kinds of PHI a note carries, mirroring the structured
+de-id:
+- **Direct identifiers** (name, MRN, address, city, state, ZIP, provider) are
+  REMOVED — replaced with a typed placeholder.
+- **Dates** (DOB and visit/event dates) are SHIFTED, not removed — by the same
+  per-(patient, category) offset the structured de-id uses (deid/dateshift), so
+  a date that appears in both the note and the FHIR lands on the same shifted
+  value and intra-category intervals survive. DOB uses the ``dob`` offset;
+  every other date uses the ``visit`` offset.
 
-Recall is measured for the PRESIDIO layer ALONE against the ground-truth PHI
-spans — the honest answer to "how much would the generalizable component catch
-on unseen notes?", where a miss is a breach. It is deliberately not inflated by
-Layer 1.
+The committed transform uses the KNOWN spans (we generated the notes, so we know
+every PHI position and category) — deterministic and reproducible. Separately,
+Presidio is run to MEASURE how much of that PHI a generalizable NLP de-id would
+catch on its own (recall) — the honest answer to "how much would protect unseen
+notes?", where a missed date can't be shifted and a missed name can't be
+removed. Recall is not inflated by the known-span transform.
 
 Run locally (needs presidio-analyzer + the spaCy model); outputs are committed.
 """
@@ -22,7 +24,12 @@ from __future__ import annotations
 
 from presidio_analyzer import AnalyzerEngine, Pattern, PatternRecognizer
 
+from deid.dateshift import shift_date
+
 Span = tuple[int, int, str]
+
+# Span types that are dates (shifted); everything else is a removable identifier.
+DATE_CATEGORY = {"DOB": "dob", "DATE": "visit"}
 
 
 def build_analyzer() -> AnalyzerEngine:
@@ -40,40 +47,37 @@ def presidio_spans(analyzer: AnalyzerEngine, text: str) -> list[Span]:
     return [(r.start, r.end, r.entity_type) for r in results]
 
 
-def _merge(spans: list[Span]) -> list[Span]:
-    """Merge overlapping spans; the region keeps the first span's label."""
-    merged: list[Span] = []
-    for start, end, label in sorted(spans):
-        if merged and start <= merged[-1][1]:
-            ps, pe, pl = merged[-1]
-            merged[-1] = (ps, max(pe, end), pl)
-        else:
-            merged.append((start, end, label))
-    return merged
+def apply_note_deid(text: str, phi_spans: list[Span], patient_id: str) -> str:
+    """Deterministic committed transform: shift date spans, redact identifiers.
 
-
-def redact_text(text: str, spans: list[Span]) -> str:
-    """Replace each (merged) span with a typed [LABEL] placeholder."""
-    out = []
+    Ground-truth spans are non-overlapping (we generated them), so a single
+    left-to-right pass rebuilds the note.
+    """
+    out: list[str] = []
     cursor = 0
-    for start, end, label in _merge(spans):
+    for start, end, label in sorted(phi_spans):
         out.append(text[cursor:start])
-        out.append(f"[{label}]")
+        category = DATE_CATEGORY.get(label)
+        if category is not None:
+            out.append(shift_date(patient_id, category, text[start:end]))
+        else:
+            out.append(f"[{label}]")
         cursor = end
     out.append(text[cursor:])
     return "".join(out)
 
 
 def deidentify_note(
-    text: str, known_spans: list[Span], analyzer: AnalyzerEngine
+    text: str, phi_spans: list[Span], patient_id: str, analyzer: AnalyzerEngine
 ) -> tuple[str, list[Span]]:
-    """Return (committed de-identified text, presidio-only spans for recall).
+    """Return (committed de-identified text, presidio-detected spans for recall).
 
-    The committed text redacts BOTH known identifiers and Presidio hits.
+    The committed text applies the deterministic known-span transform (dates
+    shifted, identifiers redacted). Presidio is run only to measure recall.
     """
     detected = presidio_spans(analyzer, text)
-    redacted = redact_text(text, known_spans + detected)
-    return redacted, detected
+    deid = apply_note_deid(text, phi_spans, patient_id)
+    return deid, detected
 
 
 def _overlaps(a: tuple[int, int], b: tuple[int, int]) -> bool:

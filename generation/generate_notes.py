@@ -131,7 +131,7 @@ def build_note(record: dict, rng: random.Random) -> dict:
         b.phi(f"{given} {family}".strip(), "PATIENT_NAME")
     if patient.get("birthDate"):
         b.add(", DOB ")
-        b.phi(patient["birthDate"], "DATE")
+        b.phi(patient["birthDate"], "DOB")  # shifted by the DOB offset (separate from visit dates)
     if mrn := (patient.get("identifier") or [{}])[0].get("value"):
         b.add(", MRN ")
         b.phi(mrn, "MRN")

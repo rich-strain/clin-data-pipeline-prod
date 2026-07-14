@@ -1,35 +1,39 @@
 {
-  "caught": 874,
-  "total": 1017,
-  "recall": 0.8594,
+  "caught": 868,
+  "total": 1020,
+  "recall": 0.851,
   "by_type": {
     "PATIENT_NAME": {
       "caught": 100,
       "total": 100
     },
-    "DATE": {
-      "caught": 403,
-      "total": 403
+    "DOB": {
+      "caught": 100,
+      "total": 100
     },
     "MRN": {
-      "caught": 86,
-      "total": 86
+      "caught": 90,
+      "total": 90
     },
     "ADDRESS": {
-      "caught": 39,
-      "total": 82
+      "caught": 38,
+      "total": 80
     },
     "CITY": {
-      "caught": 80,
-      "total": 82
+      "caught": 75,
+      "total": 80
     },
     "STATE": {
-      "caught": 45,
-      "total": 82
+      "caught": 36,
+      "total": 80
     },
     "ZIP": {
-      "caught": 21,
-      "total": 82
+      "caught": 19,
+      "total": 80
+    },
+    "DATE": {
+      "caught": 310,
+      "total": 310
     },
     "PROVIDER_NAME": {
       "caught": 100,
@@ -43,11 +47,11 @@
     },
     {
       "type": "ADDRESS",
-      "text": "5146 Sunset Dr"
+      "text": "278 Cedar Ln"
     },
     {
-      "type": "ZIP",
-      "text": "16180"
+      "type": "STATE",
+      "text": "OR"
     },
     {
       "type": "ADDRESS",
@@ -58,12 +62,8 @@
       "text": "70538"
     },
     {
-      "type": "STATE",
-      "text": "IL"
-    },
-    {
-      "type": "ZIP",
-      "text": "11129"
+      "type": "ADDRESS",
+      "text": "222 Sunset Dr"
     },
     {
       "type": "STATE",
@@ -71,35 +71,35 @@
     },
     {
       "type": "ZIP",
-      "text": "69545"
-    },
-    {
-      "type": "ADDRESS",
-      "text": "6114 Washington Ave"
-    },
-    {
-      "type": "ADDRESS",
-      "text": "4224 Washington Ave"
-    },
-    {
-      "type": "STATE",
-      "text": "CT"
+      "text": "23679"
     },
     {
       "type": "ZIP",
-      "text": "26108"
+      "text": "10261"
     },
     {
       "type": "ADDRESS",
-      "text": "9246 Cedar Ln"
+      "text": "6041 Elm St"
     },
     {
       "type": "STATE",
-      "text": "VA"
+      "text": "OR"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "9092 Maple Dr"
+    },
+    {
+      "type": "CITY",
+      "text": "Franklin"
     },
     {
       "type": "ZIP",
-      "text": "83047"
+      "text": "60413"
+    },
+    {
+      "type": "ADDRESS",
+      "text": "9734 Washington Ave"
     },
     {
       "type": "STATE",
@@ -107,35 +107,39 @@
     },
     {
       "type": "ZIP",
-      "text": "55365"
-    },
-    {
-      "type": "STATE",
-      "text": "VA"
-    },
-    {
-      "type": "ZIP",
-      "text": "37165"
-    },
-    {
-      "type": "ZIP",
-      "text": "21437"
+      "text": "70450"
     },
     {
       "type": "ADDRESS",
-      "text": "1076 Cedar Ln"
+      "text": "5739 Cedar Ln"
+    },
+    {
+      "type": "CITY",
+      "text": "Franklin"
     },
     {
       "type": "STATE",
-      "text": "CT"
+      "text": "TX"
     },
     {
       "type": "ZIP",
-      "text": "33556"
+      "text": "18621"
     },
     {
       "type": "ADDRESS",
-      "text": "5576 Sunset Dr"
+      "text": "4446 Washington Ave"
+    },
+    {
+      "type": "STATE",
+      "text": "OR"
+    },
+    {
+      "type": "ZIP",
+      "text": "29191"
+    },
+    {
+      "type": "ZIP",
+      "text": "71597"
     }
   ],
   "engine": "Microsoft Presidio (spaCy en_core_web_lg) + custom MRN recognizer"

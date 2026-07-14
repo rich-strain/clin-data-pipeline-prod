@@ -15,7 +15,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-from deid.dateshift import DATE_FIELDS, patient_offset, shift_resources
+from deid.dateshift import FIELD_CATEGORY, patient_offset, shift_resources
 from deid.leakage import leakage_check
 from deid.redact import RESEARCH_ID_SYSTEM, pseudonym, redact_resources
 from generation.landing import group_by_patient, read_landing
@@ -57,28 +57,47 @@ def test_leakage_reproduces_zero_from_committed_artifacts() -> None:
     assert result["total_leaks"] == 0, result["leaked_examples"][:3]
 
 
-def test_date_shift_preserves_intervals_and_is_nonzero() -> None:
+def test_date_shift_preserves_intervals_within_category_and_is_nonzero() -> None:
     raw = _raw()
     shifted = shift_resources(raw)
-    per_patient_deltas: dict[str, set[int]] = {}
+    # Deltas keyed by (patient, category): every date in a category moves by the
+    # same amount (interval-preserving) and never by zero.
+    deltas: dict[tuple[str, str], set[int]] = {}
     for r_raw, r_shift in zip(raw, shifted, strict=True):
         pid = (
             r_raw["id"]
             if r_raw["resourceType"] == "Patient"
             else r_raw.get("subject", {}).get("reference", "").split("/")[-1]
         )
-        for field in DATE_FIELDS:
+        for field, category in FIELD_CATEGORY.items():
             if isinstance(r_raw.get(field), str):
-                delta = (date.fromisoformat(r_shift[field]) - date.fromisoformat(r_raw[field])).days
-                per_patient_deltas.setdefault(pid, set()).add(delta)
-    for pid, deltas in per_patient_deltas.items():
-        assert len(deltas) == 1, f"patient {pid} dates shifted inconsistently: {deltas}"
-        assert 0 not in deltas, f"patient {pid} has a zero shift (would leak raw dates)"
+                d = (date.fromisoformat(r_shift[field]) - date.fromisoformat(r_raw[field])).days
+                deltas.setdefault((pid, category), set()).add(d)
+    for (pid, category), ds in deltas.items():
+        assert len(ds) == 1, f"{pid}/{category} shifted inconsistently: {ds}"
+        assert 0 not in ds, f"{pid}/{category} has a zero shift (would leak raw dates)"
+
+
+def test_dob_and_visit_offsets_are_independent() -> None:
+    # DOB shifts independently of visit dates: for essentially every patient the
+    # two category offsets differ (a shared offset would let one recovered date
+    # unshift the rest).
+    pids = list(group_by_patient(_raw()).keys())
+    differ = sum(patient_offset(p, "dob") != patient_offset(p, "visit") for p in pids)
+    assert differ >= len(pids) - 1, "DOB and visit offsets should be independent for ~all patients"
+
+
+def test_no_shifted_date_is_in_the_future() -> None:
+    today = date.today()
+    for r in shift_resources(_raw()):
+        for field in FIELD_CATEGORY:
+            if isinstance(r.get(field), str):
+                assert date.fromisoformat(r[field]) <= today, f"{field} shifted into the future"
 
 
 def test_all_patient_offsets_nonzero() -> None:
     pids = list(group_by_patient(_raw()).keys())
-    assert all(patient_offset(p) != 0 for p in pids)
+    assert all(patient_offset(p, c) != 0 for p in pids for c in ("dob", "visit"))
 
 
 def test_structured_redaction_removes_direct_identifiers() -> None:

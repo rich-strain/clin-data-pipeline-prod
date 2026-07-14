@@ -81,7 +81,7 @@ def main() -> None:
     with (deid_dir / "notes_deid.jsonl").open("w") as f:
         for n in notes:
             known = [(s["start"], s["end"], s["type"]) for s in n["phi_spans"]]
-            redacted, detected = deidentify_note(n["text"], known, analyzer)
+            redacted, detected = deidentify_note(n["text"], known, n["patient_id"], analyzer)
             deid_notes_by_patient[n["patient_id"]] = redacted
             per_note_recall.append(measure_recall(n["phi_spans"], detected))
             f.write(

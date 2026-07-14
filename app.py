@@ -263,12 +263,16 @@ def render_deid(label: str, description: str) -> None:
         return
 
     st.info(
-        "**Legal frame — HIPAA §164.514.** Structured data uses the **Limited "
-        "Data Set** pattern: a per-entity, interval-preserving date **shift** "
-        "(diagnosis→treatment gaps intact), which survives only under an LDS + "
-        "Data Use Agreement — **not** Safe Harbor (which would instead collapse "
-        "dates to year). Direct identifiers are removed; geography is "
-        "generalized to state + 3-digit ZIP."
+        "**Legal frame — HIPAA §164.514.** Dates are **shifted, not removed** — a "
+        "per-entity, interval-preserving shift (diagnosis→treatment gaps intact), "
+        "applied consistently in **both** the structured FHIR and the note text, "
+        "so a date carries the same shifted value in both. **DOB is shifted "
+        "independently** of visit/event dates (recovering one date can't unshift "
+        "the rest). This is the **Limited Data Set** pattern (dates survive only "
+        "under an LDS + DUA) — **not** Safe Harbor, which would collapse dates to "
+        "year. Direct identifiers (name, MRN, address) are removed; geography is "
+        "generalized to state + 3-digit ZIP. The shift ceiling is `date.today()` "
+        "(dynamic), so a shifted date can never land in the future."
     )
 
     c1, c2, c3 = st.columns(3)

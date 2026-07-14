@@ -1,21 +1,21 @@
 {
   "engine": "fhir.resources R4B (base-FHIR structural)",
-  "total": 862,
-  "valid": 862,
+  "total": 880,
+  "valid": 880,
   "invalid": 0,
-  "us_core_profiled": 862,
+  "us_core_profiled": 880,
   "by_type": {
     "Condition": {
-      "valid": 203,
-      "total": 203
+      "valid": 210,
+      "total": 210
     },
     "MedicationRequest": {
-      "valid": 206,
-      "total": 206
+      "valid": 198,
+      "total": 198
     },
     "Observation": {
-      "valid": 353,
-      "total": 353
+      "valid": 372,
+      "total": 372
     },
     "Patient": {
       "valid": 100,
