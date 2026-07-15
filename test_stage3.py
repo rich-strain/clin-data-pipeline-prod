@@ -42,7 +42,7 @@ def test_cache_covers_every_committed_note_no_api() -> None:
     cache = IncrementalCache(CACHE_PATH)
     # no_api=True raises on any cache miss; reaching the end means full coverage.
     records = list(extract_notes(notes, client=None, cache=cache, no_api=True))
-    assert len(records) == len(notes) == 100
+    assert len(records) == len(notes) == 1000
 
 
 class _FakeBatches:
@@ -121,7 +121,7 @@ def test_extraction_eval_scores_targets_against_source_facts() -> None:
     Names reproduce the facts (closed vocab); dosage — free text — is where it
     slips, so dosage accuracy is high but below 1.0."""
     report = extraction_eval.build_report()
-    assert report["n_records"] == 100
+    assert report["n_records"] == 1000
     assert report["diagnosis"]["micro_f1"] >= 0.95
     assert report["medication"]["micro_f1"] >= 0.95
     assert report["diagnosis"]["non_canonical_count"] == 0

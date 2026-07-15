@@ -1,30 +1,57 @@
 {
-  "total_records": 100,
+  "total_records": 1000,
   "overall": {
-    "total": 679,
-    "matched": 677,
-    "unmatched": 2,
-    "unmatched_rate": 0.0029455081001472753
+    "total": 6716,
+    "matched": 6687,
+    "unmatched": 29,
+    "unmatched_rate": 0.004318046456223943
   },
   "by_field": {
     "diagnosis": {
-      "total": 186,
-      "matched": 186,
+      "total": 1839,
+      "matched": 1839,
       "unmatched": 0
     },
     "dosage": {
-      "total": 186,
-      "matched": 184,
-      "unmatched": 2
+      "total": 1847,
+      "matched": 1818,
+      "unmatched": 29
     },
     "vital": {
-      "total": 307,
-      "matched": 307,
+      "total": 3030,
+      "matched": 3030,
       "unmatched": 0
     }
   },
   "unmatched_examples": [
     "dosage for 'Phentermine 37.5 MG Oral Tablet': '37.5 MG'",
-    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'"
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Lisinopril 10 MG Oral Tablet': '10 MG'",
+    "dosage for 'Phentermine 37.5 MG Oral Tablet': '37.5 mg PO QAM'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Sertraline 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Amlodipine 5 MG Oral Tablet': '5 MG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Lisinopril 10 MG Oral Tablet': '10 MG'",
+    "dosage for 'Sertraline 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Sertraline 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Phentermine 37.5 MG Oral Tablet': '37.5 MG'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Sumatriptan 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Sertraline 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Phentermine 37.5 MG Oral Tablet': '37.5 MG'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Sumatriptan 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Levothyroxine 75 MCG Oral Tablet': '75 MCG'",
+    "dosage for 'Tiotropium 18 MCG Inhalation Powder': '18 MCG'",
+    "dosage for 'Lisinopril 10 MG Oral Tablet': '10 MG'",
+    "dosage for 'Atorvastatin 20 MG Oral Tablet': '20 MG'",
+    "dosage for 'Sertraline 50 MG Oral Tablet': '50 MG'",
+    "dosage for 'Albuterol 90 MCG Inhaler': '2 puffs every 4 hours as needed'"
   ]
 }

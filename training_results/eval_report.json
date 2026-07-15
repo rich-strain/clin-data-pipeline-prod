@@ -1,77 +1,77 @@
 {
-  "n_examples": 12,
+  "n_examples": 111,
   "json_validity": {
-    "valid": 12,
-    "total": 12,
+    "valid": 111,
+    "total": 111,
     "rate": 1.0
   },
   "diagnosis": {
     "micro_precision": 1.0,
-    "micro_recall": 0.9545454545454546,
-    "micro_f1": 0.9767441860465117,
-    "tp": 21,
+    "micro_recall": 1.0,
+    "micro_f1": 1.0,
+    "tp": 186,
     "fp": 0,
-    "fn": 1,
+    "fn": 0,
     "non_canonical_count": 0,
     "non_canonical_examples": [],
     "per_category": [
       {
         "category": "Type 2 diabetes mellitus without complication",
-        "tp": 3,
+        "tp": 22,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Essential hypertension",
-        "tp": 2,
+        "tp": 15,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Uncomplicated asthma",
-        "tp": 3,
+        "tp": 25,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Hyperlipidemia",
-        "tp": 0,
+        "tp": 18,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Chronic obstructive lung disease",
-        "tp": 3,
+        "tp": 18,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       {
         "category": "Migraine",
-        "tp": 3,
+        "tp": 20,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Obesity",
-        "tp": 2,
+        "tp": 18,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Gastroesophageal reflux disease without esophagitis",
-        "tp": 2,
+        "tp": 15,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Hypothyroidism",
-        "tp": 1,
+        "tp": 16,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Major depression, single episode",
-        "tp": 2,
+        "tp": 19,
         "fp": 0,
         "fn": 0
       }
@@ -81,7 +81,7 @@
     "micro_precision": 1.0,
     "micro_recall": 1.0,
     "micro_f1": 1.0,
-    "tp": 22,
+    "tp": 187,
     "fp": 0,
     "fn": 0,
     "non_canonical_count": 0,
@@ -89,67 +89,67 @@
     "per_category": [
       {
         "category": "Metformin 500 MG Oral Tablet",
-        "tp": 3,
+        "tp": 22,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Lisinopril 10 MG Oral Tablet",
-        "tp": 1,
+        "tp": 8,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Atorvastatin 20 MG Oral Tablet",
-        "tp": 0,
+        "tp": 18,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Albuterol 90 MCG Inhaler",
-        "tp": 3,
+        "tp": 25,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Levothyroxine 75 MCG Oral Tablet",
-        "tp": 1,
+        "tp": 16,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Sertraline 50 MG Oral Tablet",
-        "tp": 2,
+        "tp": 19,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Omeprazole 20 MG Oral Capsule",
-        "tp": 2,
+        "tp": 15,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Amlodipine 5 MG Oral Tablet",
-        "tp": 1,
+        "tp": 8,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Tiotropium 18 MCG Inhalation Powder",
-        "tp": 4,
+        "tp": 18,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Sumatriptan 50 MG Oral Tablet",
-        "tp": 3,
+        "tp": 20,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Phentermine 37.5 MG Oral Tablet",
-        "tp": 2,
+        "tp": 18,
         "fp": 0,
         "fn": 0
       }
@@ -169,7 +169,7 @@
       },
       {
         "name": "diagnosis_micro_f1",
-        "value": 0.9767,
+        "value": 1.0,
         "threshold": 0.8,
         "op": ">=",
         "passed": true

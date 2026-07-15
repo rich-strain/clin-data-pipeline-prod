@@ -48,9 +48,12 @@ CANONICAL_CONDITIONS = [
 _CONDITIONS_BY_LENGTH = sorted(CANONICAL_CONDITIONS, key=len, reverse=True)
 
 # Paraphrases Haiku produced that aren't a canonical prefix (so the startswith
-# check below misses them): it dropped the "without complication" qualifier.
+# check below misses them): it dropped a qualifier that sits *before* the head
+# noun ("Uncomplicated asthma" -> "asthma") or *after* it ("... without
+# complication").
 _DIAGNOSIS_PARAPHRASES = {
     "type 2 diabetes mellitus": "Type 2 diabetes mellitus without complication",
+    "asthma": "Uncomplicated asthma",
 }
 
 # generate_notes.py renders history as "{condition}, diagnosed {onset}",
@@ -110,11 +113,15 @@ _UNIT_ALIASES = {
     "pounds": "lb_av",
     "f": "degf",
     "degf": "degf",
+    "c": "cel",
+    "celsius": "cel",
 }
 
 
 def _canon_unit(u: str) -> str:
-    token = u.strip().strip("[]").lower()
+    # Drop the degree sign Haiku emits ("°F"/"°C") so the bare-spelling aliases
+    # below match; strip UCUM brackets too ([degF] -> degf).
+    token = u.strip().strip("[]").replace("°", "").strip().lower()
     return _UNIT_ALIASES.get(token, token)
 
 

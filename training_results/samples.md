@@ -4,52 +4,38 @@
 
 **Instruction:**
 ```
-Patient: [PATIENT_NAME], DOB 1990-01-13, MRN [MRN]
-Address: [ADDRESS], [CITY], [STATE] [ZIP]
-Visit Date: 2025-10-30  Seen by [PROVIDER_NAME]
+Patient: [PATIENT_NAME], DOB 1972-03-06, MRN [MRN]
+Visit Date: 2025-09-13  Seen by [PROVIDER_NAME]
 
-Chief Complaint: Here today to discuss Chronic obstructive lung disease.
+Chief Complaint: Here today to discuss Hypothyroidism.
 
-HPI: Patient reports doing well on current regimen for Chronic obstructive lung disease, diagnosed 2020-02-19.
-HPI: Uncomplicated asthma (dx 2018-12-06) remains stable; no new complaints today.
+HPI: Hypothyroidism (dx 2025-05-07) remains stable; no new complaints today.
+HPI: Uncomplicated asthma (dx 2020-07-08) remains stable; no new complaints today.
 
-Current Medications: Tiotropium 18 MCG Inhalation Powder - Inhale the contents of 1 capsule once daily; Albuterol 90 MCG Inhaler - n/a.
+Current Medications: Levothyroxine 75 MCG Oral Tablet - Take 75 mcg by mouth every morning; Albuterol 90 MCG Inhaler - Inhale 2 puffs every 4 hours as needed.
 
-Vitals: BP 116/72 mmHg, Body weight 229.9 [lb_av], Heart rate 98.8 /min, Body height 179.6 cm.
+Vitals: BP 101/64 mmHg, Heart rate 80.3 /min.
 
-Assessment/Plan: Continue present treatment for Chronic obstructive lung disease; recheck at next visit.
+Assessment/Plan: Continue present treatment for Hypothyroidism; recheck at next visit.
 ```
 
 **Ground truth:**
 ```json
-{"diagnoses": [{"name": "Chronic obstructive lung disease"}, {"name": "Uncomplicated asthma"}], "medications": [{"name": "Tiotropium 18 MCG Inhalation Powder", "dosage": "Inhale the contents of 1 capsule once daily"}, {"name": "Albuterol 90 MCG Inhaler", "dosage": null}], "vitals": [{"name": "Blood pressure", "value": "116/72", "unit": "mm[Hg]"}, {"name": "Body weight", "value": 104.3, "unit": "kg"}, {"name": "Heart rate", "value": 98.8, "unit": "/min"}, {"name": "Body height", "value": 179.6, "unit": "cm"}]}
+{"diagnoses": [{"name": "Hypothyroidism"}, {"name": "Uncomplicated asthma"}], "medications": [{"name": "Levothyroxine 75 MCG Oral Tablet", "dosage": "Take 75 mcg by mouth every morning"}, {"name": "Albuterol 90 MCG Inhaler", "dosage": "Inhale 2 puffs every 4 hours as needed"}], "vitals": [{"name": "Blood pressure", "value": "101/64", "unit": "mm[Hg]"}, {"name": "Heart rate", "value": 80.3, "unit": "/min"}]}
 ```
 
 **Base (no adapter):**
 ```
 ```json
 {
-  "diagnoses": [
-    {
-      "code": "Chronic Obstructive Lung Disease",
-      "description": "Chronic obstructive lung disease"
-    }
-  ],
-  "medications": [
-    {
-      "name": "Tiotropium 18 MCG Inhalation Powder",
-      "dosage": "Inhale the contents of 1 capsule once daily"
-    },
-    {
-      "name": "Albuterol 90 MCG Inhaler",
-      "dosage": "n/a"
-    }
-  ],
+  "diagnoses": ["Hypothyroidism", "Uncomplicated asthma"],
+  "medications": {
+    "Levothyroxine": "Take 75 mcg by mouth every morning",
+    "Albuterol": "Inhale 2 puffs every 4 hours as needed"
+  },
   "vitals": {
-    "blood_pressure": "116/72 mmHg",
-    "body_weight": "229.9 lbs",
-    "heart_rate": "98.8/min",
-    "body_height": "179.6 cm"
+    "BP": "101/64 mmHg",
+    "Heart rate": "80.3/min"
   }
 }
 ```
@@ -57,31 +43,33 @@ Assessment/Plan: Continue present treatment for Chronic obstructive lung disease
 
 **Fine-tuned:**
 ```
-{"diagnoses": [{"name": "Chronic obstructive lung disease"}, {"name": "Uncomplicated asthma"}], "medications": [{"name": "Tiotropium 18 MCG Inhalation Powder", "dosage": "Inhale the contents of 1 capsule once daily"}, {"name": "Albuterol 90 MCG Inhaler", "dosage": null}], "vitals": [{"name": "Blood pressure", "value": "116/72", "unit": "mm[Hg]"}, {"name": "Body weight", "value": 94.9, "unit": "kg"}, {"name": "Heart rate", "value": 98.8, "unit": "/min"}, {"name": "Body height", "value": 179.6, "unit": "cm"}]}
+{"diagnoses": [{"name": "Hypothyroidism"}, {"name": "Uncomplicated asthma"}], "medications": [{"name": "Levothyroxine 75 MCG Oral Tablet", "dosage": "Take 75 mcg by mouth every morning"}, {"name": "Albuterol 90 MCG Inhaler", "dosage": "Inhale 2 puffs every 4 hours as needed"}], "vitals": [{"name": "Blood pressure", "value": "101/64", "unit": "mm[Hg]"}, {"name": "Heart rate", "value": 80.3, "unit": "/min"}]}
 ```
 
 ## Sample 2
 
 **Instruction:**
 ```
-Patient: [PATIENT_NAME], DOB 1982-03-14, MRN [MRN]
+Patient: [PATIENT_NAME], DOB 1961-08-24, MRN [MRN]
 Address: [ADDRESS], [CITY], [STATE] [ZIP]
-Visit Date: 2024-10-10  Seen by [PROVIDER_NAME]
+Visit Date: 2025-09-26  Seen by [PROVIDER_NAME]
 
-Chief Complaint: Here today to discuss Migraine.
+Chief Complaint: Presents for routine follow-up of Obesity.
 
-HPI: Continues management of Migraine, first diagnosed 2022-04-01.
+HPI: Continues management of Obesity, first diagnosed 2021-02-17.
+HPI: Patient reports doing well on current regimen for Gastroesophageal reflux disease without esophagitis, diagnosed 2019-05-18.
+HPI: Obesity (dx 2022-12-01) remains stable; no new complaints today.
 
-Current Medications: Sumatriptan 50 MG Oral Tablet - 50mg PO PRN.
+Current Medications: Phentermine 37.5 MG Oral Tablet - 37.5mg PO QAM; Omeprazole 20 MG Oral Capsule - 20mg PO QD.
 
-Vitals: BP 112/84 mmHg, Heart rate 76.2 /min, Body height 185.6 cm, Body temperature 36.6 Cel.
+Vitals: BP 131/89 mmHg, Glucose [Mass/volume] in Blood 87.3 mg/dL, Body weight 136.0 [lb_av].
 
-Assessment/Plan: Continue current management of Migraine.
+Assessment/Plan: Continue present treatment for Obesity; recheck at next visit.
 ```
 
 **Ground truth:**
 ```json
-{"diagnoses": [{"name": "Migraine"}], "medications": [{"name": "Sumatriptan 50 MG Oral Tablet", "dosage": "Take 50 mg by mouth at onset of migraine; may repeat once after 2 hours"}], "vitals": [{"name": "Blood pressure", "value": "112/84", "unit": "mm[Hg]"}, {"name": "Heart rate", "value": 76.2, "unit": "/min"}, {"name": "Body height", "value": 185.6, "unit": "cm"}, {"name": "Body temperature", "value": 36.6, "unit": "Cel"}]}
+{"diagnoses": [{"name": "Obesity"}, {"name": "Gastroesophageal reflux disease without esophagitis"}], "medications": [{"name": "Phentermine 37.5 MG Oral Tablet", "dosage": "Take 37.5 mg by mouth every morning before breakfast"}, {"name": "Omeprazole 20 MG Oral Capsule", "dosage": "Take 20 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "131/89", "unit": "mm[Hg]"}, {"name": "Glucose [Mass/volume] in Blood", "value": 87.3, "unit": "mg/dL"}, {"name": "Body weight", "value": 61.7, "unit": "kg"}]}
 ```
 
 **Base (no adapter):**
@@ -90,80 +78,99 @@ Assessment/Plan: Continue current management of Migraine.
 {
   "diagnoses": [
     {
-      "name": "Migraine",
-      "code": "1001"
+      "code": "Obesity",
+      "description": "Diagnosis"
     }
   ],
   "medications": [
     {
-      "name": "Sumatriptan",
-      "code": "1002"
+      "code": "Phentermine 37.5 MG Oral Tablet",
+      "description": "Medication"
+    },
+    {
+      "code": "Omeprazole 20 MG Oral Capsule",
+      "description": "Medication"
     }
   ],
-  "vitals": {
-    "blood_pressure": {
-      "value": 112,
+  "vitals": [
+    {
+      "code": "BP",
+      "value": "131/89 mmHg",
       "unit": "mmHg"
     },
-    "heart_rate": {
-      "value": 76.2,
-      "unit": "min/min"
+    {
+      "code": "Glucose",
+      "value": "87.3 mg/dL",
+      "unit": "%"
     },
-    "body_height": {
-      "value": 185.6,
-      "unit": "cm"
-    },
-    "body_temperature": {
-      "value": 36.6,
-      "unit": "Cel"
+    {
+      "code": "Body Weight",
+      "value": "136.0 lb",
+      "unit": "lb"
     }
-  }
+  ]
 }
 ```
 ```
 
 **Fine-tuned:**
 ```
-{"diagnoses": [{"name": "Migraine"}], "medications": [{"name": "Sumatriptan 50 MG Oral Tablet", "dosage": "Take 50 mg by mouth at onset of migraine; may repeat once after 2 hours"}], "vitals": [{"name": "Blood pressure", "value": "112/84", "unit": "mm[Hg]"}, {"name": "Heart rate", "value": 76.2, "unit": "/min"}, {"name": "Body height", "value": 185.6, "unit": "cm"}, {"name": "Body temperature", "value": 36.6, "unit": "Cel"}]}
+{"diagnoses": [{"name": "Obesity"}, {"name": "Gastroesophageal reflux disease without esophagitis"}], "medications": [{"name": "Phentermine 37.5 MG Oral Tablet", "dosage": "Take 37.5 mg by mouth every morning before breakfast"}, {"name": "Omeprazole 20 MG Oral Capsule", "dosage": "Take 20 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "131/89", "unit": "mm[Hg]"}, {"name": "Glucose [Mass/volume] in Blood", "value": 87.3, "unit": "mg/dL"}, {"name": "Body weight", "value": 61.6, "unit": "kg"}]}
 ```
 
 ## Sample 3
 
 **Instruction:**
 ```
-Patient: [PATIENT_NAME], DOB 2000-02-15, MRN [MRN]
+Patient: [PATIENT_NAME], DOB 1945-06-10, MRN [MRN]
 Address: [ADDRESS], [CITY], [STATE] [ZIP]
-Visit Date: 2025-12-27  Seen by [PROVIDER_NAME]
+Visit Date: 2025-05-15  Seen by [PROVIDER_NAME]
 
-Chief Complaint: Presents for routine follow-up of Essential hypertension.
+Chief Complaint: Follow-up visit for Uncomplicated asthma management.
 
-HPI: Essential hypertension (dx 2024-03-22) remains stable; no new complaints today.
+HPI: Continues management of Uncomplicated asthma, first diagnosed 2020-04-10.
+HPI: Migraine (dx 2019-02-23) remains stable; no new complaints today.
+HPI: Continues management of Essential hypertension, first diagnosed 2025-04-11.
 
-Current Medications: Lisinopril 10 MG Oral Tablet - Take 10 mg by mouth once daily.
+Current Medications: Albuterol 90 MCG Inhaler - Inhale 2 puffs every 4 hours as needed; Sumatriptan 50 MG Oral Tablet - 50mg PO PRN; Lisinopril 10 MG Oral Tablet - Take 10 mg by mouth once daily.
 
-Vitals: BP 110/67 mmHg, Body temperature 37.6 Cel.
+Vitals: BP 125/81 mmHg, Body height 72.2 [in_i].
 
-Assessment/Plan: Continue present treatment for Essential hypertension; recheck at next visit.
+Assessment/Plan: Continue present treatment for Uncomplicated asthma; recheck at next visit.
 ```
 
 **Ground truth:**
 ```json
-{"diagnoses": [{"name": "Essential hypertension"}], "medications": [{"name": "Lisinopril 10 MG Oral Tablet", "dosage": "Take 10 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "110/67", "unit": "mm[Hg]"}, {"name": "Body temperature", "value": 37.6, "unit": "Cel"}]}
+{"diagnoses": [{"name": "Uncomplicated asthma"}, {"name": "Migraine"}, {"name": "Essential hypertension"}], "medications": [{"name": "Albuterol 90 MCG Inhaler", "dosage": "Inhale 2 puffs every 4 hours as needed"}, {"name": "Sumatriptan 50 MG Oral Tablet", "dosage": "Take 50 mg by mouth at onset of migraine; may repeat once after 2 hours"}, {"name": "Lisinopril 10 MG Oral Tablet", "dosage": "Take 10 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "125/81", "unit": "mm[Hg]"}, {"name": "Body height", "value": 183.4, "unit": "cm"}]}
 ```
 
 **Base (no adapter):**
 ```
 ```json
 {
-  "diagnoses": ["Essential hypertension"],
-  "medications": {
-    "Lisinopril": {
-      "Dosage": "Take 10 mg by mouth once daily"
+  "diagnoses": [
+    {
+      "code": "Uncomplicated Asthma",
+      "description": "Follow-up visit for Uncomplicated asthma management."
     }
-  },
+  ],
+  "medications": [
+    {
+      "code": "Albuterol 90 MCG Inhaler",
+      "description": "Inhale 2 puffs every 4 hours as needed"
+    },
+    {
+      "code": "Sumatriptan 50 MG Oral Tablet",
+      "description": "50mg PO PRN"
+    },
+    {
+      "code": "Lisinopril 10 MG Oral Tablet",
+      "description": "Take 10 mg by mouth once daily"
+    }
+  ],
   "vitals": {
-    "BP": "110/67 mmHg",
-    "Body Temperature": "37.6 Cel."
+    "BP": "125/81 mmHg",
+    "Body Height": "72.2 in"
   }
 }
 ```
@@ -171,5 +178,5 @@ Assessment/Plan: Continue present treatment for Essential hypertension; recheck 
 
 **Fine-tuned:**
 ```
-{"diagnoses": [{"name": "Essential hypertension"}], "medications": [{"name": "Lisinopril 10 MG Oral Tablet", "dosage": "Take 10 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "110/67", "unit": "mm[Hg]"}, {"name": "Body temperature", "value": 37.6, "unit": "Cel"}]}
+{"diagnoses": [{"name": "Uncomplicated asthma"}, {"name": "Migraine"}, {"name": "Essential hypertension"}], "medications": [{"name": "Albuterol 90 MCG Inhaler", "dosage": "Inhale 2 puffs every 4 hours as needed"}, {"name": "Sumatriptan 50 MG Oral Tablet", "dosage": "Take 50 mg by mouth at onset of migraine; may repeat once after 2 hours"}, {"name": "Lisinopril 10 MG Oral Tablet", "dosage": "Take 10 mg by mouth once daily"}], "vitals": [{"name": "Blood pressure", "value": "125/81", "unit": "mm[Hg]"}, {"name": "Body height", "value": 183.3, "unit": "cm"}]}
 ```

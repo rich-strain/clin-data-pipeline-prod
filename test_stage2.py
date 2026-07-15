@@ -81,10 +81,13 @@ def test_date_shift_preserves_intervals_within_category_and_is_nonzero() -> None
 def test_dob_and_visit_offsets_are_independent() -> None:
     # DOB shifts independently of visit dates: for essentially every patient the
     # two category offsets differ (a shared offset would let one recovered date
-    # unshift the rest).
+    # unshift the rest). Offsets are sha256(pid:category) mod SHIFT_RANGE_DAYS, so
+    # ~n/365 coincidental collisions are expected at scale — assert the fraction,
+    # not an absolute count (which only held at 100 patients).
     pids = list(group_by_patient(_raw()).keys())
     differ = sum(patient_offset(p, "dob") != patient_offset(p, "visit") for p in pids)
-    assert differ >= len(pids) - 1, "DOB and visit offsets should be independent for ~all patients"
+    msg = "DOB and visit offsets should be independent for ~all patients"
+    assert differ >= len(pids) * 0.99, msg
 
 
 def test_no_shifted_date_is_in_the_future() -> None:

@@ -1,12 +1,12 @@
 {
-  "n_records": 100,
+  "n_records": 1000,
   "ground_truth": "source FHIR Condition / MedicationRequest resources (generated each note)",
   "prediction": "Haiku extraction, normalized (curation.normalize) \u2014 the curated targets",
   "diagnosis": {
     "micro_precision": 1.0,
     "micro_recall": 1.0,
     "micro_f1": 1.0,
-    "tp": 185,
+    "tp": 1838,
     "fp": 0,
     "fn": 0,
     "non_canonical_count": 0,
@@ -14,61 +14,61 @@
     "per_category": [
       {
         "category": "Type 2 diabetes mellitus without complication",
-        "tp": 14,
+        "tp": 177,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Essential hypertension",
-        "tp": 20,
+        "tp": 180,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Uncomplicated asthma",
-        "tp": 18,
+        "tp": 184,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Hyperlipidemia",
-        "tp": 15,
+        "tp": 180,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Chronic obstructive lung disease",
-        "tp": 21,
+        "tp": 182,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Migraine",
-        "tp": 21,
+        "tp": 181,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Obesity",
-        "tp": 16,
+        "tp": 177,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Gastroesophageal reflux disease without esophagitis",
-        "tp": 21,
+        "tp": 198,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Hypothyroidism",
-        "tp": 19,
+        "tp": 191,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Major depression, single episode",
-        "tp": 20,
+        "tp": 188,
         "fp": 0,
         "fn": 0
       }
@@ -78,7 +78,7 @@
     "micro_precision": 1.0,
     "micro_recall": 1.0,
     "micro_f1": 1.0,
-    "tp": 186,
+    "tp": 1847,
     "fp": 0,
     "fn": 0,
     "non_canonical_count": 0,
@@ -86,77 +86,77 @@
     "per_category": [
       {
         "category": "Metformin 500 MG Oral Tablet",
-        "tp": 14,
+        "tp": 177,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Lisinopril 10 MG Oral Tablet",
-        "tp": 12,
+        "tp": 107,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Atorvastatin 20 MG Oral Tablet",
-        "tp": 15,
+        "tp": 180,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Albuterol 90 MCG Inhaler",
-        "tp": 18,
+        "tp": 184,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Levothyroxine 75 MCG Oral Tablet",
-        "tp": 19,
+        "tp": 191,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Sertraline 50 MG Oral Tablet",
-        "tp": 20,
+        "tp": 188,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Omeprazole 20 MG Oral Capsule",
-        "tp": 21,
+        "tp": 198,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Amlodipine 5 MG Oral Tablet",
-        "tp": 9,
+        "tp": 82,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Tiotropium 18 MCG Inhalation Powder",
-        "tp": 21,
+        "tp": 182,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Sumatriptan 50 MG Oral Tablet",
-        "tp": 21,
+        "tp": 181,
         "fp": 0,
         "fn": 0
       },
       {
         "category": "Phentermine 37.5 MG Oral Tablet",
-        "tp": 16,
+        "tp": 177,
         "fp": 0,
         "fn": 0
       }
     ]
   },
   "dosage": {
-    "exact_match": 183,
-    "total": 186,
-    "accuracy": 0.9838709677419355,
-    "hallucinated": 2,
+    "exact_match": 1808,
+    "total": 1847,
+    "accuracy": 0.9788846778559827,
+    "hallucinated": 29,
     "mismatch_examples": [
       {
         "medication": "Phentermine 37.5 MG Oral Tablet",
@@ -175,6 +175,48 @@
         "predicted": null,
         "expected": "Inhale 2 puffs every 4 hours as needed",
         "type": "missing"
+      },
+      {
+        "medication": "Albuterol 90 MCG Inhaler",
+        "predicted": "Inhale 2 puffs every 4 hours as needed",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Lisinopril 10 MG Oral Tablet",
+        "predicted": "10 MG",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Phentermine 37.5 MG Oral Tablet",
+        "predicted": "37.5 mg PO QAM",
+        "expected": "Take 37.5 mg by mouth every morning before breakfast",
+        "type": "wrong"
+      },
+      {
+        "medication": "Phentermine 37.5 MG Oral Tablet",
+        "predicted": "Take 37.5 mg by mouth every morning before breakfast",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Levothyroxine 75 MCG Oral Tablet",
+        "predicted": "75 MCG",
+        "expected": null,
+        "type": "hallucinated"
+      },
+      {
+        "medication": "Levothyroxine 75 MCG Oral Tablet",
+        "predicted": null,
+        "expected": "Take 75 mcg by mouth every morning",
+        "type": "missing"
+      },
+      {
+        "medication": "Sertraline 50 MG Oral Tablet",
+        "predicted": "50 MG",
+        "expected": null,
+        "type": "hallucinated"
       }
     ]
   },

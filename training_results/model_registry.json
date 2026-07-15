@@ -29,5 +29,36 @@
       "gold_sha256": "824f0497d65c6ebe049b611a5339a3ddfc28eaa4b18bee4dbfe0db58ba450473",
       "gold_version": "v1"
     }
+  },
+  {
+    "version": "v2",
+    "git_sha": "6097ab1d5db5f182ef4068df2e71957e9cac787a",
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "lora_config": {
+      "r": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "task_type": "CAUSAL_LM"
+    },
+    "best_epoch": 6,
+    "best_val_loss": 0.006309533087790519,
+    "final_train_loss": 0.005900673083260951,
+    "final_val_loss": 0.006309533087790519,
+    "train_examples": 886,
+    "val_examples": 111,
+    "adapter_bytes": 4356653,
+    "mlflow_run_id": "814e33201be147e9a66c1b20839c2d22",
+    "data_lineage": {
+      "train_sha256": "841dc0e18ff3223874ff392e562f2423789637fe1d17ec0eab1947d47aec7b11",
+      "val_sha256": "6416116608e30d5bdf46f68c96052a5d2194a59905e220eff0d69f615227b06e",
+      "gold_sha256": "6e865488d9b29f1cec6113a2a89e7cc4e14904b3253d1cbb02ec0c2a258ac991",
+      "gold_version": "v1"
+    }
   }
 ]

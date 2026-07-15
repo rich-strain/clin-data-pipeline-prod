@@ -1,43 +1,43 @@
 {
-  "caught": 888,
-  "total": 1028,
-  "recall": 0.8638,
+  "caught": 8676,
+  "total": 10192,
+  "recall": 0.8513,
   "by_type": {
     "PATIENT_NAME": {
-      "caught": 100,
-      "total": 100
+      "caught": 1000,
+      "total": 1000
     },
     "DOB": {
-      "caught": 100,
-      "total": 100
+      "caught": 1000,
+      "total": 1000
     },
     "MRN": {
-      "caught": 87,
-      "total": 87
+      "caught": 850,
+      "total": 850
     },
     "ADDRESS": {
-      "caught": 44,
-      "total": 85
+      "caught": 411,
+      "total": 841
     },
     "CITY": {
-      "caught": 83,
-      "total": 85
+      "caught": 797,
+      "total": 841
     },
     "STATE": {
-      "caught": 53,
-      "total": 85
+      "caught": 431,
+      "total": 841
     },
     "ZIP": {
-      "caught": 20,
-      "total": 85
+      "caught": 209,
+      "total": 841
     },
     "DATE": {
-      "caught": 301,
-      "total": 301
+      "caught": 2978,
+      "total": 2978
     },
     "PROVIDER_NAME": {
-      "caught": 100,
-      "total": 100
+      "caught": 1000,
+      "total": 1000
     }
   },
   "missed_sample": [

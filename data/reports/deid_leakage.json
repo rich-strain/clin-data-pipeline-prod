@@ -1,5 +1,5 @@
 {
-  "patients": 100,
+  "patients": 1000,
   "total_leaks": 0,
   "leaked_examples": []
 }

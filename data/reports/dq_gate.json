@@ -1,29 +1,29 @@
 {
   "passed": true,
-  "n_records": 122,
+  "n_records": 1108,
   "tables": {
     "records": {
-      "rows": 122,
+      "rows": 1108,
       "passed": true,
       "failures": []
     },
     "diagnoses": {
-      "rows": 229,
+      "rows": 2054,
       "passed": true,
       "failures": []
     },
     "medications": {
-      "rows": 230,
+      "rows": 2063,
       "passed": true,
       "failures": []
     },
     "numeric_vitals": {
-      "rows": 258,
+      "rows": 2284,
       "passed": true,
       "failures": []
     },
     "blood_pressure": {
-      "rows": 122,
+      "rows": 1108,
       "passed": true,
       "failures": []
     }
